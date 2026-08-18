@@ -1,0 +1,1090 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<title>!GEN тв</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/hls.js/1.5.13/hls.min.js"></script>
+<style>
+  :root{
+    --bg:#000;
+    --panel:#14160f;
+    --line:#2a2f22;
+    --text:#e9ece1;
+    --dim:#8a9078;
+    --accent:#c9e14a;
+    --accent-dim:#5c6b2e;
+    --danger:#c96a4a;
+    --epg-bar-color: #e0a83d;   /* цвет полоски прогресса передачи (янтарный) */
+    --epg-bar-height: 3px;      /* толщина полоски прогресса передачи */
+  }
+  *{box-sizing:border-box; -webkit-tap-highlight-color:transparent;}
+  html,body{height:100%; overscroll-behavior:none;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    font-family:-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+    overflow:hidden;
+  }
+
+  /* ============ ОБЩАЯ СЦЕНА (видео) ============ */
+  #stage{
+    position:fixed;
+    inset:0;
+    background:#000;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+  #player{
+    width:100%;
+    height:100%;
+    object-fit:contain;
+    background:#000;
+  }
+  #stageMsg{
+    position:absolute;
+    color:var(--dim);
+    font-size:14px;
+    text-align:center;
+    padding:0 24px;
+    line-height:1.6;
+    pointer-events:none;
+  }
+  #stageMsg b{color:var(--text); font-weight:600;}
+  #stageMsg a{color:var(--accent); pointer-events:auto;}
+
+  /* зона свайпа громкости - правая половина экрана */
+  #volZone{
+    position:fixed;
+    top:0; right:0; bottom:0;
+    width:50%;
+    z-index:5;
+  }
+  /* зона свайпа переключения канала (влево/вправо) - левая половина экрана */
+  #chanZone{
+    position:fixed;
+    top:0; left:0; bottom:0;
+    width:50%;
+    z-index:5;
+    touch-action:none;
+  }
+  #volIndicator{
+    position:fixed;
+    right:16px;
+    top:50%;
+    transform:translateY(-50%);
+    width:32px;
+    height:180px;
+    background:rgba(255,255,255,.12);
+    border-radius:8px;
+    z-index:6;
+    opacity:0;
+    transition:opacity .15s;
+    pointer-events:none;
+  }
+  #volIndicator .fill{
+    position:absolute;
+    bottom:0; left:0; right:0;
+    background:var(--accent-dim);
+    border-radius:8px;
+    height:60%;
+  }
+  #volIndicator.show{opacity:1;}
+
+  /* ============ DESKTOP: шапка + правая колонка ============ */
+  #desktopHeader{
+    position:fixed; top:0; left:0; right:0;
+    padding:10px 14px;
+    display:flex;
+    align-items:baseline;
+    gap:10px;
+    border-bottom:1px solid var(--line);
+    background:rgba(13,15,12,.9);
+    z-index:10;
+  }
+  #desktopHeader .mark{
+    font-family:Georgia,"Times New Roman",serif;
+    font-style:italic;
+    font-size:20px;
+    color:var(--accent);
+  }
+  #desktopHeader .sub{
+    font-size:11px; color:var(--dim);
+    text-transform:uppercase; letter-spacing:.12em;
+  }
+
+  #desktopNav{
+    position:fixed;
+    top:41px; right:0; bottom:0;
+    width:250px;
+    border-left:1px solid var(--line);
+    overflow-y:auto;
+    background:var(--panel);
+    z-index:10;
+  }
+  .grp-title{
+    padding:14px 14px 6px;
+    font-size:11px;
+    letter-spacing:.12em;
+    text-transform:uppercase;
+    color:var(--dim);
+  }
+  .ch-row{
+    position:relative;
+    display:flex; align-items:center; gap:10px;
+    padding:5px 14px;
+    cursor:pointer;
+    border-left:3px solid transparent;
+    font-size:14px;
+  }
+  .ch-row:hover{background:rgba(255,255,255,.03);}
+  .ch-row.active{
+    border-left-color:var(--accent);
+    background:rgba(201,225,74,.08);
+    color:var(--accent);
+  }
+  .dot{width:6px;height:6px;border-radius:50%;background:var(--accent-dim);flex-shrink:0;}
+  .ch-row.active .dot{background:var(--accent);}
+  .ch-row.ext .dot{background:var(--danger);}
+  .row-logo{
+    width:28px; height:28px;
+    border-radius:5px;
+    background-size:contain;
+    background-repeat:no-repeat;
+    background-position:center;
+    background-color:var(--panel);
+    flex-shrink:0;
+  }
+  .ext-tag{
+    margin-left:auto; font-size:10px; color:var(--dim);
+    border:1px solid var(--line); padding:1px 5px; border-radius:3px;
+  }
+
+  #fsBtn{
+    position:fixed;
+    z-index:8;
+    background:rgba(20,22,16,.75);
+    border:1px solid var(--line);
+    color:var(--text);
+    width:40px; height:40px;
+    border-radius:6px;
+    font-size:16px;
+    display:none;
+    align-items:center; justify-content:center;
+    cursor:pointer;
+  }
+  #fsBtn.show{display:flex;}
+
+  #desktopStopBtn{
+    position:fixed;
+    z-index:8;
+    background:rgba(20,22,16,.75);
+    border:1px solid var(--line);
+    color:var(--text);
+    width:40px; height:40px;
+    border-radius:6px;
+    font-size:18px;
+    display:none;
+    align-items:center; justify-content:center;
+    cursor:pointer;
+  }
+  #desktopStopBtn.show{display:flex;}
+  .stop-square{
+    width:14px; height:14px;
+    background:var(--text);
+    border-radius:2px;
+    display:block;
+  }
+
+  /* полоска прогресса текущей передачи - поверх плитки/строки канала */
+  .epg-bar{
+    position:absolute;
+    left:0; right:0; bottom:0;
+    height:var(--epg-bar-height);
+    background:var(--epg-bar-color);
+    pointer-events:none;
+  }
+
+  /* блок с названием передачи и прогрессом, показывается ненадолго поверх видео
+     после выбора канала (EPG_STAGE_SECONDS в JS настройках) */
+  #stageEpg{
+    position:fixed;
+    left:50%;
+    bottom:calc(24px + env(safe-area-inset-bottom));
+    transform:translateX(-50%);
+    z-index:7;
+    max-width:80vw;
+    padding:8px 16px;
+    border-radius:10px;
+    background:rgba(10,11,8,.85);
+    text-align:center;
+    opacity:0;
+    pointer-events:none;
+    transition:opacity .3s;
+  }
+  #stageEpg.show{ opacity:1; }
+  #stageEpg .epg-title{
+    font-size:13px;
+    color:var(--text);
+    margin-bottom:6px;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+  }
+  #stageEpg .epg-track{
+    width:220px;
+    max-width:60vw;
+    height:var(--epg-bar-height);
+    background:rgba(255,255,255,.15);
+    border-radius:4px;
+    overflow:hidden;
+  }
+  #stageEpg .epg-fill{
+    height:100%;
+    background:var(--epg-bar-color);
+  }
+
+  /* ============ MOBILE: полноэкранная сетка каналов, открыта по умолчанию ============ */
+  #mobileGrid{
+    position:fixed;
+    inset:0;
+    z-index:15;
+    background:rgba(8,9,6,.97);
+    padding:calc(14px + env(safe-area-inset-top)) 14px calc(14px + env(safe-area-inset-bottom));
+    overflow-y:auto;
+    -webkit-overflow-scrolling:touch;
+    display:none;
+  }
+  #mobileGrid.open{ display:block; }
+
+  /* ---- ЦВЕТА КАТЕГОРИЙ (динамические) ----
+     Цвет каждой группы считается автоматически по формуле ниже в JS
+     (блок "НАСТРОЙКИ" перед CHANNELS) - работает для любого числа категорий,
+     не только для 4. Крутить сами цвета - там же, числами HUE_START/HUE_STEP/
+     CAT_SATURATION/CAT_LIGHTNESS. Тут только общая прозрачность подложки. */
+  :root{
+    --cat-opacity: 0.24;
+    --tile-size: 48px;   /* размер плитки канала (ширина=высота) */
+    --tile-gap: 8px;     /* расстояние между плитками */
+    --logo-pad: 5px;     /* поля внутри плитки вокруг логотипа - меньше = логотип крупнее */
+  }
+
+  .grid-group{
+    border-radius:14px;
+    padding:10px 10px 12px;
+    margin-bottom:10px;
+  }
+  .grid-grp-title{
+    padding:2px 4px 8px;
+    font-size:11px;
+    letter-spacing:.12em;
+    text-transform:uppercase;
+    color:var(--text);
+    opacity:.75;
+    font-weight:600;
+  }
+
+  .grid-wrap{
+    display:grid;
+    grid-template-columns:repeat(auto-fill, var(--tile-size));
+    gap:var(--tile-gap);
+    justify-content:start;
+  }
+  .ch-tile{
+    position:relative;
+    width:var(--tile-size); height:var(--tile-size);
+    border-radius:6px;
+    background:var(--panel);
+    border:1.5px solid var(--line);
+    display:flex; align-items:center; justify-content:center;
+    font-size:10px;
+    font-weight:600;
+    color:var(--dim);
+    text-align:center;
+    line-height:1.1;
+    overflow:hidden;
+    background-size:contain;
+    background-repeat:no-repeat;
+    background-position:center;
+    padding:var(--logo-pad);
+  }
+  .ch-tile.active{border-color:var(--accent);}
+  .ch-tile.ext{border-style:dashed;}
+
+  /* зона свайпа громкости не должна перехватывать браузерный скролл/зум */
+  #volZone{ touch-action:none; }
+
+  #gridCloseBtn{
+    position:fixed;
+    top:calc(10px + env(safe-area-inset-top));
+    left:10px;
+    z-index:16;
+    width:44px; height:44px;
+    border-radius:8px;
+    background:rgba(20,22,16,.75);
+    border:1px solid var(--line);
+    color:var(--text);
+    font-size:20px;
+    display:none;
+    align-items:center; justify-content:center;
+  }
+  #gridOpenBtn{
+    position:fixed;
+    top:calc(10px + env(safe-area-inset-top));
+    left:10px;
+    z-index:11;
+    width:44px; height:44px;
+    border-radius:8px;
+    background:rgba(20,22,16,.75);
+    border:1px solid var(--line);
+    color:var(--text);
+    font-size:22px;
+    display:none;
+    align-items:center; justify-content:center;
+  }
+  #mobileExpandBtn{
+    position:fixed;
+    top:calc(10px + env(safe-area-inset-top));
+    right:10px;
+    z-index:11;
+    width:44px; height:44px;
+    border-radius:8px;
+    background:rgba(20,22,16,.75);
+    border:1px solid var(--line);
+    display:none;
+    align-items:center; justify-content:center;
+  }
+  .expand-icon{
+    width:16px; height:16px;
+    border:2px solid var(--text);
+    border-radius:2px;
+    display:block;
+  }
+
+  /* ============ layout switch (определяем по классу на <html>, не по ширине) ============ */
+  .only-desktop{display:block;}
+  .only-mobile{display:none;}
+
+  html.mobile-mode .only-desktop{display:none !important;}
+  html.mobile-mode #fsBtn{display:none !important;}
+  html.mobile-mode #gridOpenBtn{display:flex !important;}
+</style>
+</head>
+<body>
+
+<!-- DESKTOP CHROME -->
+<header id="desktopHeader" class="only-desktop">
+  <span class="mark">!GEN ТВ</span><span class="sub" style="margin-left:6px;opacity:.5">v8+</span>
+  <span class="sub">личная подборка</span>
+</header>
+<nav id="desktopNav" class="only-desktop"></nav>
+<button id="fsBtn" title="Во весь экран">⛶</button>
+<button id="desktopStopBtn" class="only-desktop" title="Стоп"><span class="stop-square"></span></button>
+
+<!-- STAGE (общий для обеих версий) -->
+<div id="stage">
+  <video id="player" playsinline webkit-playsinline></video>
+  <iframe id="playerFrame" allow="autoplay" style="display:none;"></iframe>
+  <div id="stageMsg">Канал</div>
+</div>
+<div id="stageEpg">
+  <div class="epg-title"></div>
+  <div class="epg-track"><div class="epg-fill"></div></div>
+</div>
+<button id="gridOpenBtn" title="Каналы">▦</button>
+<button id="mobileExpandBtn" title="На весь экран"><span class="expand-icon"></span></button>
+
+<div id="volZone"></div>
+<div id="volIndicator"><div class="fill"></div></div>
+<div id="chanZone"></div>
+
+<!-- MOBILE: полноэкранная сетка, открыта по умолчанию на входе -->
+<div id="mobileGrid" class="only-mobile">
+  <div id="gridInner"></div>
+</div>
+
+<script>
+// ---- твой список каналов -------------------------------------------------
+// type "stream": проигрывается прямо здесь (прямая ссылка на HLS-поток, .m3u8)
+// type "iframe": встраивается чужая страница-плеер целиком (например
+//                player.smotrim.ru/iframe/stream/live_id/...) - работает не всегда,
+//                некоторые сайты запрещают встраивание себя, тогда будет пусто
+// type "ext":    открывается на сайте канала в новой вкладке (нет ни потока, ни iframe)
+// logo: необязательно, ссылка/путь на картинку логотипа для мобильной плитки
+// disabled: true - канал временно выключен (не рисуется вообще, ни плиткой, ни
+//           строкой), но остаётся в списке - просто добавь ", disabled: true"
+//           после url/logo у нужного канала, когда линк не работает, и убери,
+//           когда найдёшь замену
+const CHANNELS = [
+  { group: "ЦТ", items: [
+    { name: "1",		type: "stream",    url: "https://zabava-htlive.cdn.ngenix.net/hls/CH_1TVSD/variant.m3u8", logo: "https://github.com/GENgroup/TV_logo/blob/main/1.png?raw=true" },
+    { name: "РТР",		type: "stream",    url: "https://zabava-htlive.cdn.ngenix.net/hls/CH_RUSSIA1/variant.m3u8", logo: "https://github.com/GENgroup/TV_logo/blob/main/%D0%A0%D0%A2%D0%A0.png?raw=true" },
+    { name: "ТВЦ",		type: "stream",    url: "https://tvc-hls.cdnvideo.ru/tvc-res/smil:vd9221.smil/playlist.m3u8", logo: "https://github.com/GENgroup/TV_logo/blob/main/%D0%A2%D0%92%D0%A6.png?raw=true" },
+    { name: "НТВ",		type: "stream",    url: "https://zabava-htlive.cdn.ngenix.net/hls/CH_NTV/variant.m3u8", logo: "https://github.com/GENgroup/TV_logo/blob/main/%D0%9D%D0%A2%D0%92.png?raw=true" },
+    { name: "5",		type: "stream",    url: "https://zabava-htlive.cdn.ngenix.net/hls/CH_5TV/variant.m3u8", logo: "https://github.com/GENgroup/TV_logo/blob/main/5.png?raw=true" },
+    { name: "Звезда",	type: "stream",    url: "https://tvchannelstream1.tvzvezda.ru/cdn/tvzvezda/playlist.m3u8", logo: "https://github.com/GENgroup/TV_logo/blob/main/%D0%97%D0%B2%D0%B5%D0%B7%D0%B4%D0%B0.png?raw=true" },
+    { name: "Домашний",	type: "stream",    url: "https://zabava-htlive.cdn.ngenix.net/hls/CH_DOMASHNIY/variant.m3u8", logo: "https://github.com/GENgroup/TV_logo/blob/main/%D0%94%D0%BE%D0%BC%D0%B0%D1%88%D0%BD%D0%B8%D0%B9.png?raw=true" },
+    { name: "СТС",		type: "stream",    url: "http://tshift-1.telecoma.tv/sts/index.m3u8", logo: "https://github.com/GENgroup/TV_logo/blob/main/%D0%A1%D0%A2%D0%A1.png?raw=true" },
+    { name: "РЕНтв",	type: "stream",    url: "https://zabava-htlive.cdn.ngenix.net/hls/CH_RENTV_2/variant.m3u8", logo: "https://github.com/GENgroup/TV_logo/blob/main/%D0%A0%D0%95%D0%9D%D1%82%D0%B2.png?raw=true" },
+    { name: "ТНТ",		type: "stream",    url: "http://45.153.24.78:80/TNT/index.m3u8", logo: "https://github.com/GENgroup/TV_logo/blob/main/%D0%A2%D0%9D%D0%A2.png?raw=true" },
+    { name: "ОТР",		type: "stream",    url: "https://rt-nw-klgr-htlive.cdn.ngenix.net/hls/CH_R01_OTR_KLNG_FILIAL/variant.m3u8", logo: "https://github.com/GENgroup/TV_logo/blob/main/%D0%9E%D0%A2%D0%A0.png?raw=true" },
+    { name: "Мир",		type: "stream",    url: "http://hls.mirtv.cdnvideo.ru/mirtv-parampublish/mirtv_2500/playlist.m3u8", logo: "https://github.com/GENgroup/TV_logo/blob/main/%D0%9C%D0%B8%D1%80.png?raw=true" },
+    { name: "Культура",	type: "stream",    url: "https://zabava-htlive.cdn.ngenix.net/hls/CH_RUSSIAK/variant.m3u8", logo: "https://github.com/GENgroup/TV_logo/blob/main/%D0%9A.png?raw=true" },
+  ]},
+  { group: "Кино", items: [
+    { name: "Доверие",			type: "stream", url: "http://rt-mos-htlive.cdn.ngenix.net/hls/CH_R04_DOVERIE/variant.m3u8", logo: "https://github.com/GENgroup/TV_logo/blob/main/%D0%94%D0%BE%D0%B2%D0%B5%D1%80%D0%B8%D0%B5.png?raw=true" },
+    { name: "Мосфильм",			type: "stream", url: "https://fs.uplink.kz/mosfilm/tracks-v1a1/mono.ts.m3u8?token=onlinetv", logo: "https://github.com/GENgroup/TV_logo/blob/main/%D0%9C%D0%BE%D1%81%D1%84%D0%B8%D0%BB%D1%8C%D0%BC.png?raw=true" },
+    { name: "Т24",				type: "stream", url: "http://ab04f03c.ucomist.net/iptv/237WGNXDPFLZAL8HDFPKFPQA/5047/index.m3u8", logo: "https://github.com/GENgroup/TV_logo/blob/main/%D0%A224.png?raw=true" },
+	{ name: ".red",				type: "stream", url: "http://ab04f03c.ucomist.net/iptv/237WGNXDPFLZAL8HDFPKFPQA/559/index.m3u8", logo: "https://github.com/GENgroup/TV_logo/blob/main/red.png?raw=true" },
+	{ name: ".black",			type: "stream", url: "http://ab04f03c.ucomist.net/iptv/237WGNXDPFLZAL8HDFPKFPQA/20019/index.m3u8", logo: "https://github.com/GENgroup/TV_logo/blob/main/black.png?raw=true" },
+    { name: "Красная линия",	type: "stream", url: "http://s55766.cdn.ngenix.net/s55766-media-origin/rline_high/index.m3u8", logo: "https://github.com/GENgroup/TV_logo/blob/main/%D0%9A%D1%80%D0%B0%D1%81%D0%BD%D0%B0%D1%8F%20%D0%BB%D0%B8%D0%BD%D0%B8%D1%8F.png?raw=true" },
+	{ name: "Дом Кино",			type: "stream", url: "https://streaming.thestream.cyou/live/44.m3u8", logo: "https://github.com/GENgroup/TV_logo/blob/main/%D0%94%D0%BE%D0%BC%20%D0%9A%D0%B8%D0%BD%D0%BE.png?raw=true" },
+	{ name: "Любимое Кино",		type: "stream", url: "http://ab04f03c.ucomist.net/iptv/237WGNXDPFLZAL8HDFPKFPQA/20014/index.m3u8", logo: "https://github.com/GENgroup/TV_logo/blob/main/%D0%9B%D1%8E%D0%B1%D0%B8%D0%BC%D0%BE%D0%B5%20%D0%9A%D0%B8%D0%BD%D0%BE.png?raw=true" },
+	{ name: "Феникс",			type: "stream", url: "http://ab04f03c.ucomist.net/iptv/237WGNXDPFLZAL8HDFPKFPQA/2039/index.m3u8", logo: "https://github.com/GENgroup/TV_logo/blob/main/%D0%A4%D0%B5%D0%BD%D0%B8%D0%BA%D1%81.png?raw=true" },
+	{ name: "КиноТВ",			type: "stream", url: "https://vod.tuva.ru/kinotv/index.m3u8", logo: "https://github.com/GENgroup/TV_logo/blob/main/%D0%9A%D0%B8%D0%BD%D0%BE%D0%A2%D0%92.png?raw=true", disabled: true },
+	{ name: "Русский Роман",	type: "stream", url: "http://ab04f03c.ucomist.net/iptv/237WGNXDPFLZAL8HDFPKFPQA/9240/index.m3u8", logo: "https://github.com/GENgroup/TV_logo/blob/main/%D0%A0%D1%83%D1%81%D1%81%D0%BA%D0%B8%D0%B9%20%D0%A0%D0%BE%D0%BC%D0%B0%D0%BD%D1%81.png?raw=true" },
+	{ name: "Русский Детектив",	type: "stream", url: "http://ab04f03c.ucomist.net/iptv/237WGNXDPFLZAL8HDFPKFPQA/9142/index.m3u8", logo: "https://github.com/GENgroup/TV_logo/blob/main/%D0%A0%D1%83%D1%81%D1%81%D0%BA%D0%B8%D0%B9%20%D0%94%D0%B5%D1%82%D0%B5%D0%BA%D1%82%D0%B8%D0%B2.png?raw=true" },
+	{ name: "Русский Бестселлер",type: "stream", url: "http://ab04f03c.ucomist.net/iptv/237WGNXDPFLZAL8HDFPKFPQA/9141/index.m3u8", logo: "https://github.com/GENgroup/TV_logo/blob/main/%D0%A0%D1%83%D1%81%D1%81%D0%BA%D0%B8%D0%B9%20%D0%B1%D0%B5%D1%81%D1%82%D1%81%D0%B5%D0%BB%D0%BB%D0%B5%D1%80.png?raw=true" },
+	{ name: "НТВ Сериал",		type: "stream", url: "http://ab04f03c.ucomist.net/iptv/237WGNXDPFLZAL8HDFPKFPQA/9147/index.m3u8", logo: "https://github.com/GENgroup/TV_logo/blob/main/%D0%9D%D0%A2%D0%92%20%D0%A1%D0%B5%D1%80%D0%B8%D0%B0%D0%BB.png?raw=true" },
+	{ name: "НТВ Хит",			type: "stream", url: "http://ab04f03c.ucomist.net/iptv/237WGNXDPFLZAL8HDFPKFPQA/9146/index.m3u8", logo: "https://github.com/GENgroup/TV_logo/blob/main/%D0%9D%D0%A2%D0%92%20%D0%A5%D0%B8%D1%82.png?raw=true" },
+	{ name: "Ккомедия",			type: "stream", url: "http://ab04f03c.ucomist.net/iptv/237WGNXDPFLZAL8HDFPKFPQA/733/index.m3u8", logo: "https://github.com/GENgroup/TV_logo/blob/main/%D0%9A%D0%BE%D0%BC%D0%B5%D0%B4%D0%B8%D1%8F.png?raw=true" },
+    { name: "Мир Сериала",		type: "stream", url: "http://ab04f03c.ucomist.net/iptv/237WGNXDPFLZAL8HDFPKFPQA/856/index.m3u8", logo: "https://github.com/GENgroup/TV_logo/blob/main/%D0%9C%D0%B8%D1%80%20%D0%A1%D0%B5%D1%80%D0%B8%D0%B0%D0%BB%D0%B0.png?raw=true" },
+	{ name: "Родное Кино",		type: "stream", url: "http://ab04f03c.ucomist.net/iptv/237WGNXDPFLZAL8HDFPKFPQA/9127/index.m3u8", logo: "https://github.com/GENgroup/TV_logo/blob/main/%D0%A0%D0%BE%D0%B4%D0%BD%D0%BE%D0%B5%20%D0%9A%D0%B8%D0%BD%D0%BE.png?raw=true" },
+	{ name: "КиноХит",			type: "stream", url: "https://stream8.cinerama.uz/1055/tracks-v1a1/mono.m3u8", logo: "https://github.com/GENgroup/TV_logo/blob/main/%D0%9A%D0%B8%D0%BD%D0%BE%D0%A5%D0%B8%D1%82.png?raw=true" },
+	{ name: "КиноКомедия",		type: "stream", url: "http://158.101.222.193:88/georgia_play.php?id=kinokomediya", logo: "https://github.com/GENgroup/TV_logo/blob/main/%D0%9A%D0%B8%D0%BD%D0%BE%D0%9A%D0%BE%D0%BC%D0%B5%D0%B4%D0%B8%D1%8F.png?raw=true", disabled: true },
+	{ name: "КиноСемья",		type: "stream", url: "http://158.101.222.193:88/georgia_play.php?id=kinosemya", logo: "https://github.com/GENgroup/TV_logo/blob/main/%D0%9A%D0%B8%D0%BD%D0%BE%D0%A1%D0%B5%D0%BC%D1%8C%D1%8F.png?raw=true", disabled: true },
+	{ name: "КиноМикс",			type: "stream", url: "http://93.170.254.17/Kinomiks/index.m3u8", logo: "https://github.com/GENgroup/TV_logo/blob/main/%D0%9A%D0%B8%D0%BD%D0%BE%D0%9C%D0%B8%D0%BA%D1%81.png?raw=true" },
+	{ name: "Наше новое кино",  type: "stream", url: "http://158.101.222.193:88/georgia_play.php?id=nashanovoekino", logo: "https://github.com/GENgroup/TV_logo/blob/main/%D0%9D%D0%B0%D1%88%D0%B5%20%D0%BD%D0%BE%D0%B2%D0%BE%D0%B5%20%D0%BA%D0%B8%D0%BD%D0%BE.png?raw=true", disabled: true },
+    { name: "Мужское кино", 	type: "stream", url: "http://ab04f03c.ucomist.net/iptv/237WGNXDPFLZAL8HDFPKFPQA/9138/index.m3u8", logo: "https://github.com/GENgroup/TV_logo/blob/main/%D0%9C%D1%83%D0%B6%D1%81%D0%BA%D0%BE%D0%B5%20%D0%BA%D0%B8%D0%BD%D0%BE.png?raw=true", },
+	{ name: "Ностальгия",		type: "stream", url: "http://ab04f03c.ucomist.net/iptv/237WGNXDPFLZAL8HDFPKFPQA/102/index.m3u8", logo: "https://github.com/GENgroup/TV_logo/blob/main/%D0%9D%D0%BE%D1%81%D1%82%D0%B0%D0%BB%D1%8C%D0%B3%D0%B8%D1%8F.png?raw=true" },
+	{ name: "Viju+ TV1000 Рус", type: "stream", url: "http://ab04f03c.ucomist.net/iptv/237WGNXDPFLZAL8HDFPKFPQA/9227/index.m3u8", logo: "https://github.com/GENgroup/TV_logo/blob/main/Viju_TV1000%D1%80%D1%83%D1%81.png?raw=true", disabled: true },
+	{ name: "Viju+ TV1000",     type: "stream", url: "http://ab04f03c.ucomist.net/iptv/237WGNXDPFLZAL8HDFPKFPQA/6388/index.m3u8", logo: "https://github.com/GENgroup/TV_logo/blob/main/Viju_TV1000.png?raw=true" },
+	{ name: "Viju+ Action",     type: "stream", url: "http://ab04f03c.ucomist.net/iptv/237WGNXDPFLZAL8HDFPKFPQA/9057/index.m3u8", logo: "https://github.com/GENgroup/TV_logo/blob/main/Viju+%20Action.png?raw=true" },
+	{ name: "Viju+ Serial", 	type: "stream", url: "http://ab04f03c.ucomist.net/iptv/237WGNXDPFLZAL8HDFPKFPQA/9245/index.m3u8", logo: "https://github.com/GENgroup/TV_logo/blob/main/Viju+%20Serial.png?raw=true" },
+	{ name: "Viju+ Comedy",     type: "stream", url: "http://stream.mcquack.net/201/index.m3u8", logo: "https://github.com/GENgroup/TV_logo/blob/main/Viju+%20Comedy.png?raw=true" },
+	{ name: "Viju+ Megahit",    type: "stream", url: "http://stream.mcquack.net/200/index.m3u8", logo: "https://github.com/GENgroup/TV_logo/blob/main/Viju+%20Megahit.png?raw=true" },
+	{ name: "Иллюзион+",    	type: "stream", url: "http://176.118.197.101/Illuzion+/index.m3u8", logo: "https://github.com/GENgroup/TV_logo/blob/main/%D0%98%D0%BB%D0%BB%D1%8E%D0%B7%D0%B8%D0%BE%D0%BD+.png?raw=true" },
+	{ name: "Русский Иллюзион", type: "stream", url: "http://ab04f03c.ucomist.net/iptv/237WGNXDPFLZAL8HDFPKFPQA/9080/index.m3u8", logo: "https://github.com/GENgroup/TV_logo/blob/main/%D0%A0%D1%83%D1%81%D1%81%D0%BA%D0%B8%D0%B9%20%D0%98%D0%BB%D0%BB%D1%8E%D0%B7%D0%B8%D0%BE%D0%BD.png?raw=true" },
+	{ name: "Твое ТВ",       	type: "stream", url: "http://ab04f03c.ucomist.net/iptv/237WGNXDPFLZAL8HDFPKFPQA/14229/index.m3u8", logo: "https://github.com/GENgroup/TV_logo/blob/main/%D0%A2%D0%B2%D0%BE%D0%B5%20%D0%A2%D0%92.png?raw=true" },
+	{ name: "Любимое",			type: "stream", url: "http://ab04f03c.ucomist.net/iptv/237WGNXDPFLZAL8HDFPKFPQA/2106/index.m3u8", logo: "https://github.com/GENgroup/TV_logo/blob/main/%D0%9B%D1%8E%D0%B1%D0%B8%D0%BC%D0%BE%D0%B5.png?raw=true" },
+	{ name: "Время",			type: "stream", url: "http://ab04f03c.ucomist.net/iptv/237WGNXDPFLZAL8HDFPKFPQA/552/index.m3u8", logo: "https://github.com/GENgroup/TV_logo/blob/main/%D0%92%D1%80%D0%B5%D0%BC%D1%8F.png?raw=true" },
+	{ name: "Ретро",        	type: "stream", url: "http://176.118.197.101/Retro/index.m3u8", logo: "https://github.com/GENgroup/TV_logo/blob/main/%D0%A0%D0%B5%D1%82%D1%80%D0%BE.png?raw=true" },
+	{ name: "Театр",     		type: "stream", url: "http://ab04f03c.ucomist.net/iptv/237WGNXDPFLZAL8HDFPKFPQA/9337/index.m3u8", logo: "https://github.com/GENgroup/TV_logo/blob/main/%D0%A2%D0%B5%D0%B0%D1%82%D1%80.png?raw=true" },
+	{ name: "Venera.TV Сов.Классика", type: "stream", url: "http://ab04f03c.ucomist.net/iptv/237WGNXDPFLZAL8HDFPKFPQA/2146/index.m3u8", logo: "https://github.com/GENgroup/TV_logo/blob/main/Venera.TV%20%D0%A1%D0%BE%D0%B2.%D0%9A%D0%BB%D0%B0%D1%81%D1%81%D0%B8%D0%BA%D0%B0.png?raw=true" },
+  ]},
+  { group: "Кинозалы", items: [
+	{ name: "Рязанов",						type: "stream", url: "http://ab04f03c.ucomist.net/iptv/237WGNXDPFLZAL8HDFPKFPQA/17012/index.m3u8", logo: "https://github.com/GENgroup/TV_logo/blob/main/%D0%A0%D1%8F%D0%B7%D0%B0%D0%BD%D0%BE%D0%B2.png?raw=true" },
+	{ name: "Гайдай",						type: "stream", url: "http://ab04f03c.ucomist.net/iptv/237WGNXDPFLZAL8HDFPKFPQA/17004/index.m3u8", logo: "https://github.com/GENgroup/TV_logo/blob/main/%D0%93%D0%B0%D0%B9%D0%B4%D0%B0%D0%B9.png?raw=true" },
+	{ name: "HBO",							type: "stream", url: "http://ab04f03c.ucomist.net/iptv/237WGNXDPFLZAL8HDFPKFPQA/19428/index.m3u8", logo: "https://github.com/GENgroup/TV_logo/blob/main/HBO.png?raw=true" },
+	{ name: "Друзья",						type: "stream", url: "http://ab04f03c.ucomist.net/iptv/237WGNXDPFLZAL8HDFPKFPQA/17006/index.m3u8", logo: "https://github.com/GENgroup/TV_logo/blob/main/VF%20%D0%94%D1%80%D1%83%D0%B7%D1%8C%D1%8F.png?raw=true" },
+	{ name: "MM USSR Драма",				type: "stream", url: "http://ab04f03c.ucomist.net/iptv/237WGNXDPFLZAL8HDFPKFPQA/13022/index.m3u8", logo: "https://github.com/GENgroup/TV_logo/blob/main/MM%20USSR%20%D0%94%D1%80%D0%B0%D0%BC%D0%B0.png?raw=true" },
+	{ name: "StrahTV СССР",					type: "stream", url: "http://ab04f03c.ucomist.net/iptv/237WGNXDPFLZAL8HDFPKFPQA/11061/index.m3u8", logo: "https://github.com/GENgroup/TV_logo/blob/main/StrahTV%20%D0%A1%D0%A1%D0%A1%D0%A0.png?raw=true" },
+	{ name: "PG USSR",						type: "stream", url: "http://ab04f03c.ucomist.net/iptv/237WGNXDPFLZAL8HDFPKFPQA/11102/index.m3u8", logo: "https://github.com/GENgroup/TV_logo/blob/main/PG%20USSR.png?raw=true" },
+	{ name: "Сити Эдем КиноДетектив",		type: "stream", url: "https://cityeden.catcast.tv/content/41327/index.m3u8", logo: "https://github.com/GENgroup/TV_logo/blob/main/%D0%A1%D0%B8%D1%82%D0%B8%20%D0%AD%D0%B4%D0%B5%D0%BC%20%D0%9A%D0%B8%D0%BD%D0%BE%D0%94%D0%B5%D1%82%D0%B5%D0%BA%D1%82%D0%B8%D0%B2.png?raw=true" },
+	{ name: "Сити Эдем КиноКлассика",		type: "stream", url: "https://cityeden.catcast.tv/content/34185/index.m3u8", logo: "https://github.com/GENgroup/TV_logo/blob/main/%D0%A1%D0%B8%D1%82%D0%B8%20%D0%AD%D0%B4%D0%B5%D0%BC%20%D0%9A%D0%B8%D0%BD%D0%BE%D0%9A%D0%BB%D0%B0%D1%81%D1%81%D0%B8%D0%BA%D0%B0.png?raw=true" },
+	{ name: "Сити Эдем КиноКомедия",		type: "stream", url: "https://cityeden.catcast.tv/content/41331/index.m3u8", logo: "https://github.com/GENgroup/TV_logo/blob/main/%D0%A1%D0%B8%D1%82%D0%B8%20%D0%AD%D0%B4%D0%B5%D0%BC%20%D0%9A%D0%B8%D0%BD%D0%BE%D0%9A%D0%BE%D0%BC%D0%B5%D0%B4%D0%B8%D1%8F.png?raw=true" },
+	{ name: "Триколор 1",       			type: "stream", url: "http://ab04f03c.ucomist.net/iptv/237WGNXDPFLZAL8HDFPKFPQA/2568/index.m3u8", logo: "https://github.com/GENgroup/TV_logo/blob/main/%D0%A2%D1%80%D0%B8%D0%BA%D0%BE%D0%BB%D0%BE%D1%80%201.png?raw=true" },
+	{ name: "Триколор 2",					type: "stream", url: "http://ab04f03c.ucomist.net/iptv/237WGNXDPFLZAL8HDFPKFPQA/2569/index.m3u8", logo: "https://github.com/GENgroup/TV_logo/blob/main/%D0%A2%D1%80%D0%B8%D0%BA%D0%BE%D0%BB%D0%BE%D1%80%202.png?raw=true" },
+	{ name: "Триколор 3",					type: "stream", url: "http://ab04f03c.ucomist.net/iptv/237WGNXDPFLZAL8HDFPKFPQA/2570/index.m3u8", logo: "https://github.com/GENgroup/TV_logo/blob/main/%D0%A2%D1%80%D0%B8%D0%BA%D0%BE%D0%BB%D0%BE%D1%80%203.png?raw=true" },
+	{ name: "Триколор 4",					type: "stream", url: "http://ab04f03c.ucomist.net/iptv/237WGNXDPFLZAL8HDFPKFPQA/2571/index.m3u8", logo: "https://github.com/GENgroup/TV_logo/blob/main/%D0%A2%D1%80%D0%B8%D0%BA%D0%BE%D0%BB%D0%BE%D1%80%204.png?raw=true" },
+	{ name: "Триколор 5",					type: "stream", url: "http://ab04f03c.ucomist.net/iptv/237WGNXDPFLZAL8HDFPKFPQA/2572/index.m3u8", logo: "https://github.com/GENgroup/TV_logo/blob/main/%D0%A2%D1%80%D0%B8%D0%BA%D0%BE%D0%BB%D0%BE%D1%80%205.png?raw=true" },
+	{ name: "Триколор 6",					type: "stream", url: "http://ab04f03c.ucomist.net/iptv/237WGNXDPFLZAL8HDFPKFPQA/2577/index.m3u8", logo: "https://github.com/GENgroup/TV_logo/blob/main/%D0%A2%D1%80%D0%B8%D0%BA%D0%BE%D0%BB%D0%BE%D1%80%206.png?raw=true" },
+	{ name: "Триколор 7",					type: "stream", url: "http://ab04f03c.ucomist.net/iptv/237WGNXDPFLZAL8HDFPKFPQA/2574/index.m3u8", logo: "https://github.com/GENgroup/TV_logo/blob/main/%D0%A2%D1%80%D0%B8%D0%BA%D0%BE%D0%BB%D0%BE%D1%80%207.png?raw=true" },
+	{ name: "Триколор 8",					type: "stream", url: "http://ab04f03c.ucomist.net/iptv/237WGNXDPFLZAL8HDFPKFPQA/2575/index.m3u8", logo: "https://github.com/GENgroup/TV_logo/blob/main/%D0%A2%D1%80%D0%B8%D0%BA%D0%BE%D0%BB%D0%BE%D1%80%208.png?raw=true" },
+	{ name: "VF Ленфильм",					type: "stream", url: "http://ab04f03c.ucomist.net/iptv/237WGNXDPFLZAL8HDFPKFPQA/18121/index.m3u8", logo: "https://github.com/GENgroup/TV_logo/blob/main/VF%20%D0%9B%D0%B5%D0%BD%D1%84%D0%B8%D0%BB%D1%8C%D0%BC.png?raw=true" },
+	{ name: "VF Киностудия им. Горького",	type: "stream", url: "http://ab04f03c.ucomist.net/iptv/237WGNXDPFLZAL8HDFPKFPQA/18122/index.m3u8", logo: "https://github.com/GENgroup/TV_logo/blob/main/VF%20%D0%9A%D0%B8%D0%BD%D0%BE%D1%81%D1%82%D1%83%D0%B4%D0%B8%D1%8F%20%D0%B8%D0%BC.%20%D0%93%D0%BE%D1%80%D1%8C%D0%BA%D0%BE%D0%B3%D0%BE.png?raw=true" },
+	{ name: "VF Одесская киностудия",       type: "stream", url: "http://ab04f03c.ucomist.net/iptv/237WGNXDPFLZAL8HDFPKFPQA/18120/index.m3u8", logo: "https://github.com/GENgroup/TV_logo/blob/main/VF%20%D0%9E%D0%B4%D0%B5%D1%81%D1%81%D0%BA%D0%B0%D1%8F%20%D0%BA%D0%B8%D0%BD%D0%BE%D1%81%D1%82%D1%83%D0%B4%D0%B8%D1%8F.png?raw=true" },
+	{ name: "VF Свердловская киностудия",	type: "stream", url: "http://ab04f03c.ucomist.net/iptv/237WGNXDPFLZAL8HDFPKFPQA/18124/index.m3u8", logo: "https://github.com/GENgroup/TV_logo/blob/main/VF%20%D0%A1%D0%B2%D0%B5%D1%80%D0%B4%D0%BB%D0%BE%D0%B2%D1%81%D0%BA%D0%B0%D1%8F%20%D0%BA%D0%B8%D0%BD%D0%BE%D1%81%D1%82%D1%83%D0%B4%D0%B8%D1%8F-.png?raw=true" },
+	{ name: "VF Беларусьфильм",				type: "stream", url: "http://ab04f03c.ucomist.net/iptv/237WGNXDPFLZAL8HDFPKFPQA/18125/index.m3u8", logo: "https://github.com/GENgroup/TV_logo/blob/main/VF%20%D0%91%D0%B5%D0%BB%D0%B0%D1%80%D1%83%D1%81%D1%8C%D1%84%D0%B8%D0%BB%D1%8C%D0%BC.png?raw=true" },
+	{ name: "VF Рижская киностудия",		type: "stream", url: "http://ab04f03c.ucomist.net/iptv/237WGNXDPFLZAL8HDFPKFPQA/18123/index.m3u8", logo: "https://github.com/GENgroup/TV_logo/blob/main/VF%20%D0%A0%D0%B8%D0%B6%D1%81%D0%BA%D0%B0%D1%8F%20%D0%BA%D0%B8%D0%BD%D0%BE%D1%81%D1%82%D1%83%D0%B4%D0%B8%D1%8F.png?raw=true" },
+	{ name: "VF С новым годом!",			type: "stream", url: "http://ab04f03c.ucomist.net/iptv/237WGNXDPFLZAL8HDFPKFPQA/15524/index.m3u8", logo: "https://github.com/GENgroup/TV_logo/blob/main/VF%20%D0%A1%20%D0%BD%D0%BE%D0%B2%D1%8B%D0%BC%20%D0%B3%D0%BE%D0%B4%D0%BE%D0%BC.png?raw=true" },
+	{ name: "VF New Year",					type: "stream", url: "http://ab04f03c.ucomist.net/iptv/237WGNXDPFLZAL8HDFPKFPQA/15522/index.m3u8", logo: "https://github.com/GENgroup/TV_logo/blob/main/VF%20New%20Year.png?raw=true" },
+	{ name: "Yosso TV Советские Фильмы",	type: "stream", url: "http://ab04f03c.ucomist.net/iptv/237WGNXDPFLZAL8HDFPKFPQA/14175/index.m3u8", logo: "https://github.com/GENgroup/TV_logo/blob/main/Yosso%20TV%20%D0%A1%D0%BE%D0%B2%D0%B5%D1%82%D1%81%D0%BA%D0%B8%D0%B5%20%D0%A4%D0%B8%D0%BB%D1%8C%D0%BC%D1%8B.png?raw=true" },
+	{ name: "Yosso TV VHS",					type: "stream", url: "http://ab04f03c.ucomist.net/iptv/237WGNXDPFLZAL8HDFPKFPQA/14172/index.m3u8", logo: "https://github.com/GENgroup/TV_logo/blob/main/Yosso%20TV%20VHS.png?raw=true" },
+	{ name: "Yosso TV Сов. Фильмы",			type: "stream", url: "http://ab04f03c.ucomist.net/iptv/237WGNXDPFLZAL8HDFPKFPQA/19435/index.m3u8", logo: "https://github.com/GENgroup/TV_logo/blob/main/Yosso%20TV%20%D0%A1%D0%BE%D0%B2.%20%D0%A4%D0%B8%D0%BB%D1%8C%D0%BC%D1%8B%204%D0%BA.png?raw=true" },
+	{ name: "Yosso TV Best",				type: "stream", url: "http://ab04f03c.ucomist.net/iptv/237WGNXDPFLZAL8HDFPKFPQA/14236/index.m3u8", logo: "https://github.com/GENgroup/TV_logo/blob/main/Yosso%20TV%20Best.png?raw=true" },
+	{ name: "Tviksel Кино 1",				type: "stream", url: "http://ab04f03c.ucomist.net/iptv/237WGNXDPFLZAL8HDFPKFPQA/18071/index.m3u8", logo: "https://github.com/GENgroup/TV_logo/blob/main/Tviksel%20%D0%9A%D0%B8%D0%BD%D0%BE%201.png?raw=true" },
+	{ name: "Tviksel Кино 2",				type: "stream", url: "http://ab04f03c.ucomist.net/iptv/237WGNXDPFLZAL8HDFPKFPQA/18070/index.m3u8", logo: "https://github.com/GENgroup/TV_logo/blob/main/Tviksel%20%D0%9A%D0%B8%D0%BD%D0%BE%202.png?raw=true" },
+	{ name: "StrahTV Коломбо",				type: "stream", url: "http://ab04f03c.ucomist.net/iptv/237WGNXDPFLZAL8HDFPKFPQA/31713/index.m3u8", logo: "https://github.com/GENgroup/TV_logo/blob/main/StrahTV%20%D0%9A%D0%BE%D0%BB%D0%BE%D0%BC%D0%B1%D0%BE.png?raw=true" },
+	]
+},
+  { group: "Новости", items: [
+    { name: "Россия 24",		type: "stream", url: "http://77.232.131.211/Rossiya24/index.m3u8", logo: "https://github.com/GENgroup/TV_logo/blob/main/%D0%A0%D0%A2%D0%A024.png?raw=true" },
+    { name: "М24",				type: "stream", url: "https://stream.smotrim.ru/hls/givc8/playlist.m3u8?entity=channel&id=798&sign=37881ef2e289f062ceff0dca6c24dc58", logo: "https://github.com/GENgroup/TV_logo/blob/main/M24.png?raw=true" },
+    { name: "360°",				type: "stream", url: "https://cdn-evacoder-tv.facecast.io/evacoder_hls_hi/CkxfR1xNUAJwTgtXTBZTAJli/index.m3u8", logo: "https://github.com/GENgroup/TV_logo/blob/main/360.png?raw=true" },
+    { name: "Известия",			type: "stream", url: "http://igi-hls.cdnvideo.ru/igi/igi_tcode/playlist.m3u8", logo: "https://github.com/GENgroup/TV_logo/blob/main/%D0%98%D0%B7%D0%B2%D0%B5%D1%81%D1%82%D0%B8%D1%8F.png?raw=true" },
+    { name: "Звезда+",			type: "stream", url: "http://tvzvezda.bonus-tv.ru/cdn/zvezdaplus/playlist.m3u8", logo: "https://github.com/GENgroup/TV_logo/blob/main/%D0%97%D0%B2%D0%B5%D0%B7%D0%B4%D0%B0+.png?raw=true" },
+    { name: "Соловьёв Live",	type: "stream", url: "https://stream.smotrim.ru/hls2/solovievlive/playlist_6.m3u8", logo: "https://github.com/GENgroup/TV_logo/blob/main/%D0%A1%D0%BE%D0%BB%D0%BE%D0%B2%D1%8C%D1%91%D0%B2%20Live.png?raw=true" },
+	{ name: "RTVi",				type: "stream", url: "http://ab04f03c.ucomist.net/iptv/237WGNXDPFLZAL8HDFPKFPQA/9102/index.m3u8", logo: "https://github.com/GENgroup/TV_logo/blob/main/RTVI.png?raw=true" },
+	{ name: "Fox News",			type: "stream", url: "http://ab04f03c.ucomist.net/iptv/237WGNXDPFLZAL8HDFPKFPQA/31915/index.m3u8", logo: "https://github.com/GENgroup/TV_logo/blob/main/Fox%20News.png?raw=true" },
+	]
+},
+  { group: "Док", items: [
+	{ name: "Еда",			type: "stream",	url: "http://ab04f03c.ucomist.net/iptv/237WGNXDPFLZAL8HDFPKFPQA/6009/index.m3u8", logo: "https://github.com/GENgroup/TV_logo/blob/main/%D0%95%D0%B4%D0%B0.png?raw=true" },
+	{ name: "Food Time",	type: "stream", url: "http://ab04f03c.ucomist.net/iptv/237WGNXDPFLZAL8HDFPKFPQA/10025/index.m3u8", logo: "https://github.com/GENgroup/TV_logo/blob/main/FoodTime.png?raw=true" },
+	{ name: "Food Network",	type: "stream", url: "http://ab04f03c.ucomist.net/iptv/237WGNXDPFLZAL8HDFPKFPQA/2419/index.m3u8", logo: "https://github.com/GENgroup/TV_logo/blob/main/Food%20Network.png?raw=true" },
+	{ name: "Yosso TV Food",type: "stream", url: "http://ab04f03c.ucomist.net/iptv/237WGNXDPFLZAL8HDFPKFPQA/31616/index.m3u8", logo: "https://github.com/GENgroup/TV_logo/blob/main/Yosso%20TV%20Food.png?raw=true" },
+	{ name: "Кухня ТВ",		type: "stream", url: "http://ab04f03c.ucomist.net/iptv/237WGNXDPFLZAL8HDFPKFPQA/152/index.m3u8", logo: "https://github.com/GENgroup/TV_logo/blob/main/%D0%95%D0%B4%D0%B0.png?raw=true" },
+	{ name: "BOX Gurman",	type: "stream", url: "http://ab04f03c.ucomist.net/iptv/237WGNXDPFLZAL8HDFPKFPQA/31653/index.m3u8", logo: "https://github.com/GENgroup/TV_logo/blob/main/BOX%20Gurman.png?raw=true" },
+	{ name: "TLC",			type: "stream", url: "http://ab04f03c.ucomist.net/iptv/237WGNXDPFLZAL8HDFPKFPQA/9024/index.m3u8", logo: "https://github.com/GENgroup/TV_logo/blob/main/TLC.png?raw=true" },
+	{ name: "",				type: "stream", url: "", logo: "" },
+	{ name: "Discovery Channel",type: "stream", url: "http://ab04f03c.ucomist.net/iptv/237WGNXDPFLZAL8HDFPKFPQA/9011/index.m3u8", logo: "https://github.com/GENgroup/TV_logo/blob/main/Discovery%20Channel.png?raw=true" },
+	{ name: "Бобёр",		type: "stream", url: "http://ab04f03c.ucomist.net/iptv/237WGNXDPFLZAL8HDFPKFPQA/725/index.m3u8", logo: "https://github.com/GENgroup/TV_logo/blob/main/%D0%91%D0%BE%D0%B1%D1%91%D1%80.png?raw=true" },
+	{ name: "",				type: "stream", url: "", logo: "" },
+	{ name: "",				type: "stream", url: "", logo: "" },
+	{ name: "VeleS Магнитофон",	type: "stream", url: "http://ab04f03c.ucomist.net/iptv/237WGNXDPFLZAL8HDFPKFPQA/31645/index.m3u8", logo: "https://github.com/GENgroup/TV_logo/blob/main/VeleS%20%D0%9C%D0%B0%D0%B3%D0%BD%D0%B8%D1%82%D0%BE%D1%84%D0%BE%D0%BD.png?raw=true" },
+	]
+},
+  { group: "- НЕ рабочие -", items: [
+    { name: "КиноТВ",			type: "stream", url: "http://31.148.48.15/Kino_TV_HD/index.m3u8", logo: "https://github.com/GENgroup/TV_logo/blob/main/%D0%9A%D0%B8%D0%BD%D0%BE%D0%A2%D0%92.png?raw=true" },
+    { name: "Наше новое кино",  type: "stream", url: "http://89.223.46.189:8080/nashe-novoe-kino/playlist.m3u8", logo: "https://github.com/GENgroup/TV_logo/blob/main/%D0%9D%D0%B0%D1%88%D0%B5%20%D0%BD%D0%BE%D0%B2%D0%BE%D0%B5%20%D0%BA%D0%B8%D0%BD%D0%BE.png?raw=true" },
+    { name: "Viju+ TV1000 Рус", 	type: "stream", url: "http://185.78.112.47:8077/viju_tv1000_hd/index.m3u8", logo: "https://github.com/GENgroup/TV_logo/blob/main/Viju_TV1000%D1%80%D1%83%D1%81.png?raw=true" },
+	{ name: "КиноКомедия",		type: "stream", url: "http://158.101.222.193:88/georgia_play.php?id=kinokomediya", logo: "https://github.com/GENgroup/TV_logo/blob/main/%D0%9A%D0%B8%D0%BD%D0%BE%D0%9A%D0%BE%D0%BC%D0%B5%D0%B4%D0%B8%D1%8F.png?raw=true" },
+	{ name: "КиноСемья",		type: "stream", url: "http://89.223.46.189:8080/premiera/playlist.m3u8", logo: "https://github.com/GENgroup/TV_logo/blob/main/%D0%9A%D0%B8%D0%BD%D0%BE%D0%A1%D0%B5%D0%BC%D1%8C%D1%8F.png?raw=true" },
+	{ name: "--Discovery Science",type: "stream", url: "", logo: "https://github.com/GENgroup/TV_logo/blob/main/Discovery%20Science.png?raw=true" },
+	]},
+];
+
+// ---------------------------------------------------------------------------
+
+// ==================== НАСТРОЙКИ (крутить тут) ====================
+// Цвет каждой категории считается автоматически по кругу цветового круга (HSL),
+// поэтому работает для любого числа групп - хоть 3, хоть 12, каждая получит
+// свой оттенок без ручной прописи цвета под каждую.
+const HUE_START = 205;        // с какого оттенка начинать (0-360, цветовой круг)
+const HUE_STEP  = 47;         // на сколько градусов сдвигать цвет для каждой следующей группы
+const CAT_SATURATION = 60;    // насыщенность цвета подложки, % (0-100)
+const CAT_LIGHTNESS  = 60;    // светлота цвета подложки, % (0-100) - повышено для дневного света
+// прозрачность подложки (--cat-opacity) и размер/отступы плиток (--tile-size,
+// --tile-gap, --logo-pad) - там же, где остальные цвета, в блоке :root в начале файла
+// ====================================================================
+
+function categoryColor(idx){
+  const hue = (HUE_START + idx * HUE_STEP) % 360;
+  return `hsla(${hue}, ${CAT_SATURATION}%, ${CAT_LIGHTNESS}%, var(--cat-opacity))`;
+}
+
+const desktopNav = document.getElementById('desktopNav');
+const gridInner = document.getElementById('gridInner');
+const mobileGrid = document.getElementById('mobileGrid');
+const gridOpenBtn = document.getElementById('gridOpenBtn');
+const video = document.getElementById('player');
+const iframeEl = document.getElementById('playerFrame');
+const stageMsg = document.getElementById('stageMsg');
+const fsBtn = document.getElementById('fsBtn');
+const stage = document.getElementById('stage');
+let hls = null;
+let activeDesktopEl = null;
+let activeMobileEl = null;
+let playableChannels = [];  // плоский список каналов для свайпа влево/вправо
+let currentPlayIndex = -1;  // на каком канале сейчас стоим в этом списке
+
+// планшет/телефон определяем по touch-возможностям, а не по ширине экрана -
+// планшет в альбомной ориентации может быть шире 720px, но это всё равно тач-устройство
+const isTouch = ('ontouchstart' in window) || navigator.maxTouchPoints > 0;
+if (isTouch) document.documentElement.classList.add('mobile-mode');
+
+function tileContent(ch){
+  if (ch.logo) return '';
+  const words = ch.name.split(' ');
+  return words.length > 1 ? (words[0][0] + words[1][0]) : ch.name.slice(0,3);
+}
+
+function render(){
+  desktopNav.innerHTML = '';
+  gridInner.innerHTML = '';
+  playableChannels = []; // плоский список для свайпа переключения (без ext и disabled)
+
+  CHANNELS.forEach((g, idx) => {
+    const h = document.createElement('div');
+    h.className = 'grp-title';
+    h.textContent = g.group;
+    desktopNav.appendChild(h);
+
+    // цветная подложка категории на мобильной сетке - цвет считается формулой
+    // (см. блок НАСТРОЙКИ вверху), работает для любого числа групп
+    const groupBox = document.createElement('div');
+    groupBox.className = 'grid-group';
+    groupBox.style.background = categoryColor(idx);
+
+    const gh = document.createElement('div');
+    gh.className = 'grid-grp-title';
+    gh.textContent = g.group;
+    groupBox.appendChild(gh);
+
+    const wrap = document.createElement('div');
+    wrap.className = 'grid-wrap';
+    groupBox.appendChild(wrap);
+    gridInner.appendChild(groupBox);
+
+    g.items.forEach(ch => {
+      if (ch.disabled) return; // выключенный канал - просто не рисуем
+
+      // desktop row
+      const row = document.createElement('div');
+      row.className = 'ch-row' + (ch.type === 'ext' ? ' ext' : '');
+      const logoImg = ch.logo ? `<span class="row-logo" style="background-image:url('${ch.logo}')"></span>` : `<span class="dot"></span>`;
+      row.innerHTML = logoImg + `<span>${ch.name}</span>` +
+        (ch.type === 'ext' ? '<span class="ext-tag">сайт</span>' : '');
+      row.addEventListener('click', () => selectChannel(ch, row, null));
+      desktopNav.appendChild(row);
+
+      // mobile grid tile (без подписи под плиткой - только лого/инициалы)
+      const tile = document.createElement('div');
+      tile.className = 'ch-tile' + (ch.type === 'ext' ? ' ext' : '');
+      if (ch.logo){
+        tile.style.backgroundImage = `url('${ch.logo}')`;
+      } else {
+        tile.textContent = tileContent(ch);
+      }
+      tile.title = ch.name;
+      tile.addEventListener('click', () => selectChannel(ch, row, tile));
+      wrap.appendChild(tile);
+
+      if (ch.type !== 'ext'){
+        playableChannels.push({ ch, row, tile });
+      }
+    });
+  });
+}
+
+function selectChannel(ch, row, tile){
+  if (activeDesktopEl) activeDesktopEl.classList.remove('active');
+  if (row){ row.classList.add('active'); activeDesktopEl = row; }
+
+  if (activeMobileEl) activeMobileEl.classList.remove('active');
+  if (tile){ tile.classList.add('active'); activeMobileEl = tile; }
+
+  if (ch.type === 'ext'){
+    window.open(ch.url, '_blank');
+    showMsg(`<b>${ch.name}</b><br>Нет прямого потока — открыл сайт канала во вкладке.`);
+    stopAll();
+    fsBtn.classList.remove('show'); desktopStopBtn.classList.remove('show');
+    return;
+  }
+
+  if (ch.type === 'iframe'){
+    hideMsg();
+    playIframe(ch);
+    closeGrid();
+    currentPlayIndex = playableChannels.findIndex(p => p.ch === ch);
+    if (isTouch) goFullscreen();
+    return;
+  }
+
+  hideMsg();
+  playStream(ch);
+  closeGrid();
+  currentPlayIndex = playableChannels.findIndex(p => p.ch === ch);
+  if (isTouch) goFullscreen();
+}
+
+// свайп влево/вправо переключает на предыдущий/следующий играющий канал
+// по общему порядку списка (сквозь все категории, без сайтовых и отключённых)
+function switchChannel(direction){
+  if (playableChannels.length === 0) return;
+  let idx = currentPlayIndex;
+  if (idx < 0) idx = 0;
+  idx = (idx + direction + playableChannels.length) % playableChannels.length;
+  const p = playableChannels[idx];
+  selectChannel(p.ch, p.row, p.tile);
+}
+
+function showMsg(html){ stageMsg.innerHTML = html; stageMsg.style.display = 'block'; }
+function hideMsg(){ stageMsg.style.display = 'none'; }
+
+function stopAll(){
+  if (hls){ hls.destroy(); hls = null; }
+  video.pause();
+  video.removeAttribute('src');
+  video.style.display = 'none';
+  iframeEl.style.display = 'none';
+  iframeEl.src = 'about:blank';
+  somethingPlaying = false;
+  updateExpandBtnVisibility();
+}
+
+// type "stream": обычный HLS-поток (.m3u8) - играет через hls.js в <video>
+// принимает не url, а весь объект канала - нужен для показа имени в сообщении об ошибке
+function playStream(ch){
+  const url = ch.url;
+  if (hls){ hls.destroy(); hls = null; }
+  iframeEl.style.display = 'none';
+  iframeEl.src = 'about:blank';
+  video.style.display = 'block';
+
+  if (Hls.isSupported()){
+    hls = new Hls({ maxBufferLength: 20 });
+    hls.loadSource(url);
+    hls.attachMedia(video);
+    hls.on(Hls.Events.MANIFEST_PARSED, () => video.play().catch(()=>{}));
+    hls.on(Hls.Events.ERROR, (evt, data) => {
+      if (data.fatal){
+        const logoHtml = ch.logo ? `<img src="${ch.logo}" style="width:40px;height:40px;object-fit:contain;display:block;margin:0 auto 8px;border-radius:8px;">` : '';
+        showMsg(`${logoHtml}<b>${ch.name}</b> не отвечает.<br>Попробуй другой.`);
+      }
+    });
+  } else if (video.canPlayType('application/vnd.apple.mpegurl')){
+    video.src = url;
+    video.play().catch(()=>{});
+  } else {
+    showMsg('Браузер не поддерживает поток.');
+  }
+  fsBtn.classList.add('show'); desktopStopBtn.classList.add('show');
+  somethingPlaying = true;
+  updateExpandBtnVisibility();
+  showEpgProgressOnStage(ch);
+}
+
+// type "iframe": страница-плеер чужого сайта (например player.smotrim.ru/iframe/...)
+// встраивается как есть. ЧЕСТНО: часть сайтов запрещает встраивание себя (X-Frame-Options) -
+// такие каналы просто останутся пустым/белым окном, тут заранее не угадать, надо пробовать.
+function playIframe(ch){
+  const url = ch.url;
+  if (hls){ hls.destroy(); hls = null; }
+  video.pause();
+  video.removeAttribute('src');
+  video.style.display = 'none';
+  iframeEl.style.display = 'block';
+  iframeEl.src = url;
+  fsBtn.classList.add('show'); desktopStopBtn.classList.add('show');
+  somethingPlaying = true;
+  updateExpandBtnVisibility();
+  showEpgProgressOnStage(ch);
+}
+
+// ---- fullscreen ----
+function goFullscreen(){
+  const el = document.documentElement;
+  const req = el.requestFullscreen || el.webkitRequestFullscreen;
+  if (req) req.call(el).catch(() => {});
+}
+fsBtn.addEventListener('click', goFullscreen);
+
+// на мобильном: кнопка "на весь экран" появляется, только если что-то играет
+// И мы сейчас НЕ в полноэкранном режиме (программа реально видит своё состояние
+// через document.fullscreenElement, не гадает)
+const mobileExpandBtn = document.getElementById('mobileExpandBtn');
+let somethingPlaying = false;
+
+function updateExpandBtnVisibility(){
+  const inFullscreen = !!document.fullscreenElement;
+  mobileExpandBtn.style.display = (isTouch && somethingPlaying && !inFullscreen) ? 'flex' : 'none';
+}
+document.addEventListener('fullscreenchange', updateExpandBtnVisibility);
+mobileExpandBtn.addEventListener('click', goFullscreen);
+
+// тап по самому видео - тоже возвращает в полноэкранный режим (запасной способ,
+// работает одновременно с кнопкой, конфликта нет - оба ведут к одному действию)
+video.addEventListener('click', () => {
+  if (isTouch && somethingPlaying && !document.fullscreenElement) goFullscreen();
+});
+// на мобильном единственная кнопка ▦ (gridOpenBtn) и открывает сетку, и глушит
+// звук - вся логика остановки внутри openGrid(), отдельная кнопка Стоп не нужна
+
+// на ПК - отдельная кнопка Стоп рядом с полноэкранным режимом (на мобильном
+// эту роль играет сетка каналов, а на ПК список и так всегда виден сбоку)
+const desktopStopBtn = document.getElementById('desktopStopBtn');
+desktopStopBtn.addEventListener('click', () => {
+  stopAll();
+  hideMsg();
+  activeDesktopEl && activeDesktopEl.classList.remove('active');
+  activeDesktopEl = null;
+  fsBtn.classList.remove('show'); desktopStopBtn.classList.remove('show');
+});
+function positionFsBtn(){
+  const r = stage.getBoundingClientRect();
+  fsBtn.style.right = (window.innerWidth - r.right + 14) + 'px';
+  fsBtn.style.bottom = (window.innerHeight - r.bottom + 14) + 'px';
+  desktopStopBtn.style.right = (window.innerWidth - r.right + 14 + 48) + 'px';
+  desktopStopBtn.style.bottom = (window.innerHeight - r.bottom + 14) + 'px';
+}
+window.addEventListener('resize', positionFsBtn);
+positionFsBtn();
+
+// ---- mobile: сетка каналов открыта по умолчанию, закрывается при выборе канала ----
+// ВАЖНО: любое открытие сетки (тап по видео, кнопка ▦, кнопка Стоп) теперь
+// само глушит звук - незачем гадать, откуда звук продолжает играть
+function openGrid(){
+  stopAll();
+  hideMsg();
+  activeMobileEl && activeMobileEl.classList.remove('active');
+  activeMobileEl = null;
+  activeDesktopEl && activeDesktopEl.classList.remove('active');
+  activeDesktopEl = null;
+  mobileGrid.classList.add('open');
+  gridOpenBtn.style.display = 'none';
+}
+function closeGrid(){
+  mobileGrid.classList.remove('open');
+  if (isTouch) gridOpenBtn.style.display = 'flex';
+}
+gridOpenBtn.addEventListener('click', openGrid);
+if (isTouch) openGrid(); // на входе на мобильном сразу видно все каналы, ничего не прячем
+
+// ---- mobile: swipe on right half = volume ----
+const volZone = document.getElementById('volZone');
+const volIndicator = document.getElementById('volIndicator');
+const volFill = volIndicator.querySelector('.fill');
+let touchStartY = null;
+let touchStartVol = 1;
+
+volZone.addEventListener('touchstart', (e) => {
+  touchStartY = e.touches[0].clientY;
+  touchStartVol = video.volume;
+  volIndicator.classList.add('show');
+}, { passive:true });
+
+volZone.addEventListener('touchmove', (e) => {
+  if (touchStartY === null) return;
+  const dy = touchStartY - e.touches[0].clientY;
+  const delta = dy / window.innerHeight; // весь экран сверху донизу = 100% громкости
+  let newVol = touchStartVol + delta;
+  newVol = Math.max(0, Math.min(1, newVol));
+  video.volume = newVol;
+  volFill.style.height = (newVol * 100) + '%';
+}, { passive:true });
+
+function endVolTouch(){
+  touchStartY = null;
+  setTimeout(() => volIndicator.classList.remove('show'), 400);
+}
+volZone.addEventListener('touchend', endVolTouch);
+volZone.addEventListener('touchcancel', endVolTouch);
+
+video.addEventListener('volumechange', () => {
+  volFill.style.height = (video.volume * 100) + '%';
+});
+
+// ---- mobile: swipe on left half = переключение канала (влево - пред., вправо - след.) ----
+const chanZone = document.getElementById('chanZone');
+let touchStartXC = null;
+const SWIPE_THRESHOLD = 60; // px, минимальная длина свайпа, чтобы засчитать переключение
+
+chanZone.addEventListener('touchstart', (e) => {
+  touchStartXC = e.touches[0].clientX;
+}, { passive:true });
+
+chanZone.addEventListener('touchend', (e) => {
+  if (touchStartXC === null) return;
+  const dx = e.changedTouches[0].clientX - touchStartXC;
+  touchStartXC = null;
+  if (Math.abs(dx) < SWIPE_THRESHOLD) return; // короткий тап/дрожание - не свайп
+  // свайп влево (палец идёт вправо->влево, dx отрицательный) = предыдущий канал
+  // свайп вправо (dx положительный) = следующий канал
+  if (dx < 0) switchChannel(-1);
+  else switchChannel(1);
+}, { passive:true });
+
+// =====================================================================
+// EPG (телепрограмма: название передачи и % прогресса "сколько прошло")
+// =====================================================================
+// ГЛАВНЫЙ ВЫКЛЮЧАТЕЛЬ - поставь false, чтобы полностью отключить EPG
+// (ни скачивания, ни показа - как будто этой части кода нет вообще)
+const EPG_ENABLED = true;
+
+// источник по умолчанию - один файл на ВСЕ каналы разом
+const EPG_DEFAULT_SOURCE = "http://epg.one/epg2.xml";
+
+// как часто перекачивать EPG заново, в часах (программа передач не меняется
+// каждую минуту, поэтому кэшируем в localStorage браузера и не дёргаем сеть зря)
+const EPG_REFRESH_HOURS = 24;
+
+// сколько секунд показывать прогресс-полосу и название передачи поверх видео
+// сразу после выбора канала (потом сама прячется)
+const EPG_STAGE_SECONDS = 8;
+
+// ЧТОБЫ ДАТЬ КАНАЛУ СВОЙ ОТДЕЛЬНЫЙ ИСТОЧНИК EPG (если его нет в общем источнике
+// выше, но есть какой-то ещё), допиши в объекте канала в CHANNELS два поля:
+//   epgSource: "https://адрес/другого/файла.xml" (или .xml.gz)
+//   epgId:     "как канал называется или какой у него id внутри ЭТОГО файла"
+// Пример:
+//   { name: "Редкий канал", type: "stream", url: "...", logo: "...",
+//     epgSource: "https://example.com/epg.xml", epgId: "RareChannel1" },
+// Если этих двух полей нет - канал молча использует общий EPG_DEFAULT_SOURCE
+// по своему обычному имени (name). Ничего не сработало - бара просто не будет,
+// без ошибок и без надписей "нет данных" - тихо.
+
+let epgByName = {};  // { "Имя канала (как в CHANNELS)": [{start,stop,title}, ...] }
+let epgAlt = {};     // { "источник|epgId": [{start,stop,title}, ...] }
+
+function epgCacheGet(key){
+  try{
+    const raw = localStorage.getItem(key);
+    if (!raw) return null;
+    const obj = JSON.parse(raw);
+    if (Date.now() - obj.ts > EPG_REFRESH_HOURS * 3600 * 1000) return null; // протухло
+    return obj.data;
+  } catch(e){ return null; }
+}
+function epgCacheSet(key, data){
+  try{
+    localStorage.setItem(key, JSON.stringify({ ts: Date.now(), data }));
+  } catch(e){ /* хранилище переполнено/недоступно - просто не кэшируем, не страшно */ }
+}
+
+// скачивает и, если файл .gz, распаковывает прямо в браузере (без сторонних
+// библиотек - у современных браузеров DecompressionStream встроен)
+async function fetchEpgSource(url){
+  const resp = await fetch(url);
+  if (!resp.ok) throw new Error('HTTP ' + resp.status);
+  if (url.endsWith('.gz')){
+    const stream = resp.body.pipeThrough(new DecompressionStream('gzip'));
+    return await new Response(stream).text();
+  }
+  return await resp.text();
+}
+
+// разбирает XMLTV-файл, оставляя только те каналы, что реально нужны
+// (wantedNames - Set с именами, которые ищем среди <display-name>)
+function parseEpgXml(xmlText, wantedNames){
+  const doc = new DOMParser().parseFromString(xmlText, 'text/xml');
+  const idToName = {};
+  const result = {};
+
+  const channelEls = doc.getElementsByTagName('channel');
+  for (const chEl of channelEls){
+    const id = chEl.getAttribute('id');
+    const names = chEl.getElementsByTagName('display-name');
+    for (const dn of names){
+      const nm = (dn.textContent || '').trim();
+      if (wantedNames.has(nm)){
+        idToName[id] = nm;
+        result[nm] = [];
+        break;
+      }
+    }
+  }
+
+  const progEls = doc.getElementsByTagName('programme');
+  for (const p of progEls){
+    const nm = idToName[p.getAttribute('channel')];
+    if (!nm) continue;
+    const titleEl = p.getElementsByTagName('title')[0];
+    result[nm].push({
+      start: p.getAttribute('start'),
+      stop: p.getAttribute('stop'),
+      title: titleEl ? titleEl.textContent : ''
+    });
+  }
+  return result;
+}
+
+// формат даты в XMLTV: "20260817120000 +0300"
+function parseXmltvDate(s){
+  const m = /^(\d{4})(\d{2})(\d{2})(\d{2})(\d{2})(\d{2})\s*([+-]\d{4})?$/.exec(s || '');
+  if (!m) return null;
+  let iso = `${m[1]}-${m[2]}-${m[3]}T${m[4]}:${m[5]}:${m[6]}`;
+  iso += m[7] ? (m[7].slice(0,3) + ':' + m[7].slice(3)) : 'Z';
+  const d = new Date(iso);
+  return isNaN(d) ? null : d;
+}
+
+// находит текущую (прямо сейчас идущую) передачу в списке и % прогресса
+function currentProgress(programmes){
+  if (!programmes || !programmes.length) return null;
+  const now = Date.now();
+  for (const p of programmes){
+    const start = parseXmltvDate(p.start);
+    const stop = parseXmltvDate(p.stop);
+    if (!start || !stop) continue;
+    if (now >= start.getTime() && now < stop.getTime()){
+      const pct = Math.round((now - start.getTime()) / (stop.getTime() - start.getTime()) * 100);
+      return { pct: Math.max(0, Math.min(100, pct)), title: p.title };
+    }
+  }
+  return null;
+}
+
+function programmesFor(ch){
+  if (ch.epgSource){
+    return epgAlt[ch.epgSource + '|' + (ch.epgId || ch.name)] || [];
+  }
+  return epgByName[ch.name] || [];
+}
+
+// рисует/обновляет янтарную полоску снизу плитки (мобильный) и строки (ПК)
+function renderEpgBars(){
+  if (!EPG_ENABLED) return;
+  playableChannels.forEach(p => {
+    const prog = currentProgress(programmesFor(p.ch));
+    [p.tile, p.row].forEach(el => {
+      if (!el) return;
+      let bar = el.querySelector('.epg-bar');
+      if (!prog){
+        if (bar) bar.remove();
+        return;
+      }
+      if (!bar){
+        bar = document.createElement('div');
+        bar.className = 'epg-bar';
+        el.appendChild(bar);
+      }
+      bar.style.width = prog.pct + '%';
+    });
+  });
+}
+
+// показывает название передачи и прогресс поверх видео на несколько секунд
+// после выбора канала (EPG_STAGE_SECONDS), потом само прячется
+function showEpgProgressOnStage(ch){
+  if (!EPG_ENABLED) return;
+  const prog = currentProgress(programmesFor(ch));
+  const box = document.getElementById('stageEpg');
+  if (!prog){ box.classList.remove('show'); return; }
+  box.querySelector('.epg-title').textContent = prog.title;
+  box.querySelector('.epg-fill').style.width = prog.pct + '%';
+  box.classList.add('show');
+  clearTimeout(showEpgProgressOnStage._t);
+  showEpgProgressOnStage._t = setTimeout(() => box.classList.remove('show'), EPG_STAGE_SECONDS * 1000);
+}
+
+async function initEpg(){
+  if (!EPG_ENABLED) return;
+
+  // какие имена каналов нужны из ОБЩЕГО источника (у кого нет своего epgSource)
+  const wanted = new Set();
+  playableChannels.forEach(p => { if (!p.ch.epgSource) wanted.add(p.ch.name); });
+
+  try{
+    let cached = epgCacheGet('epg_default');
+    epgByName = cached || parseEpgXml(await fetchEpgSource(EPG_DEFAULT_SOURCE), wanted);
+    if (!cached) epgCacheSet('epg_default', epgByName);
+  } catch(e){
+    console.warn('EPG: основной источник не загрузился -', e.message);
+    epgByName = {};
+  }
+
+  // отдельные источники по каналам с epgSource - каждый кэшируется отдельно
+  const altSources = {};
+  playableChannels.forEach(p => {
+    if (p.ch.epgSource){
+      const set = altSources[p.ch.epgSource] || (altSources[p.ch.epgSource] = new Set());
+      set.add(p.ch.epgId || p.ch.name);
+    }
+  });
+  for (const src in altSources){
+    try{
+      const cacheKey = 'epg_alt_' + src;
+      let cached = epgCacheGet(cacheKey);
+      const parsed = cached || parseEpgXml(await fetchEpgSource(src), altSources[src]);
+      if (!cached) epgCacheSet(cacheKey, parsed);
+      for (const id of altSources[src]) epgAlt[src + '|' + id] = parsed[id] || [];
+    } catch(e){
+      console.warn('EPG: доп. источник не загрузился -', src, e.message);
+    }
+  }
+
+  renderEpgBars();
+}
+
+// раз в минуту пересчитывать полоски (передача идёт, % растёт само)
+setInterval(renderEpgBars, 60000);
+
+render();
+if (EPG_ENABLED) initEpg();
+</script>
+</body>
+</html>
