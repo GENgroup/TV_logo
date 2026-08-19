@@ -191,6 +191,23 @@
     cursor:pointer;
   }
   #desktopStopBtn.show{display:flex;}
+
+  /* всплывающий индикатор громкости на ПК - появляется при прокрутке колеса
+     мыши над видео, сам гаснет через секунду */
+  #desktopVolIndicator{
+    position:fixed;
+    z-index:8;
+    background:rgba(20,22,16,.85);
+    border:1px solid var(--line);
+    color:var(--text);
+    padding:6px 14px;
+    border-radius:8px;
+    font-size:14px;
+    opacity:0;
+    pointer-events:none;
+    transition:opacity .2s;
+  }
+  #desktopVolIndicator.show{ opacity:1; }
   .stop-square{
     width:14px; height:14px;
     background:var(--text);
@@ -267,7 +284,7 @@
   :root{
     --cat-opacity: 0.24;
     --tile-size: 48px;   /* размер плитки канала (ширина=высота) */
-    --tile-gap: 8px;     /* расстояние между плитками */
+    --tile-gap: 16px;     /* расстояние между плитками */
     --logo-pad: 5px;     /* поля внутри плитки вокруг логотипа - меньше = логотип крупнее */
   }
 
@@ -376,12 +393,13 @@
 
 <!-- DESKTOP CHROME -->
 <header id="desktopHeader" class="only-desktop">
-  <span class="mark">!GEN ТВ</span><span class="sub" style="margin-left:6px;opacity:.5">v9</span>
+  <span class="mark">!GEN ТВ</span><span class="sub" style="margin-left:6px;opacity:.5">v10</span>
   <span class="sub">личная подборка</span>
 </header>
 <nav id="desktopNav" class="only-desktop"></nav>
 <button id="fsBtn" title="Во весь экран">⛶</button>
 <button id="desktopStopBtn" class="only-desktop" title="Стоп"><span class="stop-square"></span></button>
+<div id="desktopVolIndicator" class="only-desktop"><span></span></div>
 
 <!-- STAGE (общий для обеих версий) -->
 <div id="stage">
@@ -804,6 +822,44 @@ function positionFsBtn(){
 window.addEventListener('resize', positionFsBtn);
 positionFsBtn();
 
+// ---- ПК: громкость колёсиком мыши над видео + запоминание последнего уровня ----
+// VOLUME_STEP - на сколько процентов меняется громкость за одно деление колеса
+// VOLUME_DEFAULT - громкость при самом первом запуске (пока ещё ничего не сохранено)
+const VOLUME_STEP = 0.05;
+const VOLUME_DEFAULT = 0.5;
+
+function loadSavedVolume(){
+  const saved = localStorage.getItem('tv_volume');
+  return saved !== null ? parseFloat(saved) : VOLUME_DEFAULT;
+}
+function saveVolume(v){
+  try{ localStorage.setItem('tv_volume', v); } catch(e){}
+}
+
+const desktopVolIndicator = document.getElementById('desktopVolIndicator');
+let volIndicatorTimer = null;
+function showDesktopVolIndicator(){
+  const r = stage.getBoundingClientRect();
+  desktopVolIndicator.style.left = (r.left + r.width/2) + 'px';
+  desktopVolIndicator.style.top = (r.top + 16) + 'px';
+  desktopVolIndicator.style.transform = 'translateX(-50%)';
+  desktopVolIndicator.querySelector('span').textContent = 'Громкость: ' + Math.round(video.volume*100) + '%';
+  desktopVolIndicator.classList.add('show');
+  clearTimeout(volIndicatorTimer);
+  volIndicatorTimer = setTimeout(() => desktopVolIndicator.classList.remove('show'), 1000);
+}
+
+stage.addEventListener('wheel', (e) => {
+  if (isTouch) return; // на мобильном громкость - свайпом, колесо мыши там ни при чём
+  e.preventDefault();
+  const delta = e.deltaY < 0 ? VOLUME_STEP : -VOLUME_STEP;
+  video.volume = Math.max(0, Math.min(1, video.volume + delta));
+  saveVolume(video.volume);
+  showDesktopVolIndicator();
+}, { passive:false });
+
+video.volume = loadSavedVolume(); // применяем сохранённую громкость сразу, один раз на весь сеанс
+
 // ---- mobile: сетка каналов открыта по умолчанию, закрывается при выборе канала ----
 // ВАЖНО: любое открытие сетки (тап по видео, кнопка ▦, кнопка Стоп) теперь
 // само глушит звук - незачем гадать, откуда звук продолжает играть
@@ -886,7 +942,7 @@ chanZone.addEventListener('touchend', (e) => {
 const EPG_ENABLED = true;
 
 // источник по умолчанию - один файл на ВСЕ каналы разом
-const EPG_DEFAULT_SOURCE = "https://raw.githubusercontent.com/globetvapp/epg/main/Russia/russia1.xml.gz";
+const EPG_DEFAULT_SOURCE = "https://raw.githubusercontent.com/GENgroup/TV_logo/main/russia1.xml.gz";
 
 // как часто перекачивать EPG заново, в часах (программа передач не меняется
 // каждую минуту, поэтому кэшируем в localStorage браузера и не дёргаем сеть зря)
