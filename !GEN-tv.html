@@ -55,21 +55,27 @@
   #stageMsg b{color:var(--text); font-weight:600;}
   #stageMsg a{color:var(--accent); pointer-events:auto;}
 
-  /* зона свайпа громкости - правая половина экрана */
+  /* зона свайпа громкости - правая ТРЕТЬ экрана (на ПК не мешает мыши -
+     см. правило html.mobile-mode ниже, включается только на тач-устройствах) */
   #volZone{
     position:fixed;
     top:0; right:0; bottom:0;
-    width:50%;
+    width:33.33%;
     z-index:5;
+    pointer-events:none;
   }
-  /* зона свайпа переключения канала (влево/вправо) - левая половина экрана */
+  html.mobile-mode #volZone{ pointer-events:auto; }
+
+  /* зона свайпа переключения канала (влево/вправо) - левые ДВЕ ТРЕТИ экрана */
   #chanZone{
     position:fixed;
     top:0; left:0; bottom:0;
-    width:50%;
+    width:66.66%;
     z-index:5;
     touch-action:none;
+    pointer-events:none;
   }
+  html.mobile-mode #chanZone{ pointer-events:auto; }
   #volIndicator{
     position:fixed;
     right:16px;
@@ -208,6 +214,13 @@
     transition:opacity .2s;
   }
   #desktopVolIndicator.show{ opacity:1; }
+
+  #desktopVolSlider{
+    position:fixed;
+    z-index:8;
+    width:110px;
+    accent-color: var(--accent);
+  }
   .stop-square{
     width:14px; height:14px;
     background:var(--text);
@@ -284,7 +297,7 @@
   :root{
     --cat-opacity: 0.24;
     --tile-size: 48px;   /* размер плитки канала (ширина=высота) */
-    --tile-gap: 16px;     /* расстояние между плитками */
+    --tile-gap: 24px;     /* расстояние между плитками */
     --logo-pad: 5px;     /* поля внутри плитки вокруг логотипа - меньше = логотип крупнее */
   }
 
@@ -393,12 +406,13 @@
 
 <!-- DESKTOP CHROME -->
 <header id="desktopHeader" class="only-desktop">
-  <span class="mark">!GEN ТВ</span><span class="sub" style="margin-left:6px;opacity:.5">v10</span>
+  <span class="mark">!GEN ТВ</span><span class="sub" style="margin-left:6px;opacity:.5">v11</span>
   <span class="sub">личная подборка</span>
 </header>
 <nav id="desktopNav" class="only-desktop"></nav>
 <button id="fsBtn" title="Во весь экран">⛶</button>
 <button id="desktopStopBtn" class="only-desktop" title="Стоп"><span class="stop-square"></span></button>
+<input type="range" id="desktopVolSlider" class="only-desktop" min="0" max="1000" value="500" title="Громкость">
 <div id="desktopVolIndicator" class="only-desktop"><span></span></div>
 
 <!-- STAGE (общий для обеих версий) -->
@@ -805,6 +819,7 @@ video.addEventListener('click', () => {
 // на ПК - отдельная кнопка Стоп рядом с полноэкранным режимом (на мобильном
 // эту роль играет сетка каналов, а на ПК список и так всегда виден сбоку)
 const desktopStopBtn = document.getElementById('desktopStopBtn');
+const desktopVolSlider = document.getElementById('desktopVolSlider');
 desktopStopBtn.addEventListener('click', () => {
   stopAll();
   hideMsg();
@@ -818,22 +833,33 @@ function positionFsBtn(){
   fsBtn.style.bottom = (window.innerHeight - r.bottom + 14) + 'px';
   desktopStopBtn.style.right = (window.innerWidth - r.right + 14 + 48) + 'px';
   desktopStopBtn.style.bottom = (window.innerHeight - r.bottom + 14) + 'px';
+  desktopVolSlider.style.right = (window.innerWidth - r.right + 14 + 96) + 'px';
+  desktopVolSlider.style.bottom = (window.innerHeight - r.bottom + 14 + 12) + 'px';
 }
 window.addEventListener('resize', positionFsBtn);
 positionFsBtn();
 
-// ---- ПК: громкость колёсиком мыши над видео + запоминание последнего уровня ----
-// VOLUME_STEP - на сколько процентов меняется громкость за одно деление колеса
-// VOLUME_DEFAULT - громкость при самом первом запуске (пока ещё ничего не сохранено)
-const VOLUME_STEP = 0.05;
-const VOLUME_DEFAULT = 0.5;
+// ---- ПК: постоянный ползунок громкости, "перекошенная" шкала ----
+// Обычный линейный ползунок (0-100 = 0-100% громкости напрямую) сжимает всю
+// тихую зону в первые пару миллиметров - ухо тихие звуки различает гораздо
+// тоньше, чем громкие, поэтому линейная шкала там бесполезна.
+// Тут ползунок (0-1000 для плавности) - это не сама громкость, а "позиция",
+// которая переводится в громкость через степенную кривую (**VOLUME_CURVE):
+// чем больше VOLUME_CURVE, тем сильнее растянута тихая часть шкалы.
+//   позиция 0.2 (20% хода ползунка) при VOLUME_CURVE=2 даёт громкость 0.04 (4%)
+//   позиция 0.2 при VOLUME_CURVE=3 даёт громкость 0.008 (ещё тише) - тише зона ещё растянутее
+const VOLUME_CURVE = 2.5;      // 1 = обычная линейная шкала, больше = тихая зона растянута сильнее
+const VOLUME_DEFAULT_POS = 0.5; // положение ползунка при первом запуске (0-1), не сама громкость
 
-function loadSavedVolume(){
-  const saved = localStorage.getItem('tv_volume');
-  return saved !== null ? parseFloat(saved) : VOLUME_DEFAULT;
+function posToVolume(pos){ return Math.pow(pos, VOLUME_CURVE); }
+function volumeToPos(vol){ return Math.pow(Math.max(0, vol), 1 / VOLUME_CURVE); }
+
+function loadSavedVolumePos(){
+  const saved = localStorage.getItem('tv_volume_pos');
+  return saved !== null ? parseFloat(saved) : VOLUME_DEFAULT_POS;
 }
-function saveVolume(v){
-  try{ localStorage.setItem('tv_volume', v); } catch(e){}
+function saveVolumePos(pos){
+  try{ localStorage.setItem('tv_volume_pos', pos); } catch(e){}
 }
 
 const desktopVolIndicator = document.getElementById('desktopVolIndicator');
@@ -849,16 +875,16 @@ function showDesktopVolIndicator(){
   volIndicatorTimer = setTimeout(() => desktopVolIndicator.classList.remove('show'), 1000);
 }
 
-stage.addEventListener('wheel', (e) => {
-  if (isTouch) return; // на мобильном громкость - свайпом, колесо мыши там ни при чём
-  e.preventDefault();
-  const delta = e.deltaY < 0 ? VOLUME_STEP : -VOLUME_STEP;
-  video.volume = Math.max(0, Math.min(1, video.volume + delta));
-  saveVolume(video.volume);
+desktopVolSlider.addEventListener('input', () => {
+  const pos = desktopVolSlider.value / 1000;
+  video.volume = posToVolume(pos);
+  saveVolumePos(pos);
   showDesktopVolIndicator();
-}, { passive:false });
+});
 
-video.volume = loadSavedVolume(); // применяем сохранённую громкость сразу, один раз на весь сеанс
+const initialVolPos = loadSavedVolumePos();
+desktopVolSlider.value = Math.round(initialVolPos * 1000);
+video.volume = posToVolume(initialVolPos); // применяем сохранённую громкость сразу, один раз на весь сеанс
 
 // ---- mobile: сетка каналов открыта по умолчанию, закрывается при выборе канала ----
 // ВАЖНО: любое открытие сетки (тап по видео, кнопка ▦, кнопка Стоп) теперь
