@@ -219,7 +219,40 @@
     position:fixed;
     z-index:8;
     width:110px;
-    accent-color: var(--accent);
+    height:20px;
+    margin:0;
+    -webkit-appearance:none;
+    appearance:none;
+    background:transparent;
+    cursor:pointer;
+  }
+  /* трек ползунка - полностью непрозрачный, свой цвет, не дефолт браузера */
+  #desktopVolSlider::-webkit-slider-runnable-track{
+    height:6px;
+    border-radius:4px;
+    background:#2a2f22;
+    border:1px solid var(--line);
+  }
+  #desktopVolSlider::-moz-range-track{
+    height:6px;
+    border-radius:4px;
+    background:#2a2f22;
+    border:1px solid var(--line);
+  }
+  /* бегунок - тоже полностью непрозрачный, крупный, хорошо заметный */
+  #desktopVolSlider::-webkit-slider-thumb{
+    -webkit-appearance:none;
+    width:16px; height:16px;
+    border-radius:50%;
+    background:var(--accent);
+    border:2px solid #0d0f0c;
+    margin-top:-6px;
+  }
+  #desktopVolSlider::-moz-range-thumb{
+    width:16px; height:16px;
+    border-radius:50%;
+    background:var(--accent);
+    border:2px solid #0d0f0c;
   }
   .stop-square{
     width:14px; height:14px;
@@ -297,7 +330,7 @@
   :root{
     --cat-opacity: 0.24;
     --tile-size: 48px;   /* размер плитки канала (ширина=высота) */
-    --tile-gap: 24px;     /* расстояние между плитками */
+    --tile-gap: 20px;     /* расстояние между плитками */
     --logo-pad: 5px;     /* поля внутри плитки вокруг логотипа - меньше = логотип крупнее */
   }
 
@@ -406,7 +439,7 @@
 
 <!-- DESKTOP CHROME -->
 <header id="desktopHeader" class="only-desktop">
-  <span class="mark">!GEN ТВ</span><span class="sub" style="margin-left:6px;opacity:.5">v11</span>
+  <span class="mark">!GEN ТВ</span><span class="sub" style="margin-left:6px;opacity:.5">v12</span>
   <span class="sub">личная подборка</span>
 </header>
 <nav id="desktopNav" class="only-desktop"></nav>
@@ -877,10 +910,25 @@ function showDesktopVolIndicator(){
 
 desktopVolSlider.addEventListener('input', () => {
   const pos = desktopVolSlider.value / 1000;
+  applyVolumePos(pos);
+});
+
+// колёсико мыши над видео - двигает то же самое значение, что и слайдер,
+// и держит слайдер визуально в синхроне (шаг WHEEL_STEP - доля хода ползунка)
+const WHEEL_STEP = 0.03;
+function applyVolumePos(pos){
+  pos = Math.max(0, Math.min(1, pos));
   video.volume = posToVolume(pos);
+  desktopVolSlider.value = Math.round(pos * 1000);
   saveVolumePos(pos);
   showDesktopVolIndicator();
-});
+}
+stage.addEventListener('wheel', (e) => {
+  if (isTouch) return; // на мобильном громкость - свайпом, колесо мыши там ни при чём
+  e.preventDefault();
+  const currentPos = desktopVolSlider.value / 1000;
+  applyVolumePos(currentPos + (e.deltaY < 0 ? WHEEL_STEP : -WHEEL_STEP));
+}, { passive:false });
 
 const initialVolPos = loadSavedVolumePos();
 desktopVolSlider.value = Math.round(initialVolPos * 1000);
