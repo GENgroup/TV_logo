@@ -170,7 +170,8 @@
 
   #fsBtn{
     position:fixed;
-    z-index:8;
+    top:8px; right:270px;
+    z-index:12;
     background:rgba(20,22,16,.75);
     border:1px solid var(--line);
     color:var(--text);
@@ -185,7 +186,8 @@
 
   #desktopStopBtn{
     position:fixed;
-    z-index:8;
+    top:8px; right:318px;
+    z-index:12;
     background:rgba(20,22,16,.75);
     border:1px solid var(--line);
     color:var(--text);
@@ -202,7 +204,7 @@
      мыши над видео, сам гаснет через секунду */
   #desktopVolIndicator{
     position:fixed;
-    z-index:8;
+    z-index:12;
     background:rgba(20,22,16,.85);
     border:1px solid var(--line);
     color:var(--text);
@@ -217,7 +219,8 @@
 
   #desktopVolSlider{
     position:fixed;
-    z-index:8;
+    top:16px; right:366px;
+    z-index:12;
     width:110px;
     height:20px;
     margin:0;
@@ -331,7 +334,7 @@
     --cat-opacity: 0.24;
     --tile-size: 48px;   /* размер плитки канала (ширина=высота) */
     --tile-gap: 20px;     /* расстояние между плитками */
-    --logo-pad: 5px;     /* поля внутри плитки вокруг логотипа - меньше = логотип крупнее */
+    --logo-pad: 6px;     /* поля внутри плитки вокруг логотипа - меньше = логотип крупнее */
   }
 
   .grid-group{
@@ -439,7 +442,7 @@
 
 <!-- DESKTOP CHROME -->
 <header id="desktopHeader" class="only-desktop">
-  <span class="mark">!GEN ТВ</span><span class="sub" style="margin-left:6px;opacity:.5">v12</span>
+  <span class="mark">!GEN ТВ</span><span class="sub" style="margin-left:6px;opacity:.5">v13+</span>
   <span class="sub">личная подборка</span>
 </header>
 <nav id="desktopNav" class="only-desktop"></nav>
@@ -788,7 +791,7 @@ function playStream(ch){
     hls.on(Hls.Events.ERROR, (evt, data) => {
       if (data.fatal){
         const logoHtml = ch.logo ? `<img src="${ch.logo}" style="width:40px;height:40px;object-fit:contain;display:block;margin:0 auto 8px;border-radius:8px;">` : '';
-        showMsg(`${logoHtml}<b>${ch.name}</b> не отвечает.<br>Попробуй другой.`);
+        showMsg(`${logoHtml}<b>${ch.name}</b> не отвечает.<br>`);
       }
     });
   } else if (video.canPlayType('application/vnd.apple.mpegurl')){
@@ -805,7 +808,7 @@ function playStream(ch){
 
 // type "iframe": страница-плеер чужого сайта (например player.smotrim.ru/iframe/...)
 // встраивается как есть. ЧЕСТНО: часть сайтов запрещает встраивание себя (X-Frame-Options) -
-// такие каналы просто останутся пустым/белым окном, тут заранее не угадать, надо пробовать.
+// такие каналы просто останутся пустым окном, заранее не угадать, надо пробовать.
 function playIframe(ch){
   const url = ch.url;
   if (hls){ hls.destroy(); hls = null; }
@@ -829,7 +832,7 @@ function goFullscreen(){
 fsBtn.addEventListener('click', goFullscreen);
 
 // на мобильном: кнопка "на весь экран" появляется, только если что-то играет
-// И мы сейчас НЕ в полноэкранном режиме (программа реально видит своё состояние
+// И мы НЕ в полноэкранном режиме (программа реально видит своё состояние
 // через document.fullscreenElement, не гадает)
 const mobileExpandBtn = document.getElementById('mobileExpandBtn');
 let somethingPlaying = false;
@@ -860,17 +863,8 @@ desktopStopBtn.addEventListener('click', () => {
   activeDesktopEl = null;
   fsBtn.classList.remove('show'); desktopStopBtn.classList.remove('show');
 });
-function positionFsBtn(){
-  const r = stage.getBoundingClientRect();
-  fsBtn.style.right = (window.innerWidth - r.right + 14) + 'px';
-  fsBtn.style.bottom = (window.innerHeight - r.bottom + 14) + 'px';
-  desktopStopBtn.style.right = (window.innerWidth - r.right + 14 + 48) + 'px';
-  desktopStopBtn.style.bottom = (window.innerHeight - r.bottom + 14) + 'px';
-  desktopVolSlider.style.right = (window.innerWidth - r.right + 14 + 96) + 'px';
-  desktopVolSlider.style.bottom = (window.innerHeight - r.bottom + 14 + 12) + 'px';
-}
-window.addEventListener('resize', positionFsBtn);
-positionFsBtn();
+// позиционирование кнопок и ползунка теперь просто в CSS (top/right фиксированные
+// числа с учётом ширины боковой панели 250px) - пересчёт через JS не нужен
 
 // ---- ПК: постоянный ползунок громкости, "перекошенная" шкала ----
 // Обычный линейный ползунок (0-100 = 0-100% громкости напрямую) сжимает всю
@@ -915,7 +909,7 @@ desktopVolSlider.addEventListener('input', () => {
 
 // колёсико мыши над видео - двигает то же самое значение, что и слайдер,
 // и держит слайдер визуально в синхроне (шаг WHEEL_STEP - доля хода ползунка)
-const WHEEL_STEP = 0.03;
+const WHEEL_STEP = 0.08;
 function applyVolumePos(pos){
   pos = Math.max(0, Math.min(1, pos));
   video.volume = posToVolume(pos);
