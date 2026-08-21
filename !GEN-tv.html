@@ -168,60 +168,25 @@
     border:1px solid var(--line); padding:1px 5px; border-radius:3px;
   }
 
-  #fsBtn{
+  /* ---- единая панель управления на ПК (пульт) ---- */
+  #desktopToolbar{
     position:fixed;
-    top:8px; right:270px;
+    top:8px; right:260px;
     z-index:12;
-    background:rgba(20,22,16,.75);
+    display:flex; align-items:center; gap:8px;
+    background:rgba(20,22,16,.8);
     border:1px solid var(--line);
-    color:var(--text);
-    width:40px; height:40px;
-    border-radius:6px;
-    font-size:16px;
-    display:none;
-    align-items:center; justify-content:center;
-    cursor:pointer;
-  }
-  #fsBtn.show{display:flex;}
-
-  #desktopStopBtn{
-    position:fixed;
-    top:8px; right:318px;
-    z-index:12;
-    background:rgba(20,22,16,.75);
-    border:1px solid var(--line);
-    color:var(--text);
-    width:40px; height:40px;
-    border-radius:6px;
-    font-size:18px;
-    display:none;
-    align-items:center; justify-content:center;
-    cursor:pointer;
-  }
-  #desktopStopBtn.show{display:flex;}
-
-  /* всплывающий индикатор громкости на ПК - появляется при прокрутке колеса
-     мыши над видео, сам гаснет через секунду */
-  #desktopVolIndicator{
-    position:fixed;
-    z-index:12;
-    background:rgba(20,22,16,.85);
-    border:1px solid var(--line);
-    color:var(--text);
-    padding:6px 14px;
     border-radius:8px;
-    font-size:14px;
-    opacity:0;
-    pointer-events:none;
-    transition:opacity .2s;
+    padding:6px 10px;
   }
-  #desktopVolIndicator.show{ opacity:1; }
-
+  #desktopVolText{
+    font-size:13px;
+    color:var(--dim);
+    min-width:32px;
+    text-align:right;
+  }
   #desktopVolSlider{
-    position:fixed;
-    top:16px; right:366px;
-    z-index:12;
-    width:110px;
+    width:100px;
     height:20px;
     margin:0;
     -webkit-appearance:none;
@@ -229,7 +194,6 @@
     background:transparent;
     cursor:pointer;
   }
-  /* трек ползунка - полностью непрозрачный, свой цвет, не дефолт браузера */
   #desktopVolSlider::-webkit-slider-runnable-track{
     height:6px;
     border-radius:4px;
@@ -242,28 +206,54 @@
     background:#2a2f22;
     border:1px solid var(--line);
   }
-  /* бегунок - тоже полностью непрозрачный, крупный, хорошо заметный */
   #desktopVolSlider::-webkit-slider-thumb{
     -webkit-appearance:none;
     width:16px; height:16px;
     border-radius:50%;
-    background:var(--accent);
+    background:var(--dim);
     border:2px solid #0d0f0c;
     margin-top:-6px;
   }
   #desktopVolSlider::-moz-range-thumb{
     width:16px; height:16px;
     border-radius:50%;
-    background:var(--accent);
+    background:var(--dim);
     border:2px solid #0d0f0c;
   }
+  #fsBtn, #desktopStopBtn{
+    background:transparent;
+    border:none;
+    color:var(--text);
+    width:28px; height:28px;
+    display:none;
+    align-items:center; justify-content:center;
+    cursor:pointer;
+  }
+  #fsBtn.show, #desktopStopBtn.show{display:flex;}
+
   .stop-square{
-    width:14px; height:14px;
+    width:13px; height:13px;
     background:var(--text);
     border-radius:2px;
     display:block;
   }
+  /* значок "развернуть" - два перекрывающихся квадрата (как в Windows) */
+  .expand-icon2{
+    position:relative;
+    width:16px; height:16px;
+  }
+  .expand-icon2::before, .expand-icon2::after{
+    content:'';
+    position:absolute;
+    width:11px; height:11px;
+    border:1.6px solid var(--text);
+    border-radius:2px;
+  }
+  .expand-icon2::before{ top:0; left:0; background:#14160f; }
+  .expand-icon2::after{ bottom:0; right:0; background:#14160f; }
 
+  /* всплывающий индикатор громкости на ПК - появляется при прокрутке колеса
+     мыши над видео, сам гаснет через секунду */
   /* полоска прогресса текущей передачи - поверх плитки/строки канала */
   .epg-bar{
     position:absolute;
@@ -334,6 +324,7 @@
     --cat-opacity: 0.24;
     --tile-size: 48px;   /* размер плитки канала (ширина=высота) */
     --tile-gap: 20px;     /* расстояние между плитками */
+    --tile-bg-opacity: 1; /* 0-1: фон плитки, см. пояснение у .ch-tile ниже */
     --logo-pad: 6px;     /* поля внутри плитки вокруг логотипа - меньше = логотип крупнее */
   }
 
@@ -362,7 +353,12 @@
     position:relative;
     width:var(--tile-size); height:var(--tile-size);
     border-radius:6px;
-    background:var(--panel);
+    /* фон плитки под логотипом: 1 = непрозрачный тёмный (хорош для лого БЕЗ
+       альфа-канала, без него был бы виден белый/цветной прямоугольник);
+       0 = полностью прозрачный (хорош для лого С альфа-каналом - просвечивает
+       цвет категории). Крути --tile-bg-opacity в самом начале файла, в :root -
+       безопасно, можно туда-сюда сколько угодно раз */
+    background:rgba(20,22,15, var(--tile-bg-opacity));
     border:1.5px solid var(--line);
     display:flex; align-items:center; justify-content:center;
     font-size:10px;
@@ -442,14 +438,16 @@
 
 <!-- DESKTOP CHROME -->
 <header id="desktopHeader" class="only-desktop">
-  <span class="mark">!GEN ТВ</span><span class="sub" style="margin-left:6px;opacity:.5">v13+</span>
+  <span class="mark">!GEN ТВ</span><span class="sub" style="margin-left:6px;opacity:.5">v14+</span>
   <span class="sub">личная подборка</span>
 </header>
 <nav id="desktopNav" class="only-desktop"></nav>
-<button id="fsBtn" title="Во весь экран">⛶</button>
-<button id="desktopStopBtn" class="only-desktop" title="Стоп"><span class="stop-square"></span></button>
-<input type="range" id="desktopVolSlider" class="only-desktop" min="0" max="1000" value="500" title="Громкость">
-<div id="desktopVolIndicator" class="only-desktop"><span></span></div>
+<div id="desktopToolbar" class="only-desktop">
+  <span id="desktopVolText">50%</span>
+  <input type="range" id="desktopVolSlider" min="0" max="1000" value="500" title="Громкость">
+  <button id="desktopStopBtn" title="Стоп"><span class="stop-square"></span></button>
+  <button id="fsBtn" title="Во весь экран"><span class="expand-icon2"></span></button>
+</div>
 
 <!-- STAGE (общий для обеих версий) -->
 <div id="stage">
@@ -608,7 +606,7 @@ const CHANNELS = [
   { group: "- НЕ рабочие -", items: [
     { name: "КиноТВ",			type: "stream", url: "http://31.148.48.15/Kino_TV_HD/index.m3u8", logo: "https://github.com/GENgroup/TV_logo/blob/main/%D0%9A%D0%B8%D0%BD%D0%BE%D0%A2%D0%92.png?raw=true" },
     { name: "Наше новое кино",  type: "stream", url: "http://89.223.46.189:8080/nashe-novoe-kino/playlist.m3u8", logo: "https://github.com/GENgroup/TV_logo/blob/main/%D0%9D%D0%B0%D1%88%D0%B5%20%D0%BD%D0%BE%D0%B2%D0%BE%D0%B5%20%D0%BA%D0%B8%D0%BD%D0%BE.png?raw=true" },
-    { name: "Viju+ TV1000 Рус", 	type: "stream", url: "http://185.78.112.47:8077/viju_tv1000_hd/index.m3u8", logo: "https://github.com/GENgroup/TV_logo/blob/main/Viju_TV1000%D1%80%D1%83%D1%81.png?raw=true" },
+    { name: "Viju+ TV1000 Рус", type: "stream", url: "http://185.78.112.47:8077/viju_tv1000_hd/index.m3u8", logo: "https://github.com/GENgroup/TV_logo/blob/main/Viju_TV1000%D1%80%D1%83%D1%81.png?raw=true" },
 	{ name: "КиноКомедия",		type: "stream", url: "http://158.101.222.193:88/georgia_play.php?id=kinokomediya", logo: "https://github.com/GENgroup/TV_logo/blob/main/%D0%9A%D0%B8%D0%BD%D0%BE%D0%9A%D0%BE%D0%BC%D0%B5%D0%B4%D0%B8%D1%8F.png?raw=true" },
 	{ name: "КиноСемья",		type: "stream", url: "http://89.223.46.189:8080/premiera/playlist.m3u8", logo: "https://github.com/GENgroup/TV_logo/blob/main/%D0%9A%D0%B8%D0%BD%D0%BE%D0%A1%D0%B5%D0%BC%D1%8C%D1%8F.png?raw=true" },
 	{ name: "--Discovery Science",type: "stream", url: "", logo: "https://github.com/GENgroup/TV_logo/blob/main/Discovery%20Science.png?raw=true" },
@@ -791,7 +789,7 @@ function playStream(ch){
     hls.on(Hls.Events.ERROR, (evt, data) => {
       if (data.fatal){
         const logoHtml = ch.logo ? `<img src="${ch.logo}" style="width:40px;height:40px;object-fit:contain;display:block;margin:0 auto 8px;border-radius:8px;">` : '';
-        showMsg(`${logoHtml}<b>${ch.name}</b> не отвечает.<br>`);
+        showMsg(`${logoHtml}<b>${ch.name}</b> не отвечает.<br>Попробуй другой.`);
       }
     });
   } else if (video.canPlayType('application/vnd.apple.mpegurl')){
@@ -808,7 +806,7 @@ function playStream(ch){
 
 // type "iframe": страница-плеер чужого сайта (например player.smotrim.ru/iframe/...)
 // встраивается как есть. ЧЕСТНО: часть сайтов запрещает встраивание себя (X-Frame-Options) -
-// такие каналы просто останутся пустым окном, заранее не угадать, надо пробовать.
+// такие каналы просто останутся пустым окном, тут заранее не угадать, надо пробовать.
 function playIframe(ch){
   const url = ch.url;
   if (hls){ hls.destroy(); hls = null; }
@@ -832,7 +830,7 @@ function goFullscreen(){
 fsBtn.addEventListener('click', goFullscreen);
 
 // на мобильном: кнопка "на весь экран" появляется, только если что-то играет
-// И мы НЕ в полноэкранном режиме (программа реально видит своё состояние
+// И мы сейчас НЕ в полноэкранном режиме (программа реально видит своё состояние
 // через document.fullscreenElement, не гадает)
 const mobileExpandBtn = document.getElementById('mobileExpandBtn');
 let somethingPlaying = false;
@@ -889,17 +887,9 @@ function saveVolumePos(pos){
   try{ localStorage.setItem('tv_volume_pos', pos); } catch(e){}
 }
 
-const desktopVolIndicator = document.getElementById('desktopVolIndicator');
-let volIndicatorTimer = null;
-function showDesktopVolIndicator(){
-  const r = stage.getBoundingClientRect();
-  desktopVolIndicator.style.left = (r.left + r.width/2) + 'px';
-  desktopVolIndicator.style.top = (r.top + 16) + 'px';
-  desktopVolIndicator.style.transform = 'translateX(-50%)';
-  desktopVolIndicator.querySelector('span').textContent = 'Громкость: ' + Math.round(video.volume*100) + '%';
-  desktopVolIndicator.classList.add('show');
-  clearTimeout(volIndicatorTimer);
-  volIndicatorTimer = setTimeout(() => desktopVolIndicator.classList.remove('show'), 1000);
+const desktopVolText = document.getElementById('desktopVolText');
+function updateDesktopVolText(){
+  desktopVolText.textContent = Math.round(video.volume * 100) + '%';
 }
 
 desktopVolSlider.addEventListener('input', () => {
@@ -915,7 +905,7 @@ function applyVolumePos(pos){
   video.volume = posToVolume(pos);
   desktopVolSlider.value = Math.round(pos * 1000);
   saveVolumePos(pos);
-  showDesktopVolIndicator();
+  updateDesktopVolText();
 }
 stage.addEventListener('wheel', (e) => {
   if (isTouch) return; // на мобильном громкость - свайпом, колесо мыши там ни при чём
@@ -927,6 +917,7 @@ stage.addEventListener('wheel', (e) => {
 const initialVolPos = loadSavedVolumePos();
 desktopVolSlider.value = Math.round(initialVolPos * 1000);
 video.volume = posToVolume(initialVolPos); // применяем сохранённую громкость сразу, один раз на весь сеанс
+updateDesktopVolText();
 
 // ---- mobile: сетка каналов открыта по умолчанию, закрывается при выборе канала ----
 // ВАЖНО: любое открытие сетки (тап по видео, кнопка ▦, кнопка Стоп) теперь
