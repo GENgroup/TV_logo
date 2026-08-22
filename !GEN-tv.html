@@ -487,15 +487,16 @@
 const CHANNELS = [
   { group: "ЦТ", items: [
     { name: "Первый канал",		type: "stream",    url: "https://zabava-htlive.cdn.ngenix.net/hls/CH_1TVSD/variant.m3u8", logo: "https://github.com/GENgroup/TV_logo/blob/main/1.png?raw=true" },
-    { name: "Россия 1",		type: "stream",    url: "https://zabava-htlive.cdn.ngenix.net/hls/CH_RUSSIA1/variant.m3u8", logo: "https://github.com/GENgroup/TV_logo/blob/main/%D0%A0%D0%A2%D0%A0.png?raw=true" },
-    { name: "ТВ Центр",		type: "stream",    url: "https://tvc-hls.cdnvideo.ru/tvc-res/smil:vd9221.smil/playlist.m3u8", logo: "https://github.com/GENgroup/TV_logo/blob/main/%D0%A2%D0%92%D0%A6.png?raw=true" },
+    { name: "Россия 1",	type: "stream",    url: "https://zabava-htlive.cdn.ngenix.net/hls/CH_RUSSIA1/variant.m3u8", logo: "https://github.com/GENgroup/TV_logo/blob/main/%D0%A0%D0%A2%D0%A0.png?raw=true" },
+    { name: "ТВЦ",		type: "stream",    url: "https://tvc-hls.cdnvideo.ru/tvc-res/smil:vd9221.smil/playlist.m3u8", logo: "https://github.com/GENgroup/TV_logo/blob/main/%D0%A2%D0%92%D0%A6.png?raw=true" },
     { name: "НТВ",		type: "stream",    url: "https://zabava-htlive.cdn.ngenix.net/hls/CH_NTV/variant.m3u8", logo: "https://github.com/GENgroup/TV_logo/blob/main/%D0%9D%D0%A2%D0%92.png?raw=true" },
-    { name: "Пятый канал",		type: "stream",    url: "https://zabava-htlive.cdn.ngenix.net/hls/CH_5TV/variant.m3u8", logo: "https://github.com/GENgroup/TV_logo/blob/main/5.png?raw=true" },
+    { name: "Пятый канал", type: "stream",    url: "https://zabava-htlive.cdn.ngenix.net/hls/CH_5TV/variant.m3u8", logo: "https://github.com/GENgroup/TV_logo/blob/main/5.png?raw=true" },
     { name: "Звезда",	type: "stream",    url: "https://tvchannelstream1.tvzvezda.ru/cdn/tvzvezda/playlist.m3u8", logo: "https://github.com/GENgroup/TV_logo/blob/main/%D0%97%D0%B2%D0%B5%D0%B7%D0%B4%D0%B0.png?raw=true" },
     { name: "Домашний",	type: "stream",    url: "https://zabava-htlive.cdn.ngenix.net/hls/CH_DOMASHNIY/variant.m3u8", logo: "https://github.com/GENgroup/TV_logo/blob/main/%D0%94%D0%BE%D0%BC%D0%B0%D1%88%D0%BD%D0%B8%D0%B9.png?raw=true" },
     { name: "СТС",		type: "stream",    url: "http://tshift-1.telecoma.tv/sts/index.m3u8", logo: "https://github.com/GENgroup/TV_logo/blob/main/%D0%A1%D0%A2%D0%A1.png?raw=true" },
-    { name: "РЕН ТВ"",	type: "stream",    url: "https://zabava-htlive.cdn.ngenix.net/hls/CH_RENTV_2/variant.m3u8", logo: "https://github.com/GENgroup/TV_logo/blob/main/%D0%A0%D0%95%D0%9D%D1%82%D0%B2.png?raw=true" },
+    { name: "РЕНтв",	type: "stream",    url: "https://zabava-htlive.cdn.ngenix.net/hls/CH_RENTV_2/variant.m3u8", logo: "https://github.com/GENgroup/TV_logo/blob/main/%D0%A0%D0%95%D0%9D%D1%82%D0%B2.png?raw=true" },
     { name: "ТНТ",		type: "stream",    url: "http://45.153.24.78:80/TNT/index.m3u8", logo: "https://github.com/GENgroup/TV_logo/blob/main/%D0%A2%D0%9D%D0%A2.png?raw=true" },
+    { name: "--ТВ-3",	type: "stream",    url: "", logo: "https://github.com/GENgroup/TV_logo/blob/main/%D0%A2%D0%923.png?raw=true" },
     { name: "ОТР",		type: "stream",    url: "https://rt-nw-klgr-htlive.cdn.ngenix.net/hls/CH_R01_OTR_KLNG_FILIAL/variant.m3u8", logo: "https://github.com/GENgroup/TV_logo/blob/main/%D0%9E%D0%A2%D0%A0.png?raw=true" },
     { name: "Мир",		type: "stream",    url: "http://hls.mirtv.cdnvideo.ru/mirtv-parampublish/mirtv_2500/playlist.m3u8", logo: "https://github.com/GENgroup/TV_logo/blob/main/%D0%9C%D0%B8%D1%80.png?raw=true" },
     { name: "Культура",	type: "stream",    url: "https://zabava-htlive.cdn.ngenix.net/hls/CH_RUSSIAK/variant.m3u8", logo: "https://github.com/GENgroup/TV_logo/blob/main/%D0%9A.png?raw=true" },
@@ -579,7 +580,7 @@ const CHANNELS = [
 },
   { group: "Новости", items: [
     { name: "Россия 24",		type: "stream", url: "http://77.232.131.211/Rossiya24/index.m3u8", logo: "https://github.com/GENgroup/TV_logo/blob/main/%D0%A0%D0%A2%D0%A024.png?raw=true" },
-    { name: "М24",				type: "stream", url: "https://stream.smotrim.ru/hls/givc8/playlist.m3u8?entity=channel&id=798&sign=37881ef2e289f062ceff0dca6c24dc58", logo: "https://github.com/GENgroup/TV_logo/blob/main/M24.png?raw=true" },
+    { name: "Москва 24",				type: "stream", url: "https://stream.smotrim.ru/hls/givc8/playlist.m3u8?entity=channel&id=798&sign=37881ef2e289f062ceff0dca6c24dc58", logo: "https://github.com/GENgroup/TV_logo/blob/main/M24.png?raw=true" },
     { name: "360°",				type: "stream", url: "https://cdn-evacoder-tv.facecast.io/evacoder_hls_hi/CkxfR1xNUAJwTgtXTBZTAJli/index.m3u8", logo: "https://github.com/GENgroup/TV_logo/blob/main/360.png?raw=true" },
     { name: "Известия",			type: "stream", url: "http://igi-hls.cdnvideo.ru/igi/igi_tcode/playlist.m3u8", logo: "https://github.com/GENgroup/TV_logo/blob/main/%D0%98%D0%B7%D0%B2%D0%B5%D1%81%D1%82%D0%B8%D1%8F.png?raw=true" },
     { name: "Звезда+",			type: "stream", url: "http://tvzvezda.bonus-tv.ru/cdn/zvezdaplus/playlist.m3u8", logo: "https://github.com/GENgroup/TV_logo/blob/main/%D0%97%D0%B2%D0%B5%D0%B7%D0%B4%D0%B0+.png?raw=true" },
@@ -607,7 +608,7 @@ const CHANNELS = [
   { group: "- НЕ рабочие -", items: [
     { name: "КиноТВ",			type: "stream", url: "http://31.148.48.15/Kino_TV_HD/index.m3u8", logo: "https://github.com/GENgroup/TV_logo/blob/main/%D0%9A%D0%B8%D0%BD%D0%BE%D0%A2%D0%92.png?raw=true" },
     { name: "Наше новое кино",  type: "stream", url: "http://89.223.46.189:8080/nashe-novoe-kino/playlist.m3u8", logo: "https://github.com/GENgroup/TV_logo/blob/main/%D0%9D%D0%B0%D1%88%D0%B5%20%D0%BD%D0%BE%D0%B2%D0%BE%D0%B5%20%D0%BA%D0%B8%D0%BD%D0%BE.png?raw=true" },
-    { name: "Viju+ TV1000 Рус", type: "stream", url: "http://185.78.112.47:8077/viju_tv1000_hd/index.m3u8", logo: "https://github.com/GENgroup/TV_logo/blob/main/Viju_TV1000%D1%80%D1%83%D1%81.png?raw=true" },
+    { name: "Viju+ TV1000 Рус", type: "stream", url: "https://flussonic.mkpnet.ru/tv-7510472b0133abb2/video.m3u8", logo: "https://github.com/GENgroup/TV_logo/blob/main/Viju_TV1000%D1%80%D1%83%D1%81.png?raw=true" },
 	{ name: "КиноКомедия",		type: "stream", url: "http://158.101.222.193:88/georgia_play.php?id=kinokomediya", logo: "https://github.com/GENgroup/TV_logo/blob/main/%D0%9A%D0%B8%D0%BD%D0%BE%D0%9A%D0%BE%D0%BC%D0%B5%D0%B4%D0%B8%D1%8F.png?raw=true" },
 	{ name: "КиноСемья",		type: "stream", url: "http://89.223.46.189:8080/premiera/playlist.m3u8", logo: "https://github.com/GENgroup/TV_logo/blob/main/%D0%9A%D0%B8%D0%BD%D0%BE%D0%A1%D0%B5%D0%BC%D1%8C%D1%8F.png?raw=true" },
 	{ name: "--Discovery Science",type: "stream", url: "", logo: "https://github.com/GENgroup/TV_logo/blob/main/Discovery%20Science.png?raw=true" },
@@ -1002,7 +1003,7 @@ chanZone.addEventListener('touchend', (e) => {
 const EPG_ENABLED = true;
 
 // источник по умолчанию - один файл на ВСЕ каналы разом
-const EPG_DEFAULT_SOURCE = "https://raw.githubusercontent.com/globetvapp/epg/main/Russia/russia1.xml.gz";
+const EPG_DEFAULT_SOURCE = "https://www.open-epg.com/generate/SzAf6R8p2H.xml.gz";
 
 // как часто перекачивать EPG заново, в часах (программа передач не меняется
 // каждую минуту, поэтому кэшируем в localStorage браузера и не дёргаем сеть зря)
