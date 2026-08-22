@@ -1165,9 +1165,9 @@ async function initEpg(){
   playableChannels.forEach(p => { if (!p.ch.epgSource) wanted.add(p.ch.name); });
 
   try{
-    let cached = epgCacheGet('epg_default');
+    let cached = epgCacheGet('epg_default2');
     epgByName = cached || parseEpgXml(await fetchEpgSource(EPG_DEFAULT_SOURCE), wanted);
-    if (!cached) epgCacheSet('epg_default', epgByName);
+    if (!cached) epgCacheSet('epg_default2', epgByName);
   } catch(e){
     console.warn('EPG: основной источник не загрузился -', e.message);
     epgByName = {};
