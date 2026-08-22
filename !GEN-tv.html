@@ -1164,7 +1164,7 @@ async function initEpg(){
   const wanted = new Set();
   playableChannels.forEach(p => { if (!p.ch.epgSource) wanted.add(p.ch.name); });
 
-  try{
+try{
     let cached = epgCacheGet('epg_default2');
     epgByName = cached || parseEpgXml(await fetchEpgSource(EPG_DEFAULT_SOURCE), wanted);
     if (!cached) epgCacheSet('epg_default2', epgByName);
