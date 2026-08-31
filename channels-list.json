@@ -1,0 +1,1030 @@
+{
+  "groups": [
+    {
+      "group": "ЦТ",
+      "items": [
+        {
+          "name": "Первый",
+          "type": "stream",
+          "url": "https://zabava-htlive.cdn.ngenix.net/hls/CH_1TVSD/variant.m3u8",
+          "logo": "https://github.com/GENgroup/TV_logo/blob/main/1.png?raw=true",
+          "disabled": false,
+          "epgSource": "",
+          "epgId": ""
+        },
+        {
+          "name": "Россия 1",
+          "type": "stream",
+          "url": "https://zabava-htlive.cdn.ngenix.net/hls/CH_RUSSIA1/variant.m3u8",
+          "logo": "https://github.com/GENgroup/TV_logo/blob/main/%D0%A0%D0%A2%D0%A0.png?raw=true",
+          "disabled": false,
+          "epgSource": "",
+          "epgId": ""
+        },
+        {
+          "name": "ТВ Центр",
+          "type": "stream",
+          "url": "https://tvc-hls.cdnvideo.ru/tvc-res/smil:vd9221.smil/playlist.m3u8",
+          "logo": "https://github.com/GENgroup/TV_logo/blob/main/%D0%A2%D0%92%D0%A6.png?raw=true",
+          "disabled": false,
+          "epgSource": "",
+          "epgId": ""
+        },
+        {
+          "name": "НТВ",
+          "type": "stream",
+          "url": "https://zabava-htlive.cdn.ngenix.net/hls/CH_NTV/variant.m3u8",
+          "logo": "https://github.com/GENgroup/TV_logo/blob/main/%D0%9D%D0%A2%D0%92.png?raw=true",
+          "disabled": false,
+          "epgSource": "",
+          "epgId": ""
+        },
+        {
+          "name": "Пятый канал",
+          "type": "stream",
+          "url": "https://zabava-htlive.cdn.ngenix.net/hls/CH_5TV/variant.m3u8",
+          "logo": "https://github.com/GENgroup/TV_logo/blob/main/5.png?raw=true",
+          "disabled": false,
+          "epgSource": "",
+          "epgId": ""
+        },
+        {
+          "name": "Звезда",
+          "type": "stream",
+          "url": "https://tvchannelstream1.tvzvezda.ru/cdn/tvzvezda/playlist.m3u8",
+          "logo": "https://github.com/GENgroup/TV_logo/blob/main/%D0%97%D0%B2%D0%B5%D0%B7%D0%B4%D0%B0.png?raw=true",
+          "disabled": false,
+          "epgSource": "",
+          "epgId": ""
+        },
+        {
+          "name": "Домашний",
+          "type": "stream",
+          "url": "https://zabava-htlive.cdn.ngenix.net/hls/CH_DOMASHNIY/variant.m3u8",
+          "logo": "https://github.com/GENgroup/TV_logo/blob/main/%D0%94%D0%BE%D0%BC%D0%B0%D1%88%D0%BD%D0%B8%D0%B9.png?raw=true",
+          "disabled": false,
+          "epgSource": "",
+          "epgId": ""
+        },
+        {
+          "name": "СТС",
+          "type": "stream",
+          "url": "http://ab04f03c.ucomist.net/iptv/237WGNXDPFLZAL8HDFPKFPQA/6303/index.m3u8",
+          "logo": "https://github.com/GENgroup/TV_logo/blob/main/%D0%A1%D0%A2%D0%A1.png?raw=true",
+          "disabled": false,
+          "epgSource": "",
+          "epgId": ""
+        },
+        {
+          "name": "РЕН ТВ",
+          "type": "stream",
+          "url": "https://zabava-htlive.cdn.ngenix.net/hls/CH_RENTV_2/variant.m3u8",
+          "logo": "https://github.com/GENgroup/TV_logo/blob/main/%D0%A0%D0%95%D0%9D%D1%82%D0%B2.png?raw=true",
+          "disabled": false,
+          "epgSource": "",
+          "epgId": ""
+        },
+        {
+          "name": "ТНТ",
+          "type": "stream",
+          "url": "http://ab04f03c.ucomist.net/iptv/237WGNXDPFLZAL8HDFPKFPQA/10024/index.m3u8",
+          "logo": "https://github.com/GENgroup/TV_logo/blob/main/%D0%A2%D0%9D%D0%A2.png?raw=true",
+          "disabled": false,
+          "epgSource": "",
+          "epgId": ""
+        },
+        {
+          "name": "ОТР",
+          "type": "stream",
+          "url": "https://rt-nw-klgr-htlive.cdn.ngenix.net/hls/CH_R01_OTR_KLNG_FILIAL/variant.m3u8",
+          "logo": "https://github.com/GENgroup/TV_logo/blob/main/%D0%9E%D0%A2%D0%A0.png?raw=true",
+          "disabled": false,
+          "epgSource": "",
+          "epgId": ""
+        },
+        {
+          "name": "МИР",
+          "type": "stream",
+          "url": "http://hls.mirtv.cdnvideo.ru/mirtv-parampublish/mirtv_2500/playlist.m3u8",
+          "logo": "https://github.com/GENgroup/TV_logo/blob/main/%D0%9C%D0%B8%D1%80.png?raw=true",
+          "disabled": false,
+          "epgSource": "",
+          "epgId": ""
+        },
+        {
+          "name": "Культура",
+          "type": "stream",
+          "url": "https://zabava-htlive.cdn.ngenix.net/hls/CH_RUSSIAK/variant.m3u8",
+          "logo": "https://github.com/GENgroup/TV_logo/blob/main/%D0%9A.png?raw=true",
+          "disabled": false,
+          "epgSource": "",
+          "epgId": ""
+        }
+      ]
+    },
+    {
+      "group": "Кино",
+      "items": [
+        {
+          "name": "Доверие",
+          "type": "stream",
+          "url": "http://rt-mos-htlive.cdn.ngenix.net/hls/CH_R04_DOVERIE/variant.m3u8",
+          "logo": "https://github.com/GENgroup/TV_logo/blob/main/%D0%94%D0%BE%D0%B2%D0%B5%D1%80%D0%B8%D0%B5.png?raw=true",
+          "disabled": false,
+          "epgSource": "",
+          "epgId": ""
+        },
+        {
+          "name": "Мосфильм",
+          "type": "stream",
+          "url": "https://fs.uplink.kz/mosfilm/tracks-v1a1/mono.ts.m3u8?token=onlinetv",
+          "logo": "https://github.com/GENgroup/TV_logo/blob/main/%D0%9C%D0%BE%D1%81%D1%84%D0%B8%D0%BB%D1%8C%D0%BC.png?raw=true",
+          "disabled": false,
+          "epgSource": "",
+          "epgId": ""
+        },
+        {
+          "name": "Т24",
+          "type": "stream",
+          "url": "http://ab04f03c.ucomist.net/iptv/237WGNXDPFLZAL8HDFPKFPQA/5047/index.m3u8",
+          "logo": "https://github.com/GENgroup/TV_logo/blob/main/%D0%A224.png?raw=true",
+          "disabled": false,
+          "epgSource": "",
+          "epgId": ""
+        },
+        {
+          "name": ".red",
+          "type": "stream",
+          "url": "http://ab04f03c.ucomist.net/iptv/237WGNXDPFLZAL8HDFPKFPQA/559/index.m3u8",
+          "logo": "https://github.com/GENgroup/TV_logo/blob/main/red.png?raw=true",
+          "disabled": false,
+          "epgSource": "",
+          "epgId": ""
+        },
+        {
+          "name": ".black",
+          "type": "stream",
+          "url": "http://ab04f03c.ucomist.net/iptv/237WGNXDPFLZAL8HDFPKFPQA/20019/index.m3u8",
+          "logo": "https://github.com/GENgroup/TV_logo/blob/main/black.png?raw=true",
+          "disabled": false,
+          "epgSource": "",
+          "epgId": ""
+        },
+        {
+          "name": "Красная линия",
+          "type": "stream",
+          "url": "http://s55766.cdn.ngenix.net/s55766-media-origin/rline_high/index.m3u8",
+          "logo": "https://github.com/GENgroup/TV_logo/blob/main/%D0%9A%D1%80%D0%B0%D1%81%D0%BD%D0%B0%D1%8F%20%D0%BB%D0%B8%D0%BD%D0%B8%D1%8F.png?raw=true",
+          "disabled": false,
+          "epgSource": "",
+          "epgId": ""
+        },
+        {
+          "name": "Дом Кино",
+          "type": "stream",
+          "url": "https://streaming.thestream.cyou/live/44.m3u8",
+          "logo": "https://github.com/GENgroup/TV_logo/blob/main/%D0%94%D0%BE%D0%BC%20%D0%9A%D0%B8%D0%BD%D0%BE.png?raw=true",
+          "disabled": false,
+          "epgSource": "",
+          "epgId": ""
+        },
+        {
+          "name": "Любимое Кино",
+          "type": "stream",
+          "url": "http://ab04f03c.ucomist.net/iptv/237WGNXDPFLZAL8HDFPKFPQA/20014/index.m3u8",
+          "logo": "https://github.com/GENgroup/TV_logo/blob/main/%D0%9B%D1%8E%D0%B1%D0%B8%D0%BC%D0%BE%D0%B5%20%D0%9A%D0%B8%D0%BD%D0%BE.png?raw=true",
+          "disabled": false,
+          "epgSource": "",
+          "epgId": ""
+        },
+        {
+          "name": "Феникс",
+          "type": "stream",
+          "url": "http://ab04f03c.ucomist.net/iptv/237WGNXDPFLZAL8HDFPKFPQA/2039/index.m3u8",
+          "logo": "https://github.com/GENgroup/TV_logo/blob/main/%D0%A4%D0%B5%D0%BD%D0%B8%D0%BA%D1%81.png?raw=true",
+          "disabled": false,
+          "epgSource": "",
+          "epgId": ""
+        },
+        {
+          "name": "КиноТВ",
+          "type": "stream",
+          "url": "https://vod.tuva.ru/kinotv/index.m3u8",
+          "logo": "https://github.com/GENgroup/TV_logo/blob/main/%D0%9A%D0%B8%D0%BD%D0%BE%D0%A2%D0%92.png?raw=true",
+          "disabled": true,
+          "epgSource": "",
+          "epgId": ""
+        },
+        {
+          "name": "НТВ Сериал",
+          "type": "stream",
+          "url": "http://ab04f03c.ucomist.net/iptv/237WGNXDPFLZAL8HDFPKFPQA/9147/index.m3u8",
+          "logo": "https://github.com/GENgroup/TV_logo/blob/main/%D0%9D%D0%A2%D0%92%20%D0%A1%D0%B5%D1%80%D0%B8%D0%B0%D0%BB.png?raw=true",
+          "disabled": false,
+          "epgSource": "",
+          "epgId": ""
+        },
+        {
+          "name": "НТВ Хит",
+          "type": "stream",
+          "url": "http://ab04f03c.ucomist.net/iptv/237WGNXDPFLZAL8HDFPKFPQA/9146/index.m3u8",
+          "logo": "https://github.com/GENgroup/TV_logo/blob/main/%D0%9D%D0%A2%D0%92%20%D0%A5%D0%B8%D1%82.png?raw=true",
+          "disabled": false,
+          "epgSource": "",
+          "epgId": ""
+        },
+        {
+          "name": "Ккомедия",
+          "type": "stream",
+          "url": "http://ab04f03c.ucomist.net/iptv/237WGNXDPFLZAL8HDFPKFPQA/733/index.m3u8",
+          "logo": "https://github.com/GENgroup/TV_logo/blob/main/%D0%9A%D0%BE%D0%BC%D0%B5%D0%B4%D0%B8%D1%8F.png?raw=true",
+          "disabled": false,
+          "epgSource": "",
+          "epgId": ""
+        },
+        {
+          "name": "Мир Сериала",
+          "type": "stream",
+          "url": "http://ab04f03c.ucomist.net/iptv/237WGNXDPFLZAL8HDFPKFPQA/856/index.m3u8",
+          "logo": "https://github.com/GENgroup/TV_logo/blob/main/%D0%9C%D0%B8%D1%80%20%D0%A1%D0%B5%D1%80%D0%B8%D0%B0%D0%BB%D0%B0.png?raw=true",
+          "disabled": false,
+          "epgSource": "",
+          "epgId": ""
+        },
+        {
+          "name": "Родное Кино",
+          "type": "stream",
+          "url": "http://ab04f03c.ucomist.net/iptv/237WGNXDPFLZAL8HDFPKFPQA/9127/index.m3u8",
+          "logo": "https://github.com/GENgroup/TV_logo/blob/main/%D0%A0%D0%BE%D0%B4%D0%BD%D0%BE%D0%B5%20%D0%9A%D0%B8%D0%BD%D0%BE.png?raw=true",
+          "disabled": false,
+          "epgSource": "",
+          "epgId": ""
+        },
+        {
+          "name": "КиноХит",
+          "type": "stream",
+          "url": "https://stream8.cinerama.uz/1055/tracks-v1a1/mono.m3u8",
+          "logo": "https://github.com/GENgroup/TV_logo/blob/main/%D0%9A%D0%B8%D0%BD%D0%BE%D0%A5%D0%B8%D1%82.png?raw=true",
+          "disabled": false,
+          "epgSource": "",
+          "epgId": ""
+        },
+        {
+          "name": "КиноКомедия",
+          "type": "stream",
+          "url": "http://ab04f03c.ucomist.net/iptv/237WGNXDPFLZAL8HDFPKFPQA/145/index.m3u8",
+          "logo": "https://github.com/GENgroup/TV_logo/blob/main/%D0%9A%D0%B8%D0%BD%D0%BE%D0%9A%D0%BE%D0%BC%D0%B5%D0%B4%D0%B8%D1%8F.png?raw=true",
+          "disabled": true,
+          "epgSource": "",
+          "epgId": ""
+        },
+        {
+          "name": "КиноСемья",
+          "type": "stream",
+          "url": "http://158.101.222.193:88/georgia_play.php?id=kinosemya",
+          "logo": "https://github.com/GENgroup/TV_logo/blob/main/%D0%9A%D0%B8%D0%BD%D0%BE%D0%A1%D0%B5%D0%BC%D1%8C%D1%8F.png?raw=true",
+          "disabled": true,
+          "epgSource": "",
+          "epgId": ""
+        },
+        {
+          "name": "КиноМикс",
+          "type": "stream",
+          "url": "http://93.170.254.17/Kinomiks/index.m3u8",
+          "logo": "https://github.com/GENgroup/TV_logo/blob/main/%D0%9A%D0%B8%D0%BD%D0%BE%D0%9C%D0%B8%D0%BA%D1%81.png?raw=true",
+          "disabled": false,
+          "epgSource": "",
+          "epgId": ""
+        },
+        {
+          "name": "Наше новое кино",
+          "type": "stream",
+          "url": "http://158.101.222.193:88/georgia_play.php?id=nashanovoekino",
+          "logo": "https://github.com/GENgroup/TV_logo/blob/main/%D0%9D%D0%B0%D1%88%D0%B5%20%D0%BD%D0%BE%D0%B2%D0%BE%D0%B5%20%D0%BA%D0%B8%D0%BD%D0%BE.png?raw=true",
+          "disabled": true,
+          "epgSource": "",
+          "epgId": ""
+        },
+        {
+          "name": "Мужское кино",
+          "type": "stream",
+          "url": "http://ab04f03c.ucomist.net/iptv/237WGNXDPFLZAL8HDFPKFPQA/9138/index.m3u8",
+          "logo": "https://github.com/GENgroup/TV_logo/blob/main/%D0%9C%D1%83%D0%B6%D1%81%D0%BA%D0%BE%D0%B5%20%D0%BA%D0%B8%D0%BD%D0%BE.png?raw=true",
+          "disabled": false,
+          "epgSource": "",
+          "epgId": ""
+        },
+        {
+          "name": "Ностальгия",
+          "type": "stream",
+          "url": "http://ab04f03c.ucomist.net/iptv/237WGNXDPFLZAL8HDFPKFPQA/102/index.m3u8",
+          "logo": "https://github.com/GENgroup/TV_logo/blob/main/%D0%9D%D0%BE%D1%81%D1%82%D0%B0%D0%BB%D1%8C%D0%B3%D0%B8%D1%8F.png?raw=true",
+          "disabled": false,
+          "epgSource": "",
+          "epgId": ""
+        },
+        {
+          "name": "Viju+ TV1000",
+          "type": "stream",
+          "url": "http://ab04f03c.ucomist.net/iptv/237WGNXDPFLZAL8HDFPKFPQA/132/index.m3u8",
+          "logo": "https://github.com/GENgroup/TV_logo/blob/main/Viju_TV1000%D1%80%D1%83%D1%81.png?raw=true",
+          "disabled": true,
+          "epgSource": "",
+          "epgId": ""
+        },
+        {
+          "name": "Viju+ TV1000 Рус",
+          "type": "stream",
+          "url": "http://ab04f03c.ucomist.net/iptv/237WGNXDPFLZAL8HDFPKFPQA/6388/index.m3u8",
+          "logo": "https://github.com/GENgroup/TV_logo/blob/main/Viju_TV1000.png?raw=true",
+          "disabled": false,
+          "epgSource": "",
+          "epgId": ""
+        },
+        {
+          "name": "Viju+ Action",
+          "type": "stream",
+          "url": "http://ab04f03c.ucomist.net/iptv/237WGNXDPFLZAL8HDFPKFPQA/9057/index.m3u8",
+          "logo": "https://github.com/GENgroup/TV_logo/blob/main/Viju+%20Action.png?raw=true",
+          "disabled": false,
+          "epgSource": "",
+          "epgId": ""
+        },
+        {
+          "name": "Viju+ Serial",
+          "type": "stream",
+          "url": "http://ab04f03c.ucomist.net/iptv/237WGNXDPFLZAL8HDFPKFPQA/9245/index.m3u8",
+          "logo": "https://github.com/GENgroup/TV_logo/blob/main/Viju+%20Serial.png?raw=true",
+          "disabled": false,
+          "epgSource": "",
+          "epgId": ""
+        },
+        {
+          "name": "Viju+ Comedy",
+          "type": "stream",
+          "url": "http://stream.mcquack.net/201/index.m3u8",
+          "logo": "https://github.com/GENgroup/TV_logo/blob/main/Viju+%20Comedy.png?raw=true",
+          "disabled": false,
+          "epgSource": "",
+          "epgId": ""
+        },
+        {
+          "name": "Viju+ Megahit",
+          "type": "stream",
+          "url": "http://stream.mcquack.net/200/index.m3u8",
+          "logo": "https://github.com/GENgroup/TV_logo/blob/main/Viju+%20Megahit.png?raw=true",
+          "disabled": false,
+          "epgSource": "",
+          "epgId": ""
+        },
+        {
+          "name": "Иллюзион+",
+          "type": "stream",
+          "url": "http://176.118.197.101/Illuzion+/index.m3u8",
+          "logo": "https://github.com/GENgroup/TV_logo/blob/main/%D0%98%D0%BB%D0%BB%D1%8E%D0%B7%D0%B8%D0%BE%D0%BD+.png?raw=true",
+          "disabled": false,
+          "epgSource": "",
+          "epgId": ""
+        },
+        {
+          "name": "Русский Иллюзион",
+          "type": "stream",
+          "url": "http://ab04f03c.ucomist.net/iptv/237WGNXDPFLZAL8HDFPKFPQA/9080/index.m3u8",
+          "logo": "https://github.com/GENgroup/TV_logo/blob/main/%D0%A0%D1%83%D1%81%D1%81%D0%BA%D0%B8%D0%B9%20%D0%98%D0%BB%D0%BB%D1%8E%D0%B7%D0%B8%D0%BE%D0%BD.png?raw=true",
+          "disabled": false,
+          "epgSource": "",
+          "epgId": ""
+        },
+		{
+          "name": "Русский Роман",
+          "type": "stream",
+          "url": "http://ab04f03c.ucomist.net/iptv/237WGNXDPFLZAL8HDFPKFPQA/9240/index.m3u8",
+          "logo": "https://github.com/GENgroup/TV_logo/blob/main/%D0%A0%D1%83%D1%81%D1%81%D0%BA%D0%B8%D0%B9%20%D0%A0%D0%BE%D0%BC%D0%B0%D0%BD%D1%81.png?raw=true",
+          "disabled": false,
+          "epgSource": "",
+          "epgId": ""
+        },
+        {
+          "name": "Русский Детектив",
+          "type": "stream",
+          "url": "http://ab04f03c.ucomist.net/iptv/237WGNXDPFLZAL8HDFPKFPQA/9142/index.m3u8",
+          "logo": "https://github.com/GENgroup/TV_logo/blob/main/%D0%A0%D1%83%D1%81%D1%81%D0%BA%D0%B8%D0%B9%20%D0%94%D0%B5%D1%82%D0%B5%D0%BA%D1%82%D0%B8%D0%B2.png?raw=true",
+          "disabled": false,
+          "epgSource": "",
+          "epgId": ""
+        },
+        {
+          "name": "Русский Бестселлер",
+          "type": "stream",
+          "url": "http://ab04f03c.ucomist.net/iptv/237WGNXDPFLZAL8HDFPKFPQA/9141/index.m3u8",
+          "logo": "https://github.com/GENgroup/TV_logo/blob/main/%D0%A0%D1%83%D1%81%D1%81%D0%BA%D0%B8%D0%B9%20%D0%B1%D0%B5%D1%81%D1%82%D1%81%D0%B5%D0%BB%D0%BB%D0%B5%D1%80.png?raw=true",
+          "disabled": false,
+          "epgSource": "",
+          "epgId": ""
+        },
+        {
+          "name": "Твое ТВ",
+          "type": "stream",
+          "url": "http://ab04f03c.ucomist.net/iptv/237WGNXDPFLZAL8HDFPKFPQA/14229/index.m3u8",
+          "logo": "https://github.com/GENgroup/TV_logo/blob/main/%D0%A2%D0%B2%D0%BE%D0%B5%20%D0%A2%D0%92.png?raw=true",
+          "disabled": false,
+          "epgSource": "",
+          "epgId": ""
+        },
+        {
+          "name": "Любимое",
+          "type": "stream",
+          "url": "http://ab04f03c.ucomist.net/iptv/237WGNXDPFLZAL8HDFPKFPQA/2106/index.m3u8",
+          "logo": "https://github.com/GENgroup/TV_logo/blob/main/%D0%9B%D1%8E%D0%B1%D0%B8%D0%BC%D0%BE%D0%B5.png?raw=true",
+          "disabled": false,
+          "epgSource": "",
+          "epgId": ""
+        },
+        {
+          "name": "Время",
+          "type": "stream",
+          "url": "http://ab04f03c.ucomist.net/iptv/237WGNXDPFLZAL8HDFPKFPQA/552/index.m3u8",
+          "logo": "https://github.com/GENgroup/TV_logo/blob/main/%D0%92%D1%80%D0%B5%D0%BC%D1%8F.png?raw=true",
+          "disabled": false,
+          "epgSource": "",
+          "epgId": ""
+        },
+        {
+          "name": "Ретро",
+          "type": "stream",
+          "url": "http://176.118.197.101/Retro/index.m3u8",
+          "logo": "https://github.com/GENgroup/TV_logo/blob/main/%D0%A0%D0%B5%D1%82%D1%80%D0%BE.png?raw=true",
+          "disabled": false,
+          "epgSource": "",
+          "epgId": ""
+        },
+        {
+          "name": "Театр",
+          "type": "stream",
+          "url": "http://ab04f03c.ucomist.net/iptv/237WGNXDPFLZAL8HDFPKFPQA/9337/index.m3u8",
+          "logo": "https://github.com/GENgroup/TV_logo/blob/main/%D0%A2%D0%B5%D0%B0%D1%82%D1%80.png?raw=true",
+          "disabled": false,
+          "epgSource": "",
+          "epgId": ""
+        },
+        {
+          "name": "Venera.TV Сов.Классика",
+          "type": "stream",
+          "url": "http://ab04f03c.ucomist.net/iptv/237WGNXDPFLZAL8HDFPKFPQA/2146/index.m3u8",
+          "logo": "https://github.com/GENgroup/TV_logo/blob/main/Venera.TV%20%D0%A1%D0%BE%D0%B2.%D0%9A%D0%BB%D0%B0%D1%81%D1%81%D0%B8%D0%BA%D0%B0.png?raw=true",
+          "disabled": false,
+          "epgSource": "",
+          "epgId": ""
+        }
+      ]
+    },
+    {
+      "group": "Кинозалы",
+      "items": [
+        {
+          "name": "Рязанов",
+          "type": "stream",
+          "url": "http://ab04f03c.ucomist.net/iptv/237WGNXDPFLZAL8HDFPKFPQA/17012/index.m3u8",
+          "logo": "https://github.com/GENgroup/TV_logo/blob/main/%D0%A0%D1%8F%D0%B7%D0%B0%D0%BD%D0%BE%D0%B2.png?raw=true",
+          "disabled": false,
+          "epgSource": "",
+          "epgId": ""
+        },
+        {
+          "name": "Гайдай",
+          "type": "stream",
+          "url": "http://ab04f03c.ucomist.net/iptv/237WGNXDPFLZAL8HDFPKFPQA/17004/index.m3u8",
+          "logo": "https://github.com/GENgroup/TV_logo/blob/main/%D0%93%D0%B0%D0%B9%D0%B4%D0%B0%D0%B9.png?raw=true",
+          "disabled": false,
+          "epgSource": "",
+          "epgId": ""
+        },
+        {
+          "name": "HBO",
+          "type": "stream",
+          "url": "http://ab04f03c.ucomist.net/iptv/237WGNXDPFLZAL8HDFPKFPQA/19428/index.m3u8",
+          "logo": "https://github.com/GENgroup/TV_logo/blob/main/HBO.png?raw=true",
+          "disabled": false,
+          "epgSource": "",
+          "epgId": ""
+        },
+        {
+          "name": "Друзья",
+          "type": "stream",
+          "url": "http://ab04f03c.ucomist.net/iptv/237WGNXDPFLZAL8HDFPKFPQA/17006/index.m3u8",
+          "logo": "https://github.com/GENgroup/TV_logo/blob/main/VF%20%D0%94%D1%80%D1%83%D0%B7%D1%8C%D1%8F.png?raw=true",
+          "disabled": false,
+          "epgSource": "",
+          "epgId": ""
+        },
+        {
+          "name": "MM USSR Драма",
+          "type": "stream",
+          "url": "http://ab04f03c.ucomist.net/iptv/237WGNXDPFLZAL8HDFPKFPQA/13022/index.m3u8",
+          "logo": "https://github.com/GENgroup/TV_logo/blob/main/MM%20USSR%20%D0%94%D1%80%D0%B0%D0%BC%D0%B0.png?raw=true",
+          "disabled": false,
+          "epgSource": "",
+          "epgId": ""
+        },
+        {
+          "name": "StrahTV СССР",
+          "type": "stream",
+          "url": "http://ab04f03c.ucomist.net/iptv/237WGNXDPFLZAL8HDFPKFPQA/11061/index.m3u8",
+          "logo": "https://github.com/GENgroup/TV_logo/blob/main/StrahTV%20%D0%A1%D0%A1%D0%A1%D0%A0.png?raw=true",
+          "disabled": false,
+          "epgSource": "",
+          "epgId": ""
+        },
+        {
+          "name": "PG USSR",
+          "type": "stream",
+          "url": "http://ab04f03c.ucomist.net/iptv/237WGNXDPFLZAL8HDFPKFPQA/11102/index.m3u8",
+          "logo": "https://github.com/GENgroup/TV_logo/blob/main/PG%20USSR.png?raw=true",
+          "disabled": false,
+          "epgSource": "",
+          "epgId": ""
+        },
+        {
+          "name": "=Сити Эдем КиноДетектив",
+          "type": "stream",
+          "url": "https://cityeden.catcast.tv/content/41327/index.m3u8",
+          "logo": "https://github.com/GENgroup/TV_logo/blob/main/%D0%A1%D0%B8%D1%82%D0%B8%20%D0%AD%D0%B4%D0%B5%D0%BC%20%D0%9A%D0%B8%D0%BD%D0%BE%D0%94%D0%B5%D1%82%D0%B5%D0%BA%D1%82%D0%B8%D0%B2.png?raw=true",
+          "disabled": false,
+          "epgSource": "",
+          "epgId": ""
+        },
+        {
+          "name": "=Сити Эдем КиноКлассика",
+          "type": "stream",
+          "url": "https://cityeden.catcast.tv/content/34185/index.m3u8",
+          "logo": "https://github.com/GENgroup/TV_logo/blob/main/%D0%A1%D0%B8%D1%82%D0%B8%20%D0%AD%D0%B4%D0%B5%D0%BC%20%D0%9A%D0%B8%D0%BD%D0%BE%D0%9A%D0%BB%D0%B0%D1%81%D1%81%D0%B8%D0%BA%D0%B0.png?raw=true",
+          "disabled": false,
+          "epgSource": "",
+          "epgId": ""
+        },
+        {
+          "name": "=Сити Эдем КиноКомедия",
+          "type": "stream",
+          "url": "https://cityeden.catcast.tv/content/41331/index.m3u8",
+          "logo": "https://github.com/GENgroup/TV_logo/blob/main/%D0%A1%D0%B8%D1%82%D0%B8%20%D0%AD%D0%B4%D0%B5%D0%BC%20%D0%9A%D0%B8%D0%BD%D0%BE%D0%9A%D0%BE%D0%BC%D0%B5%D0%B4%D0%B8%D1%8F.png?raw=true",
+          "disabled": false,
+          "epgSource": "",
+          "epgId": ""
+        },
+        {
+          "name": "Триколор 1",
+          "type": "stream",
+          "url": "http://ab04f03c.ucomist.net/iptv/237WGNXDPFLZAL8HDFPKFPQA/2568/index.m3u8",
+          "logo": "https://github.com/GENgroup/TV_logo/blob/main/%D0%A2%D1%80%D0%B8%D0%BA%D0%BE%D0%BB%D0%BE%D1%80%201.png?raw=true",
+          "disabled": false,
+          "epgSource": "",
+          "epgId": ""
+        },
+        {
+          "name": "Триколор 2",
+          "type": "stream",
+          "url": "http://ab04f03c.ucomist.net/iptv/237WGNXDPFLZAL8HDFPKFPQA/2569/index.m3u8",
+          "logo": "https://github.com/GENgroup/TV_logo/blob/main/%D0%A2%D1%80%D0%B8%D0%BA%D0%BE%D0%BB%D0%BE%D1%80%202.png?raw=true",
+          "disabled": false,
+          "epgSource": "",
+          "epgId": ""
+        },
+        {
+          "name": "Триколор 3",
+          "type": "stream",
+          "url": "http://ab04f03c.ucomist.net/iptv/237WGNXDPFLZAL8HDFPKFPQA/2570/index.m3u8",
+          "logo": "https://github.com/GENgroup/TV_logo/blob/main/%D0%A2%D1%80%D0%B8%D0%BA%D0%BE%D0%BB%D0%BE%D1%80%203.png?raw=true",
+          "disabled": false,
+          "epgSource": "",
+          "epgId": ""
+        },
+        {
+          "name": "Триколор 4",
+          "type": "stream",
+          "url": "http://ab04f03c.ucomist.net/iptv/237WGNXDPFLZAL8HDFPKFPQA/2571/index.m3u8",
+          "logo": "https://github.com/GENgroup/TV_logo/blob/main/%D0%A2%D1%80%D0%B8%D0%BA%D0%BE%D0%BB%D0%BE%D1%80%204.png?raw=true",
+          "disabled": false,
+          "epgSource": "",
+          "epgId": ""
+        },
+        {
+          "name": "Триколор 5",
+          "type": "stream",
+          "url": "http://ab04f03c.ucomist.net/iptv/237WGNXDPFLZAL8HDFPKFPQA/2572/index.m3u8",
+          "logo": "https://github.com/GENgroup/TV_logo/blob/main/%D0%A2%D1%80%D0%B8%D0%BA%D0%BE%D0%BB%D0%BE%D1%80%205.png?raw=true",
+          "disabled": false,
+          "epgSource": "",
+          "epgId": ""
+        },
+        {
+          "name": "Триколор 6",
+          "type": "stream",
+          "url": "http://ab04f03c.ucomist.net/iptv/237WGNXDPFLZAL8HDFPKFPQA/2577/index.m3u8",
+          "logo": "https://github.com/GENgroup/TV_logo/blob/main/%D0%A2%D1%80%D0%B8%D0%BA%D0%BE%D0%BB%D0%BE%D1%80%206.png?raw=true",
+          "disabled": false,
+          "epgSource": "",
+          "epgId": ""
+        },
+        {
+          "name": "Триколор 7",
+          "type": "stream",
+          "url": "http://ab04f03c.ucomist.net/iptv/237WGNXDPFLZAL8HDFPKFPQA/2574/index.m3u8",
+          "logo": "https://github.com/GENgroup/TV_logo/blob/main/%D0%A2%D1%80%D0%B8%D0%BA%D0%BE%D0%BB%D0%BE%D1%80%207.png?raw=true",
+          "disabled": false,
+          "epgSource": "",
+          "epgId": ""
+        },
+        {
+          "name": "Триколор 8",
+          "type": "stream",
+          "url": "http://ab04f03c.ucomist.net/iptv/237WGNXDPFLZAL8HDFPKFPQA/2575/index.m3u8",
+          "logo": "https://github.com/GENgroup/TV_logo/blob/main/%D0%A2%D1%80%D0%B8%D0%BA%D0%BE%D0%BB%D0%BE%D1%80%208.png?raw=true",
+          "disabled": false,
+          "epgSource": "",
+          "epgId": ""
+        },
+        {
+          "name": "VF Ленфильм",
+          "type": "stream",
+          "url": "http://ab04f03c.ucomist.net/iptv/237WGNXDPFLZAL8HDFPKFPQA/18121/index.m3u8",
+          "logo": "https://github.com/GENgroup/TV_logo/blob/main/VF%20%D0%9B%D0%B5%D0%BD%D1%84%D0%B8%D0%BB%D1%8C%D0%BC.png?raw=true",
+          "disabled": false,
+          "epgSource": "",
+          "epgId": ""
+        },
+        {
+          "name": "VF Киностудия им. Горького",
+          "type": "stream",
+          "url": "http://ab04f03c.ucomist.net/iptv/237WGNXDPFLZAL8HDFPKFPQA/18122/index.m3u8",
+          "logo": "https://github.com/GENgroup/TV_logo/blob/main/VF%20%D0%9A%D0%B8%D0%BD%D0%BE%D1%81%D1%82%D1%83%D0%B4%D0%B8%D1%8F%20%D0%B8%D0%BC.%20%D0%93%D0%BE%D1%80%D1%8C%D0%BA%D0%BE%D0%B3%D0%BE.png?raw=true",
+          "disabled": false,
+          "epgSource": "",
+          "epgId": ""
+        },
+        {
+          "name": "VF Одесская киностудия",
+          "type": "stream",
+          "url": "http://ab04f03c.ucomist.net/iptv/237WGNXDPFLZAL8HDFPKFPQA/18120/index.m3u8",
+          "logo": "https://github.com/GENgroup/TV_logo/blob/main/VF%20%D0%9E%D0%B4%D0%B5%D1%81%D1%81%D0%BA%D0%B0%D1%8F%20%D0%BA%D0%B8%D0%BD%D0%BE%D1%81%D1%82%D1%83%D0%B4%D0%B8%D1%8F.png?raw=true",
+          "disabled": false,
+          "epgSource": "",
+          "epgId": ""
+        },
+        {
+          "name": "VF Свердловская киностудия",
+          "type": "stream",
+          "url": "http://ab04f03c.ucomist.net/iptv/237WGNXDPFLZAL8HDFPKFPQA/18124/index.m3u8",
+          "logo": "https://github.com/GENgroup/TV_logo/blob/main/VF%20%D0%A1%D0%B2%D0%B5%D1%80%D0%B4%D0%BB%D0%BE%D0%B2%D1%81%D0%BA%D0%B0%D1%8F%20%D0%BA%D0%B8%D0%BD%D0%BE%D1%81%D1%82%D1%83%D0%B4%D0%B8%D1%8F-.png?raw=true",
+          "disabled": false,
+          "epgSource": "",
+          "epgId": ""
+        },
+        {
+          "name": "VF Беларусьфильм",
+          "type": "stream",
+          "url": "http://ab04f03c.ucomist.net/iptv/237WGNXDPFLZAL8HDFPKFPQA/18125/index.m3u8",
+          "logo": "https://github.com/GENgroup/TV_logo/blob/main/VF%20%D0%91%D0%B5%D0%BB%D0%B0%D1%80%D1%83%D1%81%D1%8C%D1%84%D0%B8%D0%BB%D1%8C%D0%BC.png?raw=true",
+          "disabled": false,
+          "epgSource": "",
+          "epgId": ""
+        },
+        {
+          "name": "VF Рижская киностудия",
+          "type": "stream",
+          "url": "http://ab04f03c.ucomist.net/iptv/237WGNXDPFLZAL8HDFPKFPQA/18123/index.m3u8",
+          "logo": "https://github.com/GENgroup/TV_logo/blob/main/VF%20%D0%A0%D0%B8%D0%B6%D1%81%D0%BA%D0%B0%D1%8F%20%D0%BA%D0%B8%D0%BD%D0%BE%D1%81%D1%82%D1%83%D0%B4%D0%B8%D1%8F.png?raw=true",
+          "disabled": false,
+          "epgSource": "",
+          "epgId": ""
+        },
+        {
+          "name": "VF  С новым годом!",
+          "type": "stream",
+          "url": "http://ab04f03c.ucomist.net/iptv/237WGNXDPFLZAL8HDFPKFPQA/15524/index.m3u8",
+          "logo": "https://github.com/GENgroup/TV_logo/blob/main/VF%20%D0%A1%20%D0%BD%D0%BE%D0%B2%D1%8B%D0%BC%20%D0%B3%D0%BE%D0%B4%D0%BE%D0%BC.png?raw=true",
+          "disabled": false,
+          "epgSource": "",
+          "epgId": ""
+        },
+        {
+          "name": "VF  New Year",
+          "type": "stream",
+          "url": "http://ab04f03c.ucomist.net/iptv/237WGNXDPFLZAL8HDFPKFPQA/15522/index.m3u8",
+          "logo": "https://github.com/GENgroup/TV_logo/blob/main/VF%20New%20Year.png?raw=true",
+          "disabled": false,
+          "epgSource": "",
+          "epgId": ""
+        },
+        {
+          "name": "Yosso TV Советские Фильмы",
+          "type": "stream",
+          "url": "http://ab04f03c.ucomist.net/iptv/237WGNXDPFLZAL8HDFPKFPQA/14175/index.m3u8",
+          "logo": "https://github.com/GENgroup/TV_logo/blob/main/Yosso%20TV%20%D0%A1%D0%BE%D0%B2%D0%B5%D1%82%D1%81%D0%BA%D0%B8%D0%B5%20%D0%A4%D0%B8%D0%BB%D1%8C%D0%BC%D1%8B.png?raw=true",
+          "disabled": false,
+          "epgSource": "",
+          "epgId": ""
+        },
+        {
+          "name": "Yosso TV VHS",
+          "type": "stream",
+          "url": "http://ab04f03c.ucomist.net/iptv/237WGNXDPFLZAL8HDFPKFPQA/14172/index.m3u8",
+          "logo": "https://github.com/GENgroup/TV_logo/blob/main/Yosso%20TV%20VHS.png?raw=true",
+          "disabled": false,
+          "epgSource": "",
+          "epgId": ""
+        },
+        {
+          "name": "Yosso TV Сов. Фильмы",
+          "type": "stream",
+          "url": "http://ab04f03c.ucomist.net/iptv/237WGNXDPFLZAL8HDFPKFPQA/19435/index.m3u8",
+          "logo": "https://github.com/GENgroup/TV_logo/blob/main/Yosso%20TV%20%D0%A1%D0%BE%D0%B2.%20%D0%A4%D0%B8%D0%BB%D1%8C%D0%BC%D1%8B%204%D0%BA.png?raw=true",
+          "disabled": false,
+          "epgSource": "",
+          "epgId": ""
+        },
+        {
+          "name": "Yosso TV Best",
+          "type": "stream",
+          "url": "http://ab04f03c.ucomist.net/iptv/237WGNXDPFLZAL8HDFPKFPQA/14236/index.m3u8",
+          "logo": "https://github.com/GENgroup/TV_logo/blob/main/Yosso%20TV%20Best.png?raw=true",
+          "disabled": false,
+          "epgSource": "",
+          "epgId": ""
+        },
+        {
+          "name": "Tviksel Кино 1",
+          "type": "stream",
+          "url": "http://ab04f03c.ucomist.net/iptv/237WGNXDPFLZAL8HDFPKFPQA/18071/index.m3u8",
+          "logo": "https://github.com/GENgroup/TV_logo/blob/main/Tviksel%20%D0%9A%D0%B8%D0%BD%D0%BE%201.png?raw=true",
+          "disabled": false,
+          "epgSource": "",
+          "epgId": ""
+        },
+        {
+          "name": "Tviksel Кино 2",
+          "type": "stream",
+          "url": "http://ab04f03c.ucomist.net/iptv/237WGNXDPFLZAL8HDFPKFPQA/18070/index.m3u8",
+          "logo": "https://github.com/GENgroup/TV_logo/blob/main/Tviksel%20%D0%9A%D0%B8%D0%BD%D0%BE%202.png?raw=true",
+          "disabled": false,
+          "epgSource": "",
+          "epgId": ""
+        },
+        {
+          "name": "StrahTV Коломбо",
+          "type": "stream",
+          "url": "http://ab04f03c.ucomist.net/iptv/237WGNXDPFLZAL8HDFPKFPQA/31713/index.m3u8",
+          "logo": "https://github.com/GENgroup/TV_logo/blob/main/StrahTV%20%D0%9A%D0%BE%D0%BB%D0%BE%D0%BC%D0%B1%D0%BE.png?raw=true",
+          "disabled": false,
+          "epgSource": "",
+          "epgId": ""
+    },
+    {
+      "group": "Док",
+      "items": [
+        {
+          "name": "Россия 24",
+          "type": "stream",
+          "url": "http://77.232.131.211/Rossiya24/index.m3u8",
+          "logo": "https://github.com/GENgroup/TV_logo/blob/main/%D0%A0%D0%A2%D0%A024.png?raw=true",
+          "disabled": false,
+          "epgSource": "",
+          "epgId": ""
+        },
+        {
+          "name": "М24",
+          "type": "stream",
+          "url": "https://stream.smotrim.ru/hls/givc8/playlist.m3u8?entity=channel&id=798&sign=37881ef2e289f062ceff0dca6c24dc58",
+          "logo": "https://github.com/GENgroup/TV_logo/blob/main/M24.png?raw=true",
+          "disabled": false,
+          "epgSource": "",
+          "epgId": ""
+        },
+        {
+          "name": "360°",
+          "type": "stream",
+          "url": "https://cdn-evacoder-tv.facecast.io/evacoder_hls_hi/CkxfR1xNUAJwTgtXTBZTAJli/index.m3u8",
+          "logo": "https://github.com/GENgroup/TV_logo/blob/main/360.png?raw=true",
+          "disabled": false,
+          "epgSource": "",
+          "epgId": ""
+        },
+        {
+          "name": "Известия",
+          "type": "stream",
+          "url": "http://igi-hls.cdnvideo.ru/igi/igi_tcode/playlist.m3u8",
+          "logo": "https://github.com/GENgroup/TV_logo/blob/main/%D0%98%D0%B7%D0%B2%D0%B5%D1%81%D1%82%D0%B8%D1%8F.png?raw=true",
+          "disabled": false,
+          "epgSource": "",
+          "epgId": ""
+        },
+        {
+          "name": "Звезда+",
+          "type": "stream",
+          "url": "http://tvzvezda.bonus-tv.ru/cdn/zvezdaplus/playlist.m3u8",
+          "logo": "https://github.com/GENgroup/TV_logo/blob/main/%D0%97%D0%B2%D0%B5%D0%B7%D0%B4%D0%B0+.png?raw=true",
+          "disabled": false,
+          "epgSource": "",
+          "epgId": ""
+        },
+        {
+          "name": "Соловьёв Live",
+          "type": "stream",
+          "url": "https://stream.smotrim.ru/hls2/solovievlive/playlist_6.m3u8",
+          "logo": "https://github.com/GENgroup/TV_logo/blob/main/%D0%A1%D0%BE%D0%BB%D0%BE%D0%B2%D1%8C%D1%91%D0%B2%20Live.png?raw=true",
+          "disabled": false,
+          "epgSource": "",
+          "epgId": ""
+        },
+        {
+          "name": "RTVi",
+          "type": "stream",
+          "url": "http://ab04f03c.ucomist.net/iptv/237WGNXDPFLZAL8HDFPKFPQA/9102/index.m3u8",
+          "logo": "https://github.com/GENgroup/TV_logo/blob/main/RTVI.png?raw=true",
+          "disabled": false,
+          "epgSource": "",
+          "epgId": ""
+        },
+        {
+          "name": "=Fox News",
+          "type": "stream",
+          "url": "http://ab04f03c.ucomist.net/iptv/237WGNXDPFLZAL8HDFPKFPQA/31915/index.m3u8",
+          "logo": "https://github.com/GENgroup/TV_logo/blob/main/Fox%20News.png?raw=true",
+          "disabled": false,
+          "epgSource": "",
+          "epgId": ""
+        },
+        {
+          "name": "Еда",
+          "type": "stream",
+          "url": "http://ab04f03c.ucomist.net/iptv/237WGNXDPFLZAL8HDFPKFPQA/6009/index.m3u8",
+          "logo": "https://github.com/GENgroup/TV_logo/blob/main/%D0%95%D0%B4%D0%B0.png?raw=true",
+          "disabled": false,
+          "epgSource": "",
+          "epgId": ""
+        },
+        {
+          "name": "Food Time",
+          "type": "stream",
+          "url": "http://ab04f03c.ucomist.net/iptv/237WGNXDPFLZAL8HDFPKFPQA/10025/index.m3u8",
+          "logo": "https://github.com/GENgroup/TV_logo/blob/main/FoodTime.png?raw=true",
+          "disabled": false,
+          "epgSource": "",
+          "epgId": ""
+        },
+        {
+          "name": "Food Network",
+          "type": "stream",
+          "url": "http://ab04f03c.ucomist.net/iptv/237WGNXDPFLZAL8HDFPKFPQA/2419/index.m3u8",
+          "logo": "https://github.com/GENgroup/TV_logo/blob/main/Food%20Network.png?raw=true",
+          "disabled": false,
+          "epgSource": "",
+          "epgId": ""
+        },
+        {
+          "name": "Yosso TV Food",
+          "type": "stream",
+          "url": "http://ab04f03c.ucomist.net/iptv/237WGNXDPFLZAL8HDFPKFPQA/31616/index.m3u8",
+          "logo": "https://github.com/GENgroup/TV_logo/blob/main/Yosso%20TV%20Food.png?raw=true",
+          "disabled": false,
+          "epgSource": "",
+          "epgId": ""
+        },
+        {
+          "name": "Кухня ТВ",
+          "type": "stream",
+          "url": "http://ab04f03c.ucomist.net/iptv/237WGNXDPFLZAL8HDFPKFPQA/152/index.m3u8",
+          "logo": "https://github.com/GENgroup/TV_logo/blob/main/%D0%9A%D1%83%D1%85%D0%BD%D1%8F%20%D0%A2%D0%92.png?raw=true",
+          "disabled": false,
+          "epgSource": "",
+          "epgId": ""
+        },
+        {
+          "name": "BOX Gurman",
+          "type": "stream",
+          "url": "http://ab04f03c.ucomist.net/iptv/237WGNXDPFLZAL8HDFPKFPQA/31653/index.m3u8",
+          "logo": "https://github.com/GENgroup/TV_logo/blob/main/BOX%20Gurman.png?raw=true",
+          "disabled": false,
+          "epgSource": "",
+          "epgId": ""
+        },
+        {
+          "name": "TLC",
+          "type": "stream",
+          "url": "http://ab04f03c.ucomist.net/iptv/237WGNXDPFLZAL8HDFPKFPQA/9024/index.m3u8",
+          "logo": "https://github.com/GENgroup/TV_logo/blob/main/TLC.png?raw=true",
+          "disabled": false,
+          "epgSource": "",
+          "epgId": ""
+        },
+        {
+          "name": "",
+          "type": "stream",
+          "url": "",
+          "logo": "",
+          "disabled": false,
+          "epgSource": "",
+          "epgId": ""
+        },
+        {
+          "name": "=Discovery Channel",
+          "type": "stream",
+          "url": "http://ab04f03c.ucomist.net/iptv/237WGNXDPFLZAL8HDFPKFPQA/227/index.m3u8",
+          "logo": "https://github.com/GENgroup/TV_logo/blob/main/Discovery%20Channel.png?raw=true",
+          "disabled": false,
+          "epgSource": "",
+          "epgId": ""
+        },
+        {
+          "name": "Бобёр",
+          "type": "stream",
+          "url": "http://ab04f03c.ucomist.net/iptv/237WGNXDPFLZAL8HDFPKFPQA/725/index.m3u8",
+          "logo": "https://github.com/GENgroup/TV_logo/blob/main/%D0%91%D0%BE%D0%B1%D1%91%D1%80.png?raw=true",
+          "disabled": false,
+          "epgSource": "",
+          "epgId": ""
+        },
+        {
+          "name": "",
+          "type": "stream",
+          "url": "",
+          "logo": "",
+          "disabled": false,
+          "epgSource": "",
+          "epgId": ""
+        },
+        {
+          "name": "",
+          "type": "stream",
+          "url": "",
+          "logo": "",
+          "disabled": false,
+          "epgSource": "",
+          "epgId": ""
+        },
+        {
+          "name": "VeleS Магнитофон",
+          "type": "stream",
+          "url": "http://ab04f03c.ucomist.net/iptv/237WGNXDPFLZAL8HDFPKFPQA/31645/index.m3u8",
+          "logo": "https://github.com/GENgroup/TV_logo/blob/main/VeleS%20%D0%9C%D0%B0%D0%B3%D0%BD%D0%B8%D1%82%D0%BE%D1%84%D0%BE%D0%BD.png?raw=true",
+          "disabled": false,
+          "epgSource": "",
+          "epgId": ""
+        },
+        {
+          "name": "=КиноТВ",
+          "type": "stream",
+          "url": "http://ab04f03c.ucomist.net/iptv/237WGNXDPFLZAL8HDFPKFPQA/2097/index.m3u8",
+          "logo": "https://github.com/GENgroup/TV_logo/blob/main/%D0%9A%D0%B8%D0%BD%D0%BE%D0%A2%D0%92.png?raw=true",
+          "disabled": false,
+          "epgSource": "",
+          "epgId": ""
+        },
+        {
+          "name": "=Наше новое кино",
+          "type": "stream",
+          "url": "http://ab04f03c.ucomist.net/iptv/237WGNXDPFLZAL8HDFPKFPQA/517/index.m3u8",
+          "logo": "https://github.com/GENgroup/TV_logo/blob/main/%D0%9D%D0%B0%D1%88%D0%B5%20%D0%BD%D0%BE%D0%B2%D0%BE%D0%B5%20%D0%BA%D0%B8%D0%BD%D0%BE.png?raw=true",
+          "disabled": false,
+          "epgSource": "",
+          "epgId": ""
+        },
+        {
+          "name": "=Viju+ TV1000",
+          "type": "stream",
+          "url": "http://185.78.112.47:8077/viju_tv1000_hd/index.m3u8",
+          "logo": "https://github.com/GENgroup/TV_logo/blob/main/Viju_TV1000%D1%80%D1%83%D1%81.png?raw=true",
+          "disabled": false,
+          "epgSource": "",
+          "epgId": ""
+        },
+        {
+          "name": "=КиноКомедия",
+          "type": "stream",
+          "url": "http://158.101.222.193:88/georgia_play.php?id=kinokomediya",
+          "logo": "https://github.com/GENgroup/TV_logo/blob/main/%D0%9A%D0%B8%D0%BD%D0%BE%D0%9A%D0%BE%D0%BC%D0%B5%D0%B4%D0%B8%D1%8F.png?raw=true",
+          "disabled": false,
+          "epgSource": "",
+          "epgId": ""
+        },
+        {
+          "name": "=КиноСемья",
+          "type": "stream",
+          "url": "http://89.223.46.189:8080/premiera/playlist.m3u8",
+          "logo": "https://github.com/GENgroup/TV_logo/blob/main/%D0%9A%D0%B8%D0%BD%D0%BE%D0%A1%D0%B5%D0%BC%D1%8C%D1%8F.png?raw=true",
+          "disabled": false,
+          "epgSource": "",
+          "epgId": ""
+        },
+        {
+          "name": "--Discovery Science",
+          "type": "stream",
+          "url": "",
+          "logo": "https://github.com/GENgroup/TV_logo/blob/main/Discovery%20Science.png?raw=true",
+          "disabled": false,
+          "epgSource": "",
+          "epgId": ""
+        }
+      ]
+    }
+  ]
+}
