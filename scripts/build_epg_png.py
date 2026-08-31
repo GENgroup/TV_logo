@@ -11,6 +11,7 @@ import gzip
 import json
 import re
 import sys
+import time
 import urllib.request
 from pathlib import Path
 from encode_to_png import encode_text_to_png
@@ -39,19 +40,33 @@ def unescape(s: str) -> str:
 
 def main():
     print(f"Качаю: {EPG_SOURCE_URL}")
-    try:
-        req = urllib.request.Request(EPG_SOURCE_URL, headers={"User-Agent": "Mozilla/5.0"})
-        with urllib.request.urlopen(req, timeout=60) as resp:
-            raw = resp.read()
-    except Exception as e:
-        print(f"ОШИБКА: не удалось скачать источник EPG - {e}")
+
+    raw = None
+    last_error = None
+    for attempt in range(1, 4):
+        try:
+            req = urllib.request.Request(EPG_SOURCE_URL, headers={"User-Agent": "Mozilla/5.0"})
+            with urllib.request.urlopen(req, timeout=120) as resp:
+                raw = resp.read()
+                expected = resp.headers.get("Content-Length")
+                if expected is not None and int(expected) != len(raw):
+                    raise IOError(
+                        f"скачано {len(raw)} байт, а сервер обещал {expected} - обрыв"
+                    )
+            # сразу пробуем распаковать - если файл битый, узнаем здесь же и повторим попытку
+            gzip.decompress(raw)
+            break
+        except Exception as e:
+            last_error = e
+            print(f"Попытка {attempt}/3 не удалась: {e}")
+            raw = None
+            time.sleep(5)
+
+    if raw is None:
+        print(f"ОШИБКА: не удалось скачать источник EPG за 3 попытки - {last_error}")
         sys.exit(1)
 
-    try:
-        text = gzip.decompress(raw).decode("utf-8")
-    except Exception as e:
-        print(f"ОШИБКА: не удалось распаковать/прочитать файл - {e}")
-        sys.exit(1)
+    text = gzip.decompress(raw).decode("utf-8")
 
     channels = dict(CHANNEL_RE.findall(text))
     print(f"Каналов в источнике: {len(channels)}")
