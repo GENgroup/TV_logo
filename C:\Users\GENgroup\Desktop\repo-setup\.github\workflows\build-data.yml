@@ -1,0 +1,44 @@
+name: Обновление данных плеера
+
+on:
+  # каждую ночь в 2:00 по Москве (= 23:00 UTC) - и EPG, и список каналов
+  schedule:
+    - cron: '0 23 * * *'
+  # мгновенно, как только меняется channels-list.json - только список каналов
+  push:
+    paths:
+      - 'channels-list.json'
+  # кнопка "Run workflow" в интерфейсе GitHub - вручную, когда угодно
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Скачать репозиторий
+        uses: actions/checkout@v4
+
+      - name: Установить Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Установить зависимости
+        run: pip install Pillow
+
+      - name: Пересобрать список каналов
+        working-directory: scripts
+        run: python build_channels_png.py
+
+      - name: Пересобрать EPG
+        if: github.event_name != 'push'
+        working-directory: scripts
+        run: python build_epg_png.py
+
+      - name: Сохранить изменения обратно в репозиторий
+        run: |
+          git config user.name "GEN-tv robot"
+          git config user.email "actions@github.com"
+          git add channels-data.png epg-data.png
+          git diff --cached --quiet && echo "Нечего сохранять" || git commit -m "Автообновление данных плеера"
+          git push
