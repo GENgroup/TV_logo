@@ -238,13 +238,13 @@
           "epgSource": "",
           "epgId": ""
         },
-
+		
         {
           "name": "КиноТВ",
           "type": "stream",
-          "url": "https://vod.tuva.ru/kinotv/index.m3u8",
+          "url": "http://ab04f03c.ucomist.net/iptv/237WGNXDPFLZAL8HDFPKFPQA/2097/index.m3u8",
           "logo": "https://github.com/GENgroup/TV_logo/blob/main/%D0%9A%D0%B8%D0%BD%D0%BE%D0%A2%D0%92.png?raw=true",
-          "disabled": true,
+          "disabled": false,
           "epgSource": "",
           "epgId": ""
         },
@@ -932,10 +932,20 @@
         },
 
         {
-          "name": "CNN",
+          "name": "=CNN",
           "type": "stream",
           "url": "http://dmi3y-tv.online/hls/CH_CNN_ENGLISH.m3u8",
-          "logo": "https://github.com/GENgroup/TV_logo/blob/main/CNN.png?raw=true",
+          "logo": "https://turnerlive.warnermediacdn.com/hls/live/586495/cnngo/cnn_slate/VIDEO_0_3564000.m3u8",
+          "disabled": false,
+          "epgSource": "",
+          "epgId": ""
+        },
+
+        {
+          "name": "CBS News",
+          "type": "stream",
+          "url": "https://cbsn-us.cbsnstream.cbsnews.com/out/v1/55a8648e8f134e82a470f83d562deeca/master_22.m3u8",
+          "logo": "https://github.com/GENgroup/TV_logo/blob/main/CBS%20News.png?raw=true",
           "disabled": false,
           "epgSource": "",
           "epgId": ""
@@ -1003,20 +1013,20 @@
         },
 
         {
-          "name": "TLC",
-          "type": "stream",
-          "url": "http://ab04f03c.ucomist.net/iptv/237WGNXDPFLZAL8HDFPKFPQA/9024/index.m3u8",
-          "logo": "https://github.com/GENgroup/TV_logo/blob/main/TLC.png?raw=true",
-          "disabled": false,
-          "epgSource": "",
-          "epgId": ""
-        },
-
-        {
           "name": "Бобер",
           "type": "stream",
           "url": "http://ab04f03c.ucomist.net/iptv/237WGNXDPFLZAL8HDFPKFPQA/725/index.m3u8",
           "logo": "https://github.com/GENgroup/TV_logo/blob/main/%D0%91%D0%BE%D0%B1%D1%91%D1%80.png?raw=true",
+          "disabled": false,
+          "epgSource": "",
+          "epgId": ""
+        },
+		
+        {
+          "name": "TLC",
+          "type": "stream",
+          "url": "http://ab04f03c.ucomist.net/iptv/237WGNXDPFLZAL8HDFPKFPQA/9024/index.m3u8",
+          "logo": "https://github.com/GENgroup/TV_logo/blob/main/TLC.png?raw=true",
           "disabled": false,
           "epgSource": "",
           "epgId": ""
@@ -1057,16 +1067,6 @@
           "type": "stream",
           "url": "",
           "logo": "",
-          "disabled": false,
-          "epgSource": "",
-          "epgId": ""
-        },
-		
-        {
-          "name": "=КиноТВ",
-          "type": "stream",
-          "url": "http://ab04f03c.ucomist.net/iptv/237WGNXDPFLZAL8HDFPKFPQA/2097/index.m3u8",
-          "logo": "https://github.com/GENgroup/TV_logo/blob/main/%D0%9A%D0%B8%D0%BD%D0%BE%D0%A2%D0%92.png?raw=true",
           "disabled": false,
           "epgSource": "",
           "epgId": ""
