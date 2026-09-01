@@ -12,6 +12,7 @@
           "epgSource": "",
           "epgId": ""
         },
+
         {
           "name": "Россия 1",
           "type": "stream",
@@ -21,6 +22,7 @@
           "epgSource": "",
           "epgId": ""
         },
+
         {
           "name": "ТВ Центр",
           "type": "stream",
@@ -30,6 +32,7 @@
           "epgSource": "",
           "epgId": ""
         },
+
         {
           "name": "НТВ",
           "type": "stream",
@@ -39,6 +42,7 @@
           "epgSource": "",
           "epgId": ""
         },
+
         {
           "name": "Пятый канал",
           "type": "stream",
@@ -48,6 +52,7 @@
           "epgSource": "",
           "epgId": ""
         },
+
         {
           "name": "Звезда",
           "type": "stream",
@@ -57,6 +62,7 @@
           "epgSource": "",
           "epgId": ""
         },
+
         {
           "name": "Домашний",
           "type": "stream",
@@ -66,6 +72,7 @@
           "epgSource": "",
           "epgId": ""
         },
+
         {
           "name": "СТС",
           "type": "stream",
@@ -75,6 +82,7 @@
           "epgSource": "",
           "epgId": ""
         },
+
         {
           "name": "РЕН ТВ",
           "type": "stream",
@@ -84,6 +92,7 @@
           "epgSource": "",
           "epgId": ""
         },
+
         {
           "name": "ТНТ",
           "type": "stream",
@@ -93,6 +102,7 @@
           "epgSource": "",
           "epgId": ""
         },
+
         {
           "name": "ОТР",
           "type": "stream",
@@ -102,6 +112,7 @@
           "epgSource": "",
           "epgId": ""
         },
+
         {
           "name": "МИР",
           "type": "stream",
@@ -111,6 +122,7 @@
           "epgSource": "",
           "epgId": ""
         },
+
         {
           "name": "Культура",
           "type": "stream",
@@ -120,8 +132,10 @@
           "epgSource": "",
           "epgId": ""
         }
+
       ]
     },
+
     {
       "group": "Кино",
       "items": [
@@ -134,6 +148,7 @@
           "epgSource": "",
           "epgId": ""
         },
+
         {
           "name": "Мосфильм",
           "type": "stream",
@@ -143,6 +158,7 @@
           "epgSource": "",
           "epgId": ""
         },
+
         {
           "name": "Т24",
           "type": "stream",
@@ -152,6 +168,7 @@
           "epgSource": "",
           "epgId": ""
         },
+
         {
           "name": ".red",
           "type": "stream",
@@ -161,6 +178,7 @@
           "epgSource": "",
           "epgId": ""
         },
+
         {
           "name": ".black",
           "type": "stream",
@@ -170,6 +188,7 @@
           "epgSource": "",
           "epgId": ""
         },
+
         {
           "name": "Красная линия",
           "type": "stream",
@@ -179,6 +198,7 @@
           "epgSource": "",
           "epgId": ""
         },
+
         {
           "name": "Дом Кино",
           "type": "stream",
@@ -188,6 +208,7 @@
           "epgSource": "",
           "epgId": ""
         },
+
         {
           "name": "Любимое Кино",
           "type": "stream",
@@ -197,6 +218,7 @@
           "epgSource": "",
           "epgId": ""
         },
+
         {
           "name": "Феникс",
           "type": "stream",
@@ -206,6 +228,7 @@
           "epgSource": "",
           "epgId": ""
         },
+
         {
           "name": "КиноТВ",
           "type": "stream",
@@ -215,6 +238,7 @@
           "epgSource": "",
           "epgId": ""
         },
+
         {
           "name": "НТВ Сериал",
           "type": "stream",
@@ -224,6 +248,7 @@
           "epgSource": "",
           "epgId": ""
         },
+
         {
           "name": "НТВ Хит",
           "type": "stream",
@@ -233,6 +258,7 @@
           "epgSource": "",
           "epgId": ""
         },
+
         {
           "name": "Ккомедия",
           "type": "stream",
@@ -242,6 +268,7 @@
           "epgSource": "",
           "epgId": ""
         },
+
         {
           "name": "Мир Сериала",
           "type": "stream",
@@ -251,6 +278,7 @@
           "epgSource": "",
           "epgId": ""
         },
+
         {
           "name": "Родное Кино",
           "type": "stream",
@@ -260,6 +288,7 @@
           "epgSource": "",
           "epgId": ""
         },
+
         {
           "name": "КиноХит",
           "type": "stream",
@@ -269,6 +298,7 @@
           "epgSource": "",
           "epgId": ""
         },
+
         {
           "name": "КиноКомедия",
           "type": "stream",
@@ -278,6 +308,7 @@
           "epgSource": "",
           "epgId": ""
         },
+
         {
           "name": "КиноСемья",
           "type": "stream",
@@ -287,6 +318,7 @@
           "epgSource": "",
           "epgId": ""
         },
+
         {
           "name": "КиноМикс",
           "type": "stream",
@@ -296,6 +328,7 @@
           "epgSource": "",
           "epgId": ""
         },
+
         {
           "name": "Наше новое кино",
           "type": "stream",
@@ -305,6 +338,7 @@
           "epgSource": "",
           "epgId": ""
         },
+
         {
           "name": "Мужское кино",
           "type": "stream",
@@ -314,6 +348,7 @@
           "epgSource": "",
           "epgId": ""
         },
+
         {
           "name": "Ностальгия",
           "type": "stream",
@@ -323,6 +358,7 @@
           "epgSource": "",
           "epgId": ""
         },
+
         {
           "name": "Viju+ TV1000",
           "type": "stream",
@@ -332,6 +368,7 @@
           "epgSource": "",
           "epgId": ""
         },
+
         {
           "name": "Viju+ TV1000 Рус",
           "type": "stream",
@@ -341,6 +378,7 @@
           "epgSource": "",
           "epgId": ""
         },
+
         {
           "name": "Viju+ Action",
           "type": "stream",
@@ -350,6 +388,7 @@
           "epgSource": "",
           "epgId": ""
         },
+
         {
           "name": "Viju+ Serial",
           "type": "stream",
@@ -359,6 +398,7 @@
           "epgSource": "",
           "epgId": ""
         },
+
         {
           "name": "Viju+ Comedy",
           "type": "stream",
@@ -368,6 +408,7 @@
           "epgSource": "",
           "epgId": ""
         },
+
         {
           "name": "Viju+ Megahit",
           "type": "stream",
@@ -377,6 +418,7 @@
           "epgSource": "",
           "epgId": ""
         },
+
         {
           "name": "Иллюзион+",
           "type": "stream",
@@ -386,6 +428,7 @@
           "epgSource": "",
           "epgId": ""
         },
+
         {
           "name": "Русский Иллюзион",
           "type": "stream",
@@ -395,7 +438,8 @@
           "epgSource": "",
           "epgId": ""
         },
-		{
+
+        {
           "name": "Русский Роман",
           "type": "stream",
           "url": "http://ab04f03c.ucomist.net/iptv/237WGNXDPFLZAL8HDFPKFPQA/9240/index.m3u8",
@@ -404,6 +448,7 @@
           "epgSource": "",
           "epgId": ""
         },
+
         {
           "name": "Русский Детектив",
           "type": "stream",
@@ -413,6 +458,7 @@
           "epgSource": "",
           "epgId": ""
         },
+
         {
           "name": "Русский Бестселлер",
           "type": "stream",
@@ -422,6 +468,7 @@
           "epgSource": "",
           "epgId": ""
         },
+
         {
           "name": "Твое ТВ",
           "type": "stream",
@@ -431,6 +478,7 @@
           "epgSource": "",
           "epgId": ""
         },
+
         {
           "name": "Любимое",
           "type": "stream",
@@ -440,6 +488,7 @@
           "epgSource": "",
           "epgId": ""
         },
+
         {
           "name": "Время",
           "type": "stream",
@@ -449,6 +498,7 @@
           "epgSource": "",
           "epgId": ""
         },
+
         {
           "name": "Ретро",
           "type": "stream",
@@ -458,6 +508,7 @@
           "epgSource": "",
           "epgId": ""
         },
+
         {
           "name": "Театр",
           "type": "stream",
@@ -467,6 +518,7 @@
           "epgSource": "",
           "epgId": ""
         },
+
         {
           "name": "Venera.TV Сов.Классика",
           "type": "stream",
@@ -476,8 +528,10 @@
           "epgSource": "",
           "epgId": ""
         }
+
       ]
     },
+
     {
       "group": "Кинозалы",
       "items": [
@@ -490,6 +544,7 @@
           "epgSource": "",
           "epgId": ""
         },
+
         {
           "name": "Гайдай",
           "type": "stream",
@@ -499,6 +554,7 @@
           "epgSource": "",
           "epgId": ""
         },
+
         {
           "name": "HBO",
           "type": "stream",
@@ -508,6 +564,7 @@
           "epgSource": "",
           "epgId": ""
         },
+
         {
           "name": "Друзья",
           "type": "stream",
@@ -517,6 +574,7 @@
           "epgSource": "",
           "epgId": ""
         },
+
         {
           "name": "MM USSR Драма",
           "type": "stream",
@@ -526,6 +584,7 @@
           "epgSource": "",
           "epgId": ""
         },
+
         {
           "name": "StrahTV СССР",
           "type": "stream",
@@ -535,6 +594,7 @@
           "epgSource": "",
           "epgId": ""
         },
+
         {
           "name": "PG USSR",
           "type": "stream",
@@ -544,6 +604,7 @@
           "epgSource": "",
           "epgId": ""
         },
+
         {
           "name": "Триколор 1",
           "type": "stream",
@@ -553,6 +614,7 @@
           "epgSource": "",
           "epgId": ""
         },
+
         {
           "name": "Триколор 2",
           "type": "stream",
@@ -562,6 +624,7 @@
           "epgSource": "",
           "epgId": ""
         },
+
         {
           "name": "Триколор 3",
           "type": "stream",
@@ -571,6 +634,7 @@
           "epgSource": "",
           "epgId": ""
         },
+
         {
           "name": "Триколор 4",
           "type": "stream",
@@ -580,6 +644,7 @@
           "epgSource": "",
           "epgId": ""
         },
+
         {
           "name": "Триколор 5",
           "type": "stream",
@@ -589,6 +654,7 @@
           "epgSource": "",
           "epgId": ""
         },
+
         {
           "name": "Триколор 6",
           "type": "stream",
@@ -598,6 +664,7 @@
           "epgSource": "",
           "epgId": ""
         },
+
         {
           "name": "Триколор 7",
           "type": "stream",
@@ -607,6 +674,7 @@
           "epgSource": "",
           "epgId": ""
         },
+
         {
           "name": "Триколор 8",
           "type": "stream",
@@ -616,6 +684,7 @@
           "epgSource": "",
           "epgId": ""
         },
+
         {
           "name": "VF Ленфильм",
           "type": "stream",
@@ -625,6 +694,7 @@
           "epgSource": "",
           "epgId": ""
         },
+
         {
           "name": "VF Киностудия им. Горького",
           "type": "stream",
@@ -634,6 +704,7 @@
           "epgSource": "",
           "epgId": ""
         },
+
         {
           "name": "VF Одесская киностудия",
           "type": "stream",
@@ -643,6 +714,7 @@
           "epgSource": "",
           "epgId": ""
         },
+
         {
           "name": "VF Свердловская киностудия",
           "type": "stream",
@@ -652,6 +724,7 @@
           "epgSource": "",
           "epgId": ""
         },
+
         {
           "name": "VF Беларусьфильм",
           "type": "stream",
@@ -661,6 +734,7 @@
           "epgSource": "",
           "epgId": ""
         },
+
         {
           "name": "VF Рижская киностудия",
           "type": "stream",
@@ -670,6 +744,7 @@
           "epgSource": "",
           "epgId": ""
         },
+
         {
           "name": "VF  С новым годом!",
           "type": "stream",
@@ -679,6 +754,7 @@
           "epgSource": "",
           "epgId": ""
         },
+
         {
           "name": "VF  New Year",
           "type": "stream",
@@ -688,6 +764,7 @@
           "epgSource": "",
           "epgId": ""
         },
+
         {
           "name": "Yosso TV Советские Фильмы",
           "type": "stream",
@@ -697,6 +774,7 @@
           "epgSource": "",
           "epgId": ""
         },
+
         {
           "name": "Yosso TV VHS",
           "type": "stream",
@@ -706,6 +784,7 @@
           "epgSource": "",
           "epgId": ""
         },
+
         {
           "name": "Yosso TV Сов. Фильмы",
           "type": "stream",
@@ -715,6 +794,7 @@
           "epgSource": "",
           "epgId": ""
         },
+
         {
           "name": "Yosso TV Best",
           "type": "stream",
@@ -724,6 +804,7 @@
           "epgSource": "",
           "epgId": ""
         },
+
         {
           "name": "Tviksel Кино 1",
           "type": "stream",
@@ -733,6 +814,7 @@
           "epgSource": "",
           "epgId": ""
         },
+
         {
           "name": "Tviksel Кино 2",
           "type": "stream",
@@ -742,6 +824,7 @@
           "epgSource": "",
           "epgId": ""
         },
+
         {
           "name": "StrahTV Коломбо",
           "type": "stream",
@@ -751,8 +834,10 @@
           "epgSource": "",
           "epgId": ""
         }
+
       ]
     },
+
     {
       "group": "Док",
       "items": [
@@ -765,6 +850,7 @@
           "epgSource": "",
           "epgId": ""
         },
+
         {
           "name": "М24",
           "type": "stream",
@@ -774,6 +860,7 @@
           "epgSource": "",
           "epgId": ""
         },
+
         {
           "name": "360°",
           "type": "stream",
@@ -783,6 +870,7 @@
           "epgSource": "",
           "epgId": ""
         },
+
         {
           "name": "Известия",
           "type": "stream",
@@ -792,6 +880,7 @@
           "epgSource": "",
           "epgId": ""
         },
+
         {
           "name": "Звезда+",
           "type": "stream",
@@ -801,6 +890,7 @@
           "epgSource": "",
           "epgId": ""
         },
+
         {
           "name": "Соловьёв Live",
           "type": "stream",
@@ -810,6 +900,7 @@
           "epgSource": "",
           "epgId": ""
         },
+
         {
           "name": "RTVi",
           "type": "stream",
@@ -819,6 +910,7 @@
           "epgSource": "",
           "epgId": ""
         },
+
         {
           "name": "=Fox News",
           "type": "stream",
@@ -828,6 +920,7 @@
           "epgSource": "",
           "epgId": ""
         },
+
         {
           "name": "Еда",
           "type": "stream",
@@ -837,6 +930,7 @@
           "epgSource": "",
           "epgId": ""
         },
+
         {
           "name": "Food Time",
           "type": "stream",
@@ -846,6 +940,7 @@
           "epgSource": "",
           "epgId": ""
         },
+
         {
           "name": "Food Network",
           "type": "stream",
@@ -855,6 +950,7 @@
           "epgSource": "",
           "epgId": ""
         },
+
         {
           "name": "Yosso TV Food",
           "type": "stream",
@@ -864,6 +960,7 @@
           "epgSource": "",
           "epgId": ""
         },
+
         {
           "name": "Кухня ТВ",
           "type": "stream",
@@ -873,6 +970,7 @@
           "epgSource": "",
           "epgId": ""
         },
+
         {
           "name": "BOX Gurman",
           "type": "stream",
@@ -882,6 +980,7 @@
           "epgSource": "",
           "epgId": ""
         },
+
         {
           "name": "TLC",
           "type": "stream",
@@ -891,6 +990,7 @@
           "epgSource": "",
           "epgId": ""
         },
+
         {
           "name": "=Discovery Channel",
           "type": "stream",
@@ -900,6 +1000,7 @@
           "epgSource": "",
           "epgId": ""
         },
+
         {
           "name": "Бобёр",
           "type": "stream",
@@ -909,6 +1010,7 @@
           "epgSource": "",
           "epgId": ""
         },
+
         {
           "name": "",
           "type": "stream",
@@ -918,6 +1020,7 @@
           "epgSource": "",
           "epgId": ""
         },
+
         {
           "name": "",
           "type": "stream",
@@ -927,6 +1030,7 @@
           "epgSource": "",
           "epgId": ""
         },
+
         {
           "name": "VeleS Магнитофон",
           "type": "stream",
@@ -936,6 +1040,7 @@
           "epgSource": "",
           "epgId": ""
         },
+
         {
           "name": "=КиноТВ",
           "type": "stream",
@@ -945,6 +1050,7 @@
           "epgSource": "",
           "epgId": ""
         },
+
         {
           "name": "=Наше новое кино",
           "type": "stream",
@@ -954,6 +1060,7 @@
           "epgSource": "",
           "epgId": ""
         },
+
         {
           "name": "=Viju+ TV1000",
           "type": "stream",
@@ -963,6 +1070,7 @@
           "epgSource": "",
           "epgId": ""
         },
+
         {
           "name": "=КиноКомедия",
           "type": "stream",
@@ -972,6 +1080,7 @@
           "epgSource": "",
           "epgId": ""
         },
+
         {
           "name": "=КиноСемья",
           "type": "stream",
@@ -981,6 +1090,7 @@
           "epgSource": "",
           "epgId": ""
         },
+
         {
           "name": "--Discovery Science",
           "type": "stream",
@@ -990,7 +1100,9 @@
           "epgSource": "",
           "epgId": ""
         }
+
       ]
     }
+
   ]
 }
