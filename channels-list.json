@@ -140,7 +140,7 @@
       "group": "Кино",
       "items": [
         {
-          "name": "Доверие",
+          "name": "Москва. Доверие",
           "type": "stream",
           "url": "http://rt-mos-htlive.cdn.ngenix.net/hls/CH_R04_DOVERIE/variant.m3u8",
           "logo": "https://github.com/GENgroup/TV_logo/blob/main/%D0%94%D0%BE%D0%B2%D0%B5%D1%80%D0%B8%D0%B5.png?raw=true",
@@ -150,7 +150,7 @@
         },
 
         {
-          "name": "Мосфильм",
+          "name": "Мосфильм. Золотая коллекция",
           "type": "stream",
           "url": "https://fs.uplink.kz/mosfilm/tracks-v1a1/mono.ts.m3u8?token=onlinetv",
           "logo": "https://github.com/GENgroup/TV_logo/blob/main/%D0%9C%D0%BE%D1%81%D1%84%D0%B8%D0%BB%D1%8C%D0%BC.png?raw=true",
@@ -170,7 +170,7 @@
         },
 
         {
-          "name": ".red",
+          "name": ".Red",
           "type": "stream",
           "url": "http://ab04f03c.ucomist.net/iptv/237WGNXDPFLZAL8HDFPKFPQA/559/index.m3u8",
           "logo": "https://github.com/GENgroup/TV_logo/blob/main/red.png?raw=true",
@@ -180,7 +180,7 @@
         },
 
         {
-          "name": ".black",
+          "name": ".Black",
           "type": "stream",
           "url": "http://ab04f03c.ucomist.net/iptv/237WGNXDPFLZAL8HDFPKFPQA/20019/index.m3u8",
           "logo": "https://github.com/GENgroup/TV_logo/blob/main/black.png?raw=true",
@@ -200,7 +200,7 @@
         },
 
         {
-          "name": "Дом Кино",
+          "name": "Дом кино",
           "type": "stream",
           "url": "https://streaming.thestream.cyou/live/44.m3u8",
           "logo": "https://github.com/GENgroup/TV_logo/blob/main/%D0%94%D0%BE%D0%BC%20%D0%9A%D0%B8%D0%BD%D0%BE.png?raw=true",
@@ -220,7 +220,7 @@
         },
 
         {
-          "name": "Феникс",
+          "name": "Феникс+ Кино",
           "type": "stream",
           "url": "http://ab04f03c.ucomist.net/iptv/237WGNXDPFLZAL8HDFPKFPQA/2039/index.m3u8",
           "logo": "https://github.com/GENgroup/TV_logo/blob/main/%D0%A4%D0%B5%D0%BD%D0%B8%D0%BA%D1%81.png?raw=true",
@@ -260,7 +260,7 @@
         },
 
         {
-          "name": "Ккомедия",
+          "name": "Комедия",
           "type": "stream",
           "url": "http://ab04f03c.ucomist.net/iptv/237WGNXDPFLZAL8HDFPKFPQA/733/index.m3u8",
           "logo": "https://github.com/GENgroup/TV_logo/blob/main/%D0%9A%D0%BE%D0%BC%D0%B5%D0%B4%D0%B8%D1%8F.png?raw=true",
@@ -310,7 +310,7 @@
         },
 
         {
-          "name": "КиноСемья",
+          "name": "Киносемья",
           "type": "stream",
           "url": "http://158.101.222.193:88/georgia_play.php?id=kinosemya",
           "logo": "https://github.com/GENgroup/TV_logo/blob/main/%D0%9A%D0%B8%D0%BD%D0%BE%D0%A1%D0%B5%D0%BC%D1%8C%D1%8F.png?raw=true",
@@ -320,7 +320,7 @@
         },
 
         {
-          "name": "КиноМикс",
+          "name": "Киномикс",
           "type": "stream",
           "url": "http://93.170.254.17/Kinomiks/index.m3u8",
           "logo": "https://github.com/GENgroup/TV_logo/blob/main/%D0%9A%D0%B8%D0%BD%D0%BE%D0%9C%D0%B8%D0%BA%D1%81.png?raw=true",
@@ -360,7 +360,7 @@
         },
 
         {
-          "name": "Viju+ TV1000",
+          "name": "viju TV1000",
           "type": "stream",
           "url": "http://ab04f03c.ucomist.net/iptv/237WGNXDPFLZAL8HDFPKFPQA/132/index.m3u8",
           "logo": "https://github.com/GENgroup/TV_logo/blob/main/Viju_TV1000%D1%80%D1%83%D1%81.png?raw=true",
@@ -370,7 +370,7 @@
         },
 
         {
-          "name": "Viju+ TV1000 Рус",
+          "name": "viju TV1000 русское",
           "type": "stream",
           "url": "http://ab04f03c.ucomist.net/iptv/237WGNXDPFLZAL8HDFPKFPQA/6388/index.m3u8",
           "logo": "https://github.com/GENgroup/TV_logo/blob/main/Viju_TV1000.png?raw=true",
@@ -380,7 +380,7 @@
         },
 
         {
-          "name": "Viju+ Action",
+          "name": "viju TV1000 action",
           "type": "stream",
           "url": "http://ab04f03c.ucomist.net/iptv/237WGNXDPFLZAL8HDFPKFPQA/9057/index.m3u8",
           "logo": "https://github.com/GENgroup/TV_logo/blob/main/Viju+%20Action.png?raw=true",
@@ -390,7 +390,7 @@
         },
 
         {
-          "name": "Viju+ Serial",
+          "name": "viju+ Serial",
           "type": "stream",
           "url": "http://ab04f03c.ucomist.net/iptv/237WGNXDPFLZAL8HDFPKFPQA/9245/index.m3u8",
           "logo": "https://github.com/GENgroup/TV_logo/blob/main/Viju+%20Serial.png?raw=true",
@@ -400,7 +400,7 @@
         },
 
         {
-          "name": "Viju+ Comedy",
+          "name": "viju+ Comedy",
           "type": "stream",
           "url": "http://stream.mcquack.net/201/index.m3u8",
           "logo": "https://github.com/GENgroup/TV_logo/blob/main/Viju+%20Comedy.png?raw=true",
@@ -410,7 +410,7 @@
         },
 
         {
-          "name": "Viju+ Megahit",
+          "name": "viju+ Megahit",
           "type": "stream",
           "url": "http://stream.mcquack.net/200/index.m3u8",
           "logo": "https://github.com/GENgroup/TV_logo/blob/main/Viju+%20Megahit.png?raw=true",
@@ -420,7 +420,7 @@
         },
 
         {
-          "name": "Иллюзион+",
+          "name": "Иллюзион +",
           "type": "stream",
           "url": "http://176.118.197.101/Illuzion+/index.m3u8",
           "logo": "https://github.com/GENgroup/TV_logo/blob/main/%D0%98%D0%BB%D0%BB%D1%8E%D0%B7%D0%B8%D0%BE%D0%BD+.png?raw=true",
@@ -440,7 +440,7 @@
         },
 
         {
-          "name": "Русский Роман",
+          "name": "Русский роман",
           "type": "stream",
           "url": "http://ab04f03c.ucomist.net/iptv/237WGNXDPFLZAL8HDFPKFPQA/9240/index.m3u8",
           "logo": "https://github.com/GENgroup/TV_logo/blob/main/%D0%A0%D1%83%D1%81%D1%81%D0%BA%D0%B8%D0%B9%20%D0%A0%D0%BE%D0%BC%D0%B0%D0%BD%D1%81.png?raw=true",
@@ -460,7 +460,7 @@
         },
 
         {
-          "name": "Русский Бестселлер",
+          "name": "Русский бестселлер",
           "type": "stream",
           "url": "http://ab04f03c.ucomist.net/iptv/237WGNXDPFLZAL8HDFPKFPQA/9141/index.m3u8",
           "logo": "https://github.com/GENgroup/TV_logo/blob/main/%D0%A0%D1%83%D1%81%D1%81%D0%BA%D0%B8%D0%B9%20%D0%B1%D0%B5%D1%81%D1%82%D1%81%D0%B5%D0%BB%D0%BB%D0%B5%D1%80.png?raw=true",
@@ -500,7 +500,7 @@
         },
 
         {
-          "name": "Ретро",
+          "name": "Ретро ТВ",
           "type": "stream",
           "url": "http://176.118.197.101/Retro/index.m3u8",
           "logo": "https://github.com/GENgroup/TV_logo/blob/main/%D0%A0%D0%B5%D1%82%D1%80%D0%BE.png?raw=true",
@@ -520,7 +520,7 @@
         },
 
         {
-          "name": "Venera.TV Сов.Классика",
+          "name": "Советская киноклассика HD",
           "type": "stream",
           "url": "http://ab04f03c.ucomist.net/iptv/237WGNXDPFLZAL8HDFPKFPQA/2146/index.m3u8",
           "logo": "https://github.com/GENgroup/TV_logo/blob/main/Venera.TV%20%D0%A1%D0%BE%D0%B2.%D0%9A%D0%BB%D0%B0%D1%81%D1%81%D0%B8%D0%BA%D0%B0.png?raw=true",
@@ -852,7 +852,7 @@
         },
 
         {
-          "name": "М24",
+          "name": "Москва-24",
           "type": "stream",
           "url": "https://stream.smotrim.ru/hls/givc8/playlist.m3u8?entity=channel&id=798&sign=37881ef2e289f062ceff0dca6c24dc58",
           "logo": "https://github.com/GENgroup/TV_logo/blob/main/M24.png?raw=true",
@@ -862,7 +862,7 @@
         },
 
         {
-          "name": "360°",
+          "name": "360.ru",
           "type": "stream",
           "url": "https://cdn-evacoder-tv.facecast.io/evacoder_hls_hi/CkxfR1xNUAJwTgtXTBZTAJli/index.m3u8",
           "logo": "https://github.com/GENgroup/TV_logo/blob/main/360.png?raw=true",
@@ -882,7 +882,7 @@
         },
 
         {
-          "name": "Звезда+",
+          "name": "Звезда Плюс",
           "type": "stream",
           "url": "http://tvzvezda.bonus-tv.ru/cdn/zvezdaplus/playlist.m3u8",
           "logo": "https://github.com/GENgroup/TV_logo/blob/main/%D0%97%D0%B2%D0%B5%D0%B7%D0%B4%D0%B0+.png?raw=true",
@@ -922,7 +922,7 @@
         },
 
         {
-          "name": "Еда",
+          "name": "ЕДА",
           "type": "stream",
           "url": "http://ab04f03c.ucomist.net/iptv/237WGNXDPFLZAL8HDFPKFPQA/6009/index.m3u8",
           "logo": "https://github.com/GENgroup/TV_logo/blob/main/%D0%95%D0%B4%D0%B0.png?raw=true",
@@ -962,7 +962,7 @@
         },
 
         {
-          "name": "Кухня ТВ",
+          "name": "Кухня",
           "type": "stream",
           "url": "http://ab04f03c.ucomist.net/iptv/237WGNXDPFLZAL8HDFPKFPQA/152/index.m3u8",
           "logo": "https://github.com/GENgroup/TV_logo/blob/main/%D0%9A%D1%83%D1%85%D0%BD%D1%8F%20%D0%A2%D0%92.png?raw=true",
@@ -1002,7 +1002,7 @@
         },
 
         {
-          "name": "Бобёр",
+          "name": "Бобер",
           "type": "stream",
           "url": "http://ab04f03c.ucomist.net/iptv/237WGNXDPFLZAL8HDFPKFPQA/725/index.m3u8",
           "logo": "https://github.com/GENgroup/TV_logo/blob/main/%D0%91%D0%BE%D0%B1%D1%91%D1%80.png?raw=true",
