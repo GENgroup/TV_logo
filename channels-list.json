@@ -104,6 +104,16 @@
         },
 
         {
+          "name": "ТВ-3",
+          "type": "stream",
+          "url": "http://dmi3y-tv.online/hls/DVB-T2/CH_TV3.m3u8",
+          "logo": "https://github.com/GENgroup/TV_logo/blob/main/%D0%A2%D0%923.png?raw=true",
+          "disabled": false,
+          "epgSource": "",
+          "epgId": ""
+        },
+		
+        {
           "name": "ОТР",
           "type": "stream",
           "url": "https://rt-nw-klgr-htlive.cdn.ngenix.net/hls/CH_R01_OTR_KLNG_FILIAL/variant.m3u8",
@@ -912,15 +922,26 @@
         },
 
         {
-          "name": "=Fox News",
+          "name": "Fox News",
           "type": "stream",
-          "url": "http://ab04f03c.ucomist.net/iptv/237WGNXDPFLZAL8HDFPKFPQA/31915/index.m3u8",
+          "url": "http://45.190.28.50/FOX_NEWS/index.m3u8",
           "logo": "https://github.com/GENgroup/TV_logo/blob/main/Fox%20News.png?raw=true",
           "disabled": false,
           "epgSource": "",
           "epgId": ""
         },
 
+        {
+          "name": "CNN",
+          "type": "stream",
+          "url": "http://dmi3y-tv.online/hls/CH_CNN_ENGLISH.m3u8",
+          "logo": "https://github.com/GENgroup/TV_logo/blob/main/CNN.png?raw=true",
+          "disabled": false,
+          "epgSource": "",
+          "epgId": ""
+        },
+
+		
         {
           "name": "ЕДА",
           "type": "stream",
@@ -992,16 +1013,6 @@
         },
 
         {
-          "name": "=Discovery Channel",
-          "type": "stream",
-          "url": "http://ab04f03c.ucomist.net/iptv/237WGNXDPFLZAL8HDFPKFPQA/227/index.m3u8",
-          "logo": "https://github.com/GENgroup/TV_logo/blob/main/Discovery%20Channel.png?raw=true",
-          "disabled": false,
-          "epgSource": "",
-          "epgId": ""
-        },
-
-        {
           "name": "Бобер",
           "type": "stream",
           "url": "http://ab04f03c.ucomist.net/iptv/237WGNXDPFLZAL8HDFPKFPQA/725/index.m3u8",
@@ -1012,10 +1023,10 @@
         },
 
         {
-          "name": "",
+          "name": "Discovery Channel",
           "type": "stream",
-          "url": "",
-          "logo": "",
+          "url": "http://dmi3y-tv.online/hls/CH_DISCOVERY_CHANNEL.m3u8",
+          "logo": "https://github.com/GENgroup/TV_logo/blob/main/Discovery%20Channel.png?raw=true",
           "disabled": false,
           "epgSource": "",
           "epgId": ""
@@ -1041,6 +1052,16 @@
           "epgId": ""
         },
 
+        {
+          "name": "",
+          "type": "stream",
+          "url": "",
+          "logo": "",
+          "disabled": false,
+          "epgSource": "",
+          "epgId": ""
+        },
+		
         {
           "name": "=КиноТВ",
           "type": "stream",
