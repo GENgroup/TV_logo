@@ -750,6 +750,8 @@
           "disabled": false,
           "epgSource": "",
           "epgId": ""
+        }
+      ]
     },
     {
       "group": "Док",
