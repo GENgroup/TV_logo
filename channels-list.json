@@ -104,7 +104,7 @@
         },
 
         {
-          "name": "ТВ-3",
+          "name": "=ТВ-3",
           "type": "stream",
           "url": "http://dmi3y-tv.online/hls/DVB-T2/CH_TV3.m3u8",
           "logo": "https://github.com/GENgroup/TV_logo/blob/main/%D0%A2%D0%923.png?raw=true",
@@ -374,7 +374,7 @@
           "type": "stream",
           "url": "http://ab04f03c.ucomist.net/iptv/237WGNXDPFLZAL8HDFPKFPQA/132/index.m3u8",
           "logo": "https://github.com/GENgroup/TV_logo/blob/main/Viju_TV1000%D1%80%D1%83%D1%81.png?raw=true",
-          "disabled": true,
+          "disabled": false,
           "epgSource": "",
           "epgId": ""
         },
@@ -935,7 +935,7 @@
           "name": "CNN",
           "type": "stream",
           "url": "https://turnerlive.warnermediacdn.com/hls/live/586495/cnngo/cnn_slate/VIDEO_0_3564000.m3u8",
-          "logo": "https://turnerlive.warnermediacdn.com/hls/live/586495/cnngo/cnn_slate/VIDEO_0_3564000.m3u8",
+          "logo": "https://github.com/GENgroup/TV_logo/blob/main/CNN.png?raw=true",
           "disabled": false,
           "epgSource": "",
           "epgId": ""
