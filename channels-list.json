@@ -156,7 +156,7 @@
           "logo": "https://github.com/GENgroup/TV_logo/blob/main/%D0%94%D0%BE%D0%B2%D0%B5%D1%80%D0%B8%D0%B5.png?raw=true",
           "disabled": false,
           "epgSource": "",
-          "epgId": "Москва Доверие.ru"
+          "epgId": "Доверие"
         },
 
         {
@@ -166,7 +166,7 @@
           "logo": "https://github.com/GENgroup/TV_logo/blob/main/%D0%9C%D0%BE%D1%81%D1%84%D0%B8%D0%BB%D1%8C%D0%BC.png?raw=true",
           "disabled": false,
           "epgSource": "",
-          "epgId": "Мосфильм. Золотая коллекция.ru"
+          "epgId": "Золотая коллекция"
         },
 
         {
