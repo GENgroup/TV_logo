@@ -104,13 +104,13 @@
         },
 
         {
-          "name": "=ТВ-3",
+          "name": "ТВ-3",
           "type": "stream",
-          "url": "http://194.152.35.17/tv-3/index.m3u8",
+          "url": "http://89.33.29.115:8080/TV_3/tracks-v1a1/mono.m3u8",
           "logo": "https://github.com/GENgroup/TV_logo/blob/main/%D0%A2%D0%923.png?raw=true",
           "disabled": false,
           "epgSource": "",
-          "epgId": "ТВ-3"
+          "epgId": ""
         },
 		
         {
@@ -1073,30 +1073,10 @@
         },
 
         {
-          "name": "TV-3 1",
+          "name": "",
           "type": "stream",
-          "url": "http://176.118.197.101/TB3/index.m3u8",
-          "logo": "https://github.com/GENgroup/TV_logo/blob/main/%D0%A2%D0%923.png?raw=true",
-          "disabled": false,
-          "epgSource": "",
-          "epgId": ""
-        },
-
-        {
-          "name": "TV-3 2",
-          "type": "stream",
-          "url": "http://31.131.141.195:8000/play/a002/index.m3u8",
-          "logo": "https://github.com/GENgroup/TV_logo/blob/main/%D0%A2%D0%923.png?raw=true",
-          "disabled": false,
-          "epgSource": "",
-          "epgId": ""
-        },
-		
-        {
-          "name": "TV-3 3",
-          "type": "stream",
-          "url": "http://89.33.29.115:8080/TV_3/tracks-v1a1/mono.m3u8",
-          "logo": "https://github.com/GENgroup/TV_logo/blob/main/%D0%A2%D0%923.png?raw=true",
+          "url": "",
+          "logo": "",
           "disabled": false,
           "epgSource": "",
           "epgId": ""
