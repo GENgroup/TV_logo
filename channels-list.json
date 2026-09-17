@@ -50,7 +50,7 @@
           "logo": "https://github.com/GENgroup/TV_logo/blob/main/5.png?raw=true",
           "disabled": false,
           "epgSource": "",
-          "epgId": ""
+          "epgId": "Пятый канал.ru"
         },
 
         {
@@ -110,7 +110,7 @@
           "logo": "https://github.com/GENgroup/TV_logo/blob/main/%D0%A2%D0%923.png?raw=true",
           "disabled": false,
           "epgSource": "",
-          "epgId": ""
+          "epgId": "ТВ‑3.ru"
         },
 		
         {
@@ -150,13 +150,13 @@
       "group": "Кино",
       "items": [
         {
-          "name": "Москва. Доверие",
+          "name": "Москва Доверие",
           "type": "stream",
           "url": "http://rt-mos-htlive.cdn.ngenix.net/hls/CH_R04_DOVERIE/variant.m3u8",
           "logo": "https://github.com/GENgroup/TV_logo/blob/main/%D0%94%D0%BE%D0%B2%D0%B5%D1%80%D0%B8%D0%B5.png?raw=true",
           "disabled": false,
           "epgSource": "",
-          "epgId": ""
+          "epgId": "Москва Доверие.ru"
         },
 
         {
@@ -166,7 +166,7 @@
           "logo": "https://github.com/GENgroup/TV_logo/blob/main/%D0%9C%D0%BE%D1%81%D1%84%D0%B8%D0%BB%D1%8C%D0%BC.png?raw=true",
           "disabled": false,
           "epgSource": "",
-          "epgId": ""
+          "epgId": "Мосфильм. Золотая коллекция.ru"
         },
 
         {
@@ -180,23 +180,23 @@
         },
 
         {
-          "name": ".Red",
+          "name": ".red",
           "type": "stream",
           "url": "http://ab04f03c.ucomist.net/iptv/237WGNXDPFLZAL8HDFPKFPQA/559/index.m3u8",
           "logo": "https://github.com/GENgroup/TV_logo/blob/main/red.png?raw=true",
           "disabled": false,
           "epgSource": "",
-          "epgId": ""
+          "epgId": ".red.ru"
         },
 
         {
-          "name": ".Black",
+          "name": ".black",
           "type": "stream",
           "url": "http://ab04f03c.ucomist.net/iptv/237WGNXDPFLZAL8HDFPKFPQA/20019/index.m3u8",
           "logo": "https://github.com/GENgroup/TV_logo/blob/main/black.png?raw=true",
           "disabled": false,
           "epgSource": "",
-          "epgId": ""
+          "epgId": ".black.ru"
         },
 
         {
@@ -226,7 +226,7 @@
           "logo": "https://github.com/GENgroup/TV_logo/blob/main/%D0%9B%D1%8E%D0%B1%D0%B8%D0%BC%D0%BE%D0%B5%20%D0%9A%D0%B8%D0%BD%D0%BE.png?raw=true",
           "disabled": false,
           "epgSource": "",
-          "epgId": ""
+          "epgId": "Любимое Кино HD.ru"
         },
 
         {
@@ -286,7 +286,7 @@
           "logo": "https://github.com/GENgroup/TV_logo/blob/main/%D0%9C%D0%B8%D1%80%20%D0%A1%D0%B5%D1%80%D0%B8%D0%B0%D0%BB%D0%B0.png?raw=true",
           "disabled": false,
           "epgSource": "",
-          "epgId": ""
+          "epgId": "Мир сериала HD.ru"
         },
 
         {
@@ -296,7 +296,7 @@
           "logo": "https://github.com/GENgroup/TV_logo/blob/main/%D0%A0%D0%BE%D0%B4%D0%BD%D0%BE%D0%B5%20%D0%9A%D0%B8%D0%BD%D0%BE.png?raw=true",
           "disabled": false,
           "epgSource": "",
-          "epgId": ""
+          "epgId": "РОДНОЕ КИНО.ru"
         },
 
         {
@@ -336,7 +336,7 @@
           "logo": "https://github.com/GENgroup/TV_logo/blob/main/%D0%9A%D0%B8%D0%BD%D0%BE%D0%9C%D0%B8%D0%BA%D1%81.png?raw=true",
           "disabled": false,
           "epgSource": "",
-          "epgId": ""
+          "epgId": "КИНОМИКС.ru"
         },
 
         {
@@ -346,7 +346,7 @@
           "logo": "https://github.com/GENgroup/TV_logo/blob/main/%D0%9D%D0%B0%D1%88%D0%B5%20%D0%BD%D0%BE%D0%B2%D0%BE%D0%B5%20%D0%BA%D0%B8%D0%BD%D0%BE.png?raw=true",
           "disabled": false,
           "epgSource": "",
-          "epgId": ""
+          "epgId": "НАШЕ НОВОЕ КИНО.ru"
         },
 
         {
@@ -376,7 +376,7 @@
           "logo": "https://github.com/GENgroup/TV_logo/blob/main/Viju_TV1000%D1%80%D1%83%D1%81.png?raw=true",
           "disabled": false,
           "epgSource": "",
-          "epgId": ""
+          "epgId": "viju TV1000.ru"
         },
 
         {
@@ -386,7 +386,7 @@
           "logo": "https://github.com/GENgroup/TV_logo/blob/main/Viju_TV1000.png?raw=true",
           "disabled": false,
           "epgSource": "",
-          "epgId": ""
+          "epgId": "viju TV1000 русское.ru"
         },
 
         {
@@ -396,7 +396,7 @@
           "logo": "https://github.com/GENgroup/TV_logo/blob/main/Viju+%20Action.png?raw=true",
           "disabled": false,
           "epgSource": "",
-          "epgId": ""
+          "epgId": "viju TV1000 action.ru"
         },
 
         {
@@ -416,7 +416,7 @@
           "logo": "https://github.com/GENgroup/TV_logo/blob/main/Viju+%20Comedy.png?raw=true",
           "disabled": false,
           "epgSource": "",
-          "epgId": ""
+          "epgId": "viju+ Comedy.ru"
         },
 
         {
@@ -426,7 +426,7 @@
           "logo": "https://github.com/GENgroup/TV_logo/blob/main/Viju+%20Megahit.png?raw=true",
           "disabled": false,
           "epgSource": "",
-          "epgId": ""
+          "epgId": "viju+ Megahit.ru"
         },
 
         {
@@ -456,7 +456,7 @@
           "logo": "https://github.com/GENgroup/TV_logo/blob/main/%D0%A0%D1%83%D1%81%D1%81%D0%BA%D0%B8%D0%B9%20%D0%A0%D0%BE%D0%BC%D0%B0%D0%BD%D1%81.png?raw=true",
           "disabled": false,
           "epgSource": "",
-          "epgId": ""
+          "epgId": "Русский роман.ru"
         },
 
         {
@@ -858,7 +858,7 @@
           "logo": "https://github.com/GENgroup/TV_logo/blob/main/%D0%A0%D0%A2%D0%A024.png?raw=true",
           "disabled": false,
           "epgSource": "",
-          "epgId": ""
+          "epgId": "Россия‑24.ru"
         },
 
         {
@@ -878,7 +878,7 @@
           "logo": "https://github.com/GENgroup/TV_logo/blob/main/360.png?raw=true",
           "disabled": false,
           "epgSource": "",
-          "epgId": ""
+          "epgId": "360.ru.ru"
         },
 
         {
@@ -999,7 +999,7 @@
           "logo": "https://github.com/GENgroup/TV_logo/blob/main/%D0%9A%D1%83%D1%85%D0%BD%D1%8F%20%D0%A2%D0%92.png?raw=true",
           "disabled": false,
           "epgSource": "",
-          "epgId": ""
+          "epgId": "Кухня.ru"
         },
 
         {
@@ -1019,7 +1019,7 @@
           "logo": "https://github.com/GENgroup/TV_logo/blob/main/%D0%91%D0%BE%D0%B1%D1%91%D1%80.png?raw=true",
           "disabled": false,
           "epgSource": "",
-          "epgId": ""
+          "epgId": "БОБЁР.ru"
         },
 		
         {

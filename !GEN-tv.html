@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<title>!GEN-тв</title>
-<link rel="icon" type="image/png" href="https://github.com/GENgroup/TV_logo/blob/main/Favicon.png?raw=true">
+<title>!GEN-tv</title>
+<link rel="icon" href="https://raw.githubusercontent.com/GENgroup/TV_logo/main/Favicon.ico">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/hls.js/1.5.13/hls.min.js"></script>
 <style>
   :root{
@@ -18,6 +18,7 @@
     --danger:#c96a4a;
     --epg-bar-color: #e0a83d;   /* цвет полоски прогресса передачи (янтарный) */
     --epg-bar-height: 1px;      /* толщина полоски прогресса передачи */
+    --epg-tooltip-font-size: 17px;  /* размер шрифта подсказки "что сейчас идёт" при наведении на канал - поменяй тут, если мелко/крупно */
   }
   *{box-sizing:border-box; -webkit-tap-highlight-color:transparent;}
   html,body{height:100%; overscroll-behavior:none;}
@@ -264,6 +265,22 @@
     pointer-events:none;
   }
 
+  /* всплывающая подсказка "что сейчас идёт" при наведении на канал (ПК) */
+  #epgHoverTip{
+    position:fixed;
+    z-index:9999;
+    background:var(--panel);
+    border:1px solid var(--line);
+    color:var(--text);
+    font-size:var(--epg-tooltip-font-size);
+    padding:5px 9px;
+    border-radius:6px;
+    pointer-events:none;
+    max-width:320px;
+    display:none;
+    box-shadow:0 2px 8px rgba(0,0,0,.4);
+  }
+
   /* блок с названием передачи и прогрессом, показывается ненадолго поверх видео
      после выбора канала (EPG_STAGE_SECONDS в JS настройках) */
   #stageEpg{
@@ -324,9 +341,9 @@
   :root{
     --cat-opacity: 0.24;
     --tile-size: 48px;   /* размер плитки канала (ширина=высота) */
-    --tile-gap: 24px;     /* расстояние между плитками */
+    --tile-gap: 20px;     /* расстояние между плитками */
     --tile-bg-opacity: 1; /* 0-1: фон плитки, см. пояснение у .ch-tile ниже */
-    --logo-pad: 5px;     /* поля внутри плитки вокруг логотипа - меньше = логотип крупнее */
+    --logo-pad: 4px;     /* поля внутри плитки вокруг логотипа - меньше = логотип крупнее */
   }
 
   .grid-group{
@@ -439,8 +456,8 @@
 
 <!-- DESKTOP CHROME -->
 <header id="desktopHeader" class="only-desktop">
-  <span class="mark">!GEN-тв</span><span class="sub" style="margin-left:6px;opacity:.5">ИТОГ-1</span>
-  <span class="sub">личная подборка</span>
+  <span class="mark">!GEN-tv</span><span class="sub" style="margin-left:6px;opacity:.5">v10</span>
+  <span class="sub">личный телевизор</span>
 </header>
 <nav id="desktopNav" class="only-desktop"></nav>
 <div id="desktopToolbar" class="only-desktop">
@@ -703,7 +720,7 @@ function stopAll(){
 }
 
 // type "stream": обычный HLS-поток (.m3u8) - играет через hls.js в <video>
-// принимает не url, а весь объект канала - нужен для показа имени в сообщении об ошибке
+// принимает не url, а объект канала - для показа имени в сообщении об ошибке
 function playStream(ch){
   const url = ch.url;
   if (hls){ hls.destroy(); hls = null; }
@@ -1102,10 +1119,13 @@ function currentProgress(programmes){
 }
 
 function programmesFor(ch){
-  if (ch.epgSource){
-    return epgAlt[ch.epgSource + '|' + (ch.epgId || ch.name)] || [];
-  }
-  return epgByName[ch.name] || [];
+  // epgId - "под каким именем искать этот канал в общем расписании",
+  // если оно называется в EPG-источнике не так же, как у нас на экране.
+  // epgSource пока зарезервирован на будущее (отдельный источник для
+  // конкретного канала) - сейчас всё расписание собирается из ОДНОГО
+  // общего источника в build_all.py, поэтому epgSource ничего не делает.
+  const key = ch.epgId || ch.name;
+  return epgByName[key] || [];
 }
 
 // рисует/обновляет янтарную полоску снизу плитки (мобильный) и строки (ПК)
@@ -1118,6 +1138,7 @@ function renderEpgBars(){
       let bar = el.querySelector('.epg-bar');
       if (!prog){
         if (bar) bar.remove();
+        el.removeAttribute('data-epg-title');
         return;
       }
       if (!bar){
@@ -1126,8 +1147,40 @@ function renderEpgBars(){
         el.appendChild(bar);
       }
       bar.style.width = prog.pct + '%';
+      el.setAttribute('data-epg-title', prog.title);
+      bindEpgHoverTip(el);
     });
   });
+}
+
+// подсказка "что сейчас идёт" при наведении мышью - привязывается один раз
+// на элемент (флаг epgHoverBound), дальше просто читает актуальный
+// data-epg-title, который renderEpgBars обновляет каждую минуту
+let epgHoverTipEl = null;
+function bindEpgHoverTip(el){
+  if (el.dataset.epgHoverBound) return;
+  el.dataset.epgHoverBound = '1';
+  el.addEventListener('mouseenter', (e) => {
+    const title = el.getAttribute('data-epg-title');
+    if (!title) return;
+    if (!epgHoverTipEl){
+      epgHoverTipEl = document.createElement('div');
+      epgHoverTipEl.id = 'epgHoverTip';
+      document.body.appendChild(epgHoverTipEl);
+    }
+    epgHoverTipEl.textContent = title;
+    epgHoverTipEl.style.display = 'block';
+    positionEpgHoverTip(e);
+  });
+  el.addEventListener('mousemove', positionEpgHoverTip);
+  el.addEventListener('mouseleave', () => {
+    if (epgHoverTipEl) epgHoverTipEl.style.display = 'none';
+  });
+}
+function positionEpgHoverTip(e){
+  if (!epgHoverTipEl || epgHoverTipEl.style.display === 'none') return;
+  epgHoverTipEl.style.left = (e.clientX + 14) + 'px';
+  epgHoverTipEl.style.top = (e.clientY + 14) + 'px';
 }
 
 // показывает название передачи и прогресс поверх видео на несколько секунд
@@ -1141,7 +1194,7 @@ function showEpgProgressOnStage(ch){
   box.querySelector('.epg-fill').style.width = prog.pct + '%';
   box.classList.add('show');
   clearTimeout(showEpgProgressOnStage._t);
-  showEpgProgressOnStage._t = setTimeout(() => box.classList.remove('show'), EPG_STAGE_SECONDS * 1000);
+  showEpgProgressOnStage._t = setTimeout(() => box.classList.remove('show'), EPG_STAGE_SECONDS * 1500);
 }
 
 async function initEpg(){
