@@ -26,7 +26,7 @@
         {
           "name": "ТВ Центр",
           "type": "stream",
-          "url": "https://tvc-hls.cdnvideo.ru/tvc-res/smil:vd9221.smil/playlist.m3u8",
+          "url": "https://flussonic.mkpnet.ru/tv-b76bb5b80615eed6/video.m3u8",
           "logo": "https://github.com/GENgroup/TV_logo/blob/main/%D0%A2%D0%92%D0%A6.png?raw=true",
           "disabled": false,
           "epgSource": "",
@@ -106,7 +106,7 @@
         {
           "name": "ТВ-3",
           "type": "stream",
-          "url": "http://89.33.29.115:8080/TV_3/tracks-v1a1/mono.m3u8",
+          "url": "https://flussonic.mkpnet.ru/tv-b9ddf7deb3d25757/video.m3u8",
           "logo": "https://github.com/GENgroup/TV_logo/blob/main/%D0%A2%D0%923.png?raw=true",
           "disabled": false,
           "epgSource": "",
@@ -934,7 +934,7 @@
         {
           "name": "CNN",
           "type": "stream",
-          "url": "https://turnerlive.warnermediacdn.com/hls/live/586495/cnngo/cnn_slate/VIDEO_0_3564000.m3u8",
+          "url": "https://tvsen6.aynaott.com/cnn/index.m3u8",
           "logo": "https://github.com/GENgroup/TV_logo/blob/main/CNN.png?raw=true",
           "disabled": false,
           "epgSource": "",
@@ -1035,7 +1035,7 @@
         {
           "name": "Discovery Channel",
           "type": "stream",
-          "url": "http://dmi3y-tv.online/hls/CH_DISCOVERY_CHANNEL.m3u8",
+          "url": "http://ab04f03c.ucomist.net/iptv/237WGNXDPFLZAL8HDFPKFPQA/227/index.m3u8",
           "logo": "https://github.com/GENgroup/TV_logo/blob/main/Discovery%20Channel.png?raw=true",
           "disabled": false,
           "epgSource": "",
